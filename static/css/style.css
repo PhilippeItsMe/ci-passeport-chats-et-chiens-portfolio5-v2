@@ -135,6 +135,7 @@ a:hover {
     background-color: var(--offwhite);
     border: 1px solid var(--orange);
     border-radius: 0.375rem;
+    text-decoration: none;
 }
 
 .submit-btn:hover {
