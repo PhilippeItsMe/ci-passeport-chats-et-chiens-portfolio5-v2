@@ -100,20 +100,30 @@ class UserRegistrationForm(UserCreationForm):
 
 class CustomSignupForm(forms.Form):
     """
-    Custom signup form to register users by group.
+    Custom signup form to register users by group, first name, and last name.
     """
     group_choices = [
-        ('Pet Owners', 'Pet Owners'),
-        ('Business Owners', 'Business Owners'),
+        ('Pet Owners', 'Propriétaire d\'un animal'),
+        ('Business Owners', 'Propriétaire d\'un service animalier'),
     ]
-    group = forms.ChoiceField(choices=group_choices, label="Sign Up as")
+    group = forms.ChoiceField(choices=group_choices,
+                              label="Je m'enregiste en tant que : ")
+    
+    first_name = forms.CharField(max_length=30, label='Prénom', required=True)
+    last_name = forms.CharField(max_length=30, label='Nom', required=True)
+
+    field_order = ['first_name', 'last_name', 'group','email','email2',
+                    'password1', 'password2']
 
     def signup(self, request, user):
+
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
         group_name = self.cleaned_data['group']
         try:
             group = Group.objects.get(name=group_name)
             user.groups.add(group)
         except Group.DoesNotExist:
-            raise ValueError(f"The group '{group_name}' does not exist.")
+            raise ValueError(f"Le groupe '{group_name}' n'existe pas.")
         user.save()
         return user

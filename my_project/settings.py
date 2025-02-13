@@ -11,11 +11,23 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
+
+#------------ Security check -------------- #
+
 DEBUG = True
 
 ALLOWED_HOSTS = ['localhost',
                  '8000-philippeits-cipasseport-ueridz1s5o8.ws-eu117.gitpod.io',
                  '.herokuapp.com']
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.codeinstitute-ide.net/",
+    "https://*.herokuapp.com",
+    "https://8000-philippeits-ciportfolio-cvf4eg2kc6e.ws-eu117.gitpod.io"
+]
+
+
+#------------ Apps and so on -------------- #
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -37,7 +49,6 @@ INSTALLED_APPS = [
     'pet_owners',
 ]
 
-SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
@@ -76,15 +87,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'my_project.wsgi.application'
 
+
+#------------ Apps and so on -------------- #
+
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://*.codeinstitute-ide.net/",
-    "https://*.herokuapp.com",
-    "https://8000-philippeits-ciportfolio-cvf4eg2kc6e.ws-eu117.gitpod.io"
-]
+
+
+#------------ Authentification -------------- #
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -101,13 +113,31 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-ACCOUNT_EMAIL_VERIFICATION = 'none'
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SITE_ID = 1
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
+ACCOUNT_USERNAME_REQUIRED = False
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/'
 
 ACCOUNT_SIGNUP_FORM_CLASS = 'pet_businesses.forms.CustomSignupForm'
 
+
+#------------ Internatlisation -------------- #
+
 LANGUAGE_CODE = 'fr'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Paris'
 
 USE_I18N = True
 
