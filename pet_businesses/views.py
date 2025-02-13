@@ -151,6 +151,9 @@ def comment_delete(request, slug, comment_id):
 
 @group_required("Pet Owners")
 def like_post(request, pet_business_id):
+    """
+    View to like pet businesses.
+    """
     pet_business = get_object_or_404(PetBusiness, id=pet_business_id)
     like, created = Like.objects.get_or_create(pet_business=pet_business,
                                                author=request.user)

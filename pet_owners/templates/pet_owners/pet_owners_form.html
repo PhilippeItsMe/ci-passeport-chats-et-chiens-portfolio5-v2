@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+<div class="page-wrapper">
+    <h3>Mes animaux de companie</h3>
+
+    <!---------- Existing list of pets  ---------->
+
+    {% if pet %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th class="hidden">Date de naissance</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for single_pet in pet %}
+            <tr>
+                <td>{{ single_pet.name }}</td>
+                <td>{{ single_pet.birtday }}</td>
+                <td>{{ single_pet.pet_type}}</td>
+                <td>
+                    <a href="{% url 'pet_edit' pet.slug pet.id %}" class="yellow-btn">Editer</a>
+
+                    <!-- Delete button triggering confirmation modal -->
+
+                    <button type="button" class="orange-btn" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                        data-href="{% url 'pet_delete' pet.slug pet.id %}">
+                        Effacer
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Vous nous avez pas encore parler de vos animaux de companie.</p>
+    {% endif %}
+
+    <!---------- Form to create a new pet business ---------->
+
+    <h3 class="spacing">{% if form.instance.pk %}Editez votre animal{% else %}Ajouter votre animal de companie
+        !{% endif %}
+    </h3>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="submit-btn">
+            {% if form.instance.pk %}Mettre à jour{% else %}Soumettre{% endif %}
+        </button>
+    </form>
+
+    <!---------- Delete confirmation modal ---------->
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Êtes-vous sur de vouloir effacer votre animal de compagnie ?
+                    Cette opération est définitive.
+                </div>
+                <div class="modal-footer">
+                    <form method="POST" action="#" id="deleteConfirmForm">
+                        {% csrf_token %}
+                        <button type="submit" class="orange-btn">Effacer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'js/slug_creation.js' %}"></script>
+<script src="{% static 'js/pet_businesses.js' %}"></script>
+
+{% endblock content %}
