@@ -12,11 +12,15 @@ def create_groups_and_permissions():
     pet_owners_group, created = Group.objects.get_or_create(name='Pet Owners')
     pet_model_comment = apps.get_model('pet_businesses', 'Comment')
     pet_model_like = apps.get_model('pet_businesses', 'Like')
-    pet_permissions = Permission.objects.filter(content_type=ContentType.objects.get_for_model(pet_model_comment, pet_model_like))
+    pet_permissions = Permission.objects.filter(
+        content_type=ContentType.objects.get_for_model(
+            pet_model_comment, pet_model_like))
     pet_owners_group.permissions.set(pet_permissions)
-    business_owners_group, created = Group.objects.get_or_create(name='Business Owners')
+    business_owners_group, created = Group.objects.get_or_create(
+        name='Business Owners')
     business_model = apps.get_model('pet_businesses', 'Business')
-    business_permissions = Permission.objects.filter(content_type=ContentType.objects.get_for_model(business_model))
+    business_permissions = Permission.objects.filter(
+        content_type=ContentType.objects.get_for_model(business_model))
     business_owners_group.permissions.set(business_permissions)
 
 
@@ -106,7 +110,8 @@ class PetBusiness (models.Model):
         """
         Returns the service types as a list of strings.
         """
-        return [service_type.service_type for service_type in self.business_service_type.all()]
+        return [service_type.service_type 
+                for service_type in self.business_service_type.all()]
 
 
 class Comment(models.Model):
