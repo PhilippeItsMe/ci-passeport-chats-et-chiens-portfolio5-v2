@@ -1,0 +1,284 @@
+@import url('https://fonts.googleapis.com/css2?family=Chewy&family=Quicksand:wght@300..700&display=swap');
+
+/*----- Setup -----*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main {
+    /*Pushing footer to the page bottom*/
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-wrapper {
+    /*Padding around the full page*/
+    padding: 0 2rem;
+}
+
+/*----- Colors -----*/
+
+:root {
+    /*Primary color*/
+    --yellow: #FCC737;
+    --orange: #dc3545;
+
+    /*Secondary color*/
+    --darkgrey: #2B2929;
+    --offwhite: #fafafa;
+}
+
+.offwhite {
+    color: var(--offwhite);
+}
+
+.bg-yellow {
+    background-color: var(--yellow);
+}
+
+.bg-orange {
+    background-color: var(--orange);
+}
+
+/*----- Typo -----*/
+
+h1 {
+    font-family: "Chewy", serif;
+    font-size: 5rem;
+    font-weight: 400;
+}
+
+h2 {
+    font-family: "Chewy", serif;
+    font-size: 4rem;
+    font-weight: 400;
+}
+
+h3 {
+    font-family: "Chewy", serif;
+    font-size: 2.5rem !important;
+    font-weight: 400;
+}
+
+p,
+a,
+.btn,
+th,
+li {
+    font-family: "Quicksand", serif;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.bold {
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+/*----- Links & Button -----*/
+
+.link {
+    color: var(--orange);
+}
+
+.link:hover {
+    color: var(--orange);
+    font-weight: 500;
+}
+
+.page-link {
+    color: var(--orange);
+    border-radius: 10%;
+}
+
+.page-link:hover {
+    color: var(--offwhite);
+    background-color: var(--orange);
+    border-radius: 10%;
+}
+
+.fake-btn-effect {
+    margin-top: 1rem;
+    background-color: var(--offwhite);
+    padding: 5px 10px;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.wrapping-border {
+    display: inline-block;
+    border: 1px solid var(--darkgrey);
+    border-radius: 20px;
+    padding: 0 1rem;
+    margin-bottom: 0.5rem;
+    width: auto;
+}
+
+/*----- Header -----*/
+
+.logo {
+    width: 300px;
+    height: auto;
+}
+
+#herosection {
+    background-color: var(--yellow);
+    width: 100%;
+    height: auto;
+    margin-bottom: 100px;
+}
+
+.relativeposition {
+    position: relative;
+}
+
+.footprint {
+    position: absolute;
+    width: 150px;
+    top: 25px;
+}
+
+.heropet {
+    height: 400px;
+    margin-top: 30px;
+    margin-bottom: -50px;
+}
+
+/*----- Footer -----*/
+
+footer {
+    margin-top: 6rem;
+    background-color: var(--yellow);
+    height: 100px;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.footercat {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    right: 50px;
+    top: -222px;
+}
+
+/*----- Business List -----*/
+
+.card {
+    width: 100%;
+    border: 1px solid var(--orange);
+}
+
+.orange-hr {
+    color: var(--orange);
+    width: 90%;
+}
+
+.image-wrapper {
+    width: 106px;
+    height: 106px;
+    border: 3px solid var(--yellow);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    margin: 0 auto 2rem auto;
+}
+
+.round-image {
+    margin: 0;
+    padding: 0;
+    display: block;
+    width: 94px;
+    height: 94px;
+    border-radius: 50%;
+}
+
+.title-color {
+    color: var(--orange);
+    font-size: 1.3rem;
+}
+
+/*----- Business Detail -----*/
+
+.spacing-up {
+    margin-top: 3rem;
+}
+
+.picto {
+    width: 25px;
+    margin-right: 10px;
+}
+
+.right-move-up {
+    display: flex;
+    align-items: start;
+}
+
+.right-move {
+    display: flex;
+    align-items: center;
+}
+
+.rounded-corner {
+    border-radius: 20px;
+}
+
+.like-wrapper {
+    margin-top: 1rem;
+}
+
+
+/*----- My Pet Services (Business Form) -----*/
+
+.spacing {
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+}
+
+/*----- Responsivness -----*/
+
+@media screen and (max-width: 768px) {
+    .btneffect {
+        margin-top: 30px;
+    }
+
+    .footercat {
+        width: 200px;
+        height: 200px;
+        position: absolute;
+        right: 50px;
+        top: -148px;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .hidden {
+        display: none;
+    }
+
+    .footercat {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 330px) {
+
+    .btn-danger,
+    .btn-warning {
+        margin: 0.2rem 0rem;
+    }
+
+    .logo {
+        width: 150px;
+        height: auto;
+    }
+}
