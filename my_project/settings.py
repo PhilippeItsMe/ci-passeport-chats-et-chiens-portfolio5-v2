@@ -14,7 +14,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = ['localhost',
-                 '8000-philippeits-ciportfolio-cvf4eg2kc6e.ws-eu117.gitpod.io',
+                 '8000-philippeits-cipasseport-ueridz1s5o8.ws-eu117.gitpod.io',
                  '.herokuapp.com']
 
 INSTALLED_APPS = [
