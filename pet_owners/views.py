@@ -7,6 +7,7 @@ from .forms import PetOwnerForm, PetForm
 from pet_businesses.utils import group_required
 from django.core.exceptions import PermissionDenied
 
+
 @group_required("Pet Owners")
 def pet_owner_form(request):
     """
@@ -24,13 +25,13 @@ def pet_owner_form(request):
             pet_owner.author = request.user
             pet_owner.save()
             messages.success(request, "Vos informations ont été mises à jour.")
-            return redirect('petowner-detail')
+            return redirect('pet_owner_form')
         else:
             messages.error(request, "Il y a eu une erreur.")
     else:
         form = PetOwnerForm(instance=pet_owner)
 
-    return render(request, 'pet_owners/petowner_form.html',
+    return render(request, 'pet_owners/pet_owners_form.html',
                   {'form': form, 'pet_owner': pet_owner})
 
 
@@ -47,15 +48,14 @@ def pet_create(request):
             pet = form.save(commit=False)
             pet.pet_owner = pet_owner
             pet.save()
-            messages.success(request, f"L'animal {pet.name} 
-                             a été ajouté avec succès.")
-            return redirect('petowner-detail')
+            messages.success(request, f"L'animal {pet.name} a été ajouté avec succès.")
+            return redirect('pet_owner_form')
         else:
             messages.error(request, "Il y a eu une erreur.")
     else:
         form = PetForm()
 
-    return render(request, 'pet_owners/pet_form.html', {'form': form})
+    return render(request, 'pet_owners/pet_owners_form.html', {'form': form, 'pet_owner': pet_owner})
 
 
 @group_required("Pet Owners")
@@ -69,15 +69,14 @@ def pet_edit(request, pet_id):
         form = PetForm(request.POST, request.FILES, instance=pet)
         if form.is_valid():
             pet = form.save()
-            messages.success(request, f"L'animal {pet.name} 
-                             a été mis à jour avec succès.")
-            return redirect('petowner-detail')
+            messages.success(request, f"L'animal {pet.name} a été mis à jour avec succès.")
+            return redirect('pet_owner_form')
         else:
             messages.error(request, "Il y a eu une erreur.")
     else:
         form = PetForm(instance=pet)
 
-    return render(request, 'pet_owners/pet_form.html', {'form': form, 'pet': pet})
+    return render(request, 'pet_owners/pet_owners_form.html', {'form': form, 'pet': pet, 'pet_owner': pet.pet_owner})
 
 
 @group_required("Pet Owners")
@@ -89,10 +88,9 @@ def pet_delete(request, pet_id):
 
     if request.method == "POST":
         pet.delete()
-        messages.success(request, f"L'animal {pet.name} 
-                          a été supprimé avec succès.")
-        return redirect('petowner-detail')
+        messages.success(request, f"L'animal {pet.name} a été supprimé avec succès.")
+        return redirect('pet_owner_form')
     else:
         messages.error(request, "Il y a eu une erreur.")
 
-    return render(request, 'pet_owners/pet_confirm_delete.html', {'pet': pet})
+    return render(request, 'pet_owners/pet_owners_form.html', {'pet': pet, 'pet_owner': pet.pet_owner})

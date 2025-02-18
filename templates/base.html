@@ -46,10 +46,16 @@
                         <a class="nav-link {% if request.path == home_url %}active{% endif %}" aria-current="page"
                             href="{% url 'home' %}">Home</a>
                     </li>
+
                     {% if user.is_authenticated %}
+
                     {% if user|in_group:"Business Owners" %}
                     <li><a class="nav-link" href="{% url 'pet_business_form' %}">Mon entreprise</a></li>
+                    {% elif user|in_group:"Pet Owners" %}
+                    <li><a class="nav-link" href="{% url 'pet_owner_form' %}">Mon profil et mes animaux</a></li>
+
                     {% endif %}
+
 
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == logout_url %}active{% endif %}" aria-current="page"
