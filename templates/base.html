@@ -33,9 +33,13 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container-fluid">
+
+            <!-- Logo -->
             <a class="navbar-brand" href="{% url 'home' %}">
                 <img class="logo" src="{% static 'images/logo.webp' %}" alt="logo">
             </a>
+
+            <!-- Menu -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
                 aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -73,6 +77,50 @@
                     {% endif %}
                 </ul>
             </div>
+
+            <!-- Search bar -->
+            <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
+                <form method="GET" action="">
+                    <div class="input-group w-100">
+                        <input class="form-control border border-black rounded-0" type="text" name="q"
+                            placeholder="Rechercher">
+                        <div class="input-group-append">
+                            <button class="form-control btn btn-black border border-black rounded-0 h-100 bg-darkgrey"
+                                type="submit">
+                                <span class="icon">
+                                    <img class="search-icon" src="{% static 'images/search.webp' %}" alt="Search">
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+            <!--Account
+            <li class="list-inline-item dropdown">
+                <a class="text-black nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    <div class="text-center">
+                        <div><i class="fas fa-user fa-lg"></i></div>
+                        <p class="my-0">Mon compte</p>
+                    </div>
+                </a>
+                <div class="dropdown-menu border-0" aria-labelledby="user-options">
+                    {% if request.user.is_authenticated %}
+                    {% if request.user.is_superuser %}
+                    <a href="" class="dropdown-item">Product Management</a>
+                    {% endif %}
+                    <a href="" class="dropdown-item">My Profile</a>
+                    <a href="{% url 'account_logout' %}" class="dropdown-item">Se déconnecter</a>
+                    {% else %}
+                    <a href="{% url 'account_signup' %}" class="dropdown-item">S'inscrire</a>
+                    <a href="{% url 'account_login' %}" class="dropdown-item">Se connecter</a>
+                    {% endif %}
+                </div>
+            </li>
+            -->
+
         </div>
     </nav>
 

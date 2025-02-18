@@ -30,7 +30,7 @@ main {
 }
 
 .offwhite {
-    color: var(--offwhite);
+    color: var(--offwhite) !important;
 }
 
 .bg-yellow {
@@ -39,6 +39,10 @@ main {
 
 .bg-orange {
     background-color: var(--orange);
+}
+
+.bg-darkgrey {
+    background-color: var(--darkgrey) !important;
 }
 
 /*---------- Typo ----------*/
@@ -67,7 +71,8 @@ a,
 .orange-btn,
 .submit-btn,
 th,
-li {
+li,
+input {
     font-family: "Quicksand", serif;
     font-size: 1rem;
     font-weight: 400;
@@ -86,7 +91,7 @@ li {
 .orange-btn:hover,
 .submit-btn:hover,
 a:hover {
-    cursor: url('/static/images/paw-cursor.webp') 12 12, auto;
+    cursor: url('/static/images/paw-cursor.webp') 10 10, auto;
 }
 
 
@@ -180,6 +185,10 @@ a:hover {
 .logo {
     width: 300px;
     height: auto;
+}
+
+.search-icon {
+    height: 20px;
 }
 
 #herosection {

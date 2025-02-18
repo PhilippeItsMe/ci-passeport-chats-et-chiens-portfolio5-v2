@@ -11,6 +11,8 @@ from pet_businesses.utils import group_required
 from django.core.exceptions import PermissionDenied
 
 
+#------------  Authentificaiton view ------------#
+
 def custom_signup(request):
     """
     Custom signup view combining user registration and group assignment.
@@ -44,6 +46,8 @@ def custom_signup(request):
         'group_form': group_form,
     })
 
+
+#------------  Pet Businesses view ------------#
 
 class BusinessList(generic.ListView):
     """
@@ -100,66 +104,6 @@ def pet_business_detail(request, slug):
             "has_liked": has_liked,
         },
     )
-
-
-@group_required("Pet Owners")
-def comment_edit(request, slug, comment_id):
-    """
-    View to edit comments.
-    """
-    if request.method == "POST":
-
-        queryset = PetBusiness.objects.filter(approved=True)
-        post = get_object_or_404(queryset, slug=slug)
-        comment = get_object_or_404(Comment, pk=comment_id)
-        comment_form = CommentForm(data=request.POST, instance=comment)
-
-        if comment_form.is_valid() and comment.author == request.user:
-            comment = comment_form.save(commit=False)
-            comment.pet_business = post
-            comment.approved = False
-            comment.save()
-            messages.add_message(request, messages.SUCCESS,
-                                 'Commentaire mis à jour.')
-        else:
-            messages.add_message(request,
-                                 messages.ERROR,
-                                 'Il y a eu une erreur.')
-
-    return HttpResponseRedirect(reverse('pet_business_detail', args=[slug]))
-
-
-@group_required("Pet Owners")
-def comment_delete(request, slug, comment_id):
-    """
-    View to delete comment.
-    """
-    queryset = PetBusiness.objects.filter(approved=True)
-    post = get_object_or_404(queryset, slug=slug)
-    comment = get_object_or_404(Comment, pk=comment_id)
-
-    if comment.author == request.user:
-        comment.delete()
-        messages.add_message(request, messages.SUCCESS,
-                             'Commentaire effacé!')
-    else:
-        messages.add_message(request, messages.ERROR,
-                             'Vous ne pouvez effacer que vos commentaires!')
-
-    return HttpResponseRedirect(reverse('pet_business_detail', args=[slug]))
-
-
-@group_required("Pet Owners")
-def like_post(request, pet_business_id):
-    """
-    View to like pet businesses.
-    """
-    pet_business = get_object_or_404(PetBusiness, id=pet_business_id)
-    like, created = Like.objects.get_or_create(pet_business=pet_business,
-                                               author=request.user)
-    if not created:
-        like.delete()
-    return redirect('pet_business_detail', slug=pet_business.slug)
 
 
 @group_required("Business Owners")
@@ -239,3 +183,67 @@ def pet_business_delete(request, slug, pet_business_id):
     else:
         messages.error(request, "Il y a eu une erreur.")
     return redirect('pet_business_form')
+
+
+#------------  Comments views ------------#
+
+@group_required("Pet Owners")
+def comment_edit(request, slug, comment_id):
+    """
+    View to edit comments.
+    """
+    if request.method == "POST":
+
+        queryset = PetBusiness.objects.filter(approved=True)
+        post = get_object_or_404(queryset, slug=slug)
+        comment = get_object_or_404(Comment, pk=comment_id)
+        comment_form = CommentForm(data=request.POST, instance=comment)
+
+        if comment_form.is_valid() and comment.author == request.user:
+            comment = comment_form.save(commit=False)
+            comment.pet_business = post
+            comment.approved = False
+            comment.save()
+            messages.add_message(request, messages.SUCCESS,
+                                 'Commentaire mis à jour.')
+        else:
+            messages.add_message(request,
+                                 messages.ERROR,
+                                 'Il y a eu une erreur.')
+
+    return HttpResponseRedirect(reverse('pet_business_detail', args=[slug]))
+
+
+@group_required("Pet Owners")
+def comment_delete(request, slug, comment_id):
+    """
+    View to delete comment.
+    """
+    queryset = PetBusiness.objects.filter(approved=True)
+    post = get_object_or_404(queryset, slug=slug)
+    comment = get_object_or_404(Comment, pk=comment_id)
+
+    if comment.author == request.user:
+        comment.delete()
+        messages.add_message(request, messages.SUCCESS,
+                             'Commentaire effacé!')
+    else:
+        messages.add_message(request, messages.ERROR,
+                             'Vous ne pouvez effacer que vos commentaires!')
+
+    return HttpResponseRedirect(reverse('pet_business_detail', args=[slug]))
+
+
+#------------  Likes views ------------#
+
+@group_required("Pet Owners")
+def like_post(request, pet_business_id):
+    """
+    View to like pet businesses.
+    """
+    pet_business = get_object_or_404(PetBusiness, id=pet_business_id)
+    like, created = Like.objects.get_or_create(pet_business=pet_business,
+                                               author=request.user)
+    if not created:
+        like.delete()
+    return redirect('pet_business_detail', slug=pet_business.slug)

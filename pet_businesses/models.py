@@ -4,6 +4,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.apps import apps
 from cloudinary.models import CloudinaryField
 
+#------------ Authorisation model ------------#
 
 def create_groups_and_permissions():
     """
@@ -23,6 +24,7 @@ def create_groups_and_permissions():
         content_type=ContentType.objects.get_for_model(business_model))
     business_owners_group.permissions.set(business_permissions)
 
+#------------ Pet Businesses Models ------------#
 
 class ServiceType (models.Model):
     """
@@ -63,6 +65,20 @@ class PetBusiness (models.Model):
     Model representing a pet business with details such as address,
     contact information, and services offered.
     """
+    
+    CANTON_CHOICES = [
+        ('Genève', 'Genève'),
+        ('Vaud - La Côte', 'Vaud - La Côte'),
+        ('Vaud - Lausanne', 'Vaud - Lausanne'),
+        ('Vaud - Gros-de-Vaud & Plaine de l’Orbe', 'Vaud - Gros-de-Vaud & Plaine de l’Orbe'),
+        ('Vaud - Alpes vaudoises & Chablais vaudois', 'Vaud - Alpes vaudoises & Chablais vaudois'),
+        ('Vaud - Jura vaudois', 'Vaud - Jura vaudois'),
+        ('Valais', 'Valais'),
+        ('Fribourg', 'Fribourg'),
+        ('Neuchâtel', 'Neuchâtel'),
+        ('Jura', 'Jura'),
+    ]
+
     firm = models.CharField(max_length=255, unique=True)
     slug = models.SlugField(max_length=255, unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE,
@@ -71,6 +87,7 @@ class PetBusiness (models.Model):
     number = models.CharField(max_length=8)
     npa = models.CharField(max_length=13)
     locality = models.CharField(max_length=255)
+    canton = models.CharField(max_length=100, choices=CANTON_CHOICES)
     phone = models.CharField(max_length=16)
     email = models.EmailField()
     featured_image = CloudinaryField('image', default='placeholder')
@@ -113,6 +130,8 @@ class PetBusiness (models.Model):
         return [service_type.service_type 
                 for service_type in self.business_service_type.all()]
 
+
+#------------ Comments & Likes Models ------------#
 
 class Comment(models.Model):
     """
