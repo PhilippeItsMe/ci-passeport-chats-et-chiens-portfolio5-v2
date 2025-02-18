@@ -1,19 +1,9 @@
-from . import views
 from django.urls import path
+from . import views
 
 urlpatterns = [
-    # PetOwner URLs
-    path('profile/create/', views.PetOwnerCreateView.as_view(), 
-         name='petowner-create'),
-    path('profile/', views.PetOwnerDetailView.as_view(), 
-         name='petowner-detail'),
-    path('profile/edit/', views.PetOwnerUpdateView.as_view(), 
-         name='petowner-update'),
-
-    # Pet URLs
-    path('pets/add/', views.PetCreateView.as_view(), name='pet-create'),
-    path('pets/<int:pk>/edit/', views.PetUpdateView.as_view(), 
-         name='pet-update'),
-    path('pets/<int:pk>/delete/', views.PetDeleteView.as_view(), 
-         name='pet-delete'),
+    path('profile/', views.pet_owner_form, name='petowner-detail'),
+    path('pets/add/', views.pet_create, name='pet-create'),      
+    path('pets/<int:pet_id>/edit/', views.pet_edit, name='pet-edit'),
+    path('pets/<int:pet_id>/delete/', views.pet_delete, name='pet-delete'),
 ]

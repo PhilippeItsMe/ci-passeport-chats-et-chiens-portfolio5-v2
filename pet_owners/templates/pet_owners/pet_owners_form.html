@@ -3,35 +3,52 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-
 <div class="page-wrapper">
-    <h3>Mes animaux de companie</h3>
+    <h3>Mon Profil de Propriétaire d'Animaux</h3>
 
-    <!---------- Existing list of pets  ---------->
+    <!---------- PetOwner Details Form (Create/Update) ---------->
+    <h4 class="spacing">{% if pet_owner %}Modifier mon profil{% else %}Créer mon profil{% endif %}</h4>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="submit-btn">
+            {% if pet_owner %}Mettre à jour{% else %}Créer{% endif %}
+        </button>
+    </form>
 
-    {% if pet %}
+    <hr>
+
+    <!---------- Existing list of Pets ---------->
+    <h3>Mes Animaux</h3>
+
+    {% if pet_owner and pet_owner.pets.all %}
     <table class="table">
         <thead>
             <tr>
                 <th>Nom</th>
-                <th class="hidden">Date de naissance</th>
+                <th>Date de naissance</th>
                 <th>Type</th>
+                <th>Image</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            {% for single_pet in pet %}
+            {% for pet in pet_owner.pets.all %}
             <tr>
-                <td>{{ single_pet.name }}</td>
-                <td>{{ single_pet.birtday }}</td>
-                <td>{{ single_pet.pet_type}}</td>
+                <td>{{ pet.name }}</td>
+                <td>{{ pet.birthday|date:"d/m/Y" }}</td>
+                <td>{{ pet.pet_type }}</td>
                 <td>
-                    <a href="{% url 'pet_edit' pet.slug pet.id %}" class="yellow-btn">Editer</a>
+                    <img src="{{ pet.pet_featured_image.url }}" alt="{{ pet.name }}" width="60" height="60"
+                        style="border-radius: 8px;">
+                </td>
+                <td>
+                    <a href="{% url 'pet-edit' pet.id %}" class="yellow-btn">Modifier</a>
 
                     <!-- Delete button triggering confirmation modal -->
-
                     <button type="button" class="orange-btn" data-bs-toggle="modal" data-bs-target="#deleteModal"
-                        data-href="{% url 'pet_delete' pet.slug pet.id %}">
-                        Effacer
+                        data-href="{% url 'pet-delete' pet.id %}">
+                        Supprimer
                     </button>
                 </td>
             </tr>
@@ -39,24 +56,13 @@
         </tbody>
     </table>
     {% else %}
-    <p>Vous nous avez pas encore parler de vos animaux de companie.</p>
+    <p>Vous n'avez pas encore enregistré d'animaux.</p>
     {% endif %}
 
-    <!---------- Form to create a new pet business ---------->
-
-    <h3 class="spacing">{% if form.instance.pk %}Editez votre animal{% else %}Ajouter votre animal de companie
-        !{% endif %}
-    </h3>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="submit-btn">
-            {% if form.instance.pk %}Mettre à jour{% else %}Soumettre{% endif %}
-        </button>
-    </form>
+    <!---------- Link to Add a Pet ---------->
+    <a href="{% url 'pet-create' %}" class="submit-btn spacing">Ajouter un animal</a>
 
     <!---------- Delete confirmation modal ---------->
-
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -65,21 +71,34 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Êtes-vous sur de vouloir effacer votre animal de compagnie ?
-                    Cette opération est définitive.
+                    Êtes-vous sûr de vouloir supprimer cet animal ? Cette opération est définitive.
                 </div>
                 <div class="modal-footer">
                     <form method="POST" action="#" id="deleteConfirmForm">
                         {% csrf_token %}
-                        <button type="submit" class="orange-btn">Effacer</button>
+                        <button type="submit" class="orange-btn">Supprimer</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
 
-<script src="{% static 'js/slug_creation.js' %}"></script>
-<script src="{% static 'js/pet_businesses.js' %}"></script>
+
+<!--<script src="{% static 'js/pet_businesses.js' %}"></script>-->
+
+<script>
+    // JavaScript to dynamically update the delete form action
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteModal = document.getElementById('deleteModal');
+        deleteModal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+            const actionUrl = button.getAttribute('data-href');
+            const form = deleteModal.querySelector('#deleteConfirmForm');
+            form.action = actionUrl;
+        });
+    });
+</script>
 
 {% endblock content %}
