@@ -17,8 +17,8 @@ class PetOwnerForm(forms.ModelForm):
             'newsletter': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }
         labels = {
-            'phone': 'Téléphone ',
-            'newsletter': 'Abonné à la newsletter ',
+            'phone': 'Vous pouvez sans autre me contacter à ce numéro si nécessaire : ',
+            'newsletter': 'Je souhaite recevoir votre newsletter.',
         }
 
 

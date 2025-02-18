@@ -4,10 +4,10 @@
 {% load crispy_forms_tags %}
 
 <div class="page-wrapper">
-    <h3>Mon Profil de Propriétaire d'Animaux</h3>
+    <h3>Mon profil et mes loulous</h3>
 
     <!---------- PetOwner Details Form (Create/Update) ---------->
-    <h4 class="spacing">{% if pet_owner %}Modifier mon profil{% else %}Créer mon profil{% endif %}</h4>
+    <h4 class="spacing">{% if pet_owner %}Quelques informations à mon sujet : {% else %}Créer mon profil{% endif %}</h4>
     <form method="POST">
         {% csrf_token %}
         {{ form|crispy }}
@@ -19,7 +19,7 @@
     <hr>
 
     <!---------- Existing list of Pets ---------->
-    <h3>Mes Animaux</h3>
+    <h3>Mes meilleurs amis</h3>
 
     {% if pet_owner and pet_owner.pets.all %}
     <table class="table">
@@ -56,7 +56,7 @@
         </tbody>
     </table>
     {% else %}
-    <p>Vous n'avez pas encore enregistré d'animaux.</p>
+    <p>Parlez nous de vos animaux de compagnie.</p>
     {% endif %}
 
     <!---------- Link to Add a Pet ---------->
