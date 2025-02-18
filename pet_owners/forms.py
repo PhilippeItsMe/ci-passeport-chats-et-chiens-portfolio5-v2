@@ -34,6 +34,11 @@ class PetForm(forms.ModelForm):
             'pet_type',
             'pet_featured_image',
         ]
+        error_messages = {
+            'name': {
+                'required': 'Veuillez renseigner le nom de votre animal.',
+            },
+        },
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'birthday': forms.DateInput(attrs={'class': 'form-control',

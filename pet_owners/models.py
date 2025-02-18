@@ -10,10 +10,9 @@ class PetOwner(models.Model):
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name="pet_owners",
-        default=1
+        related_name="pet_owners"
     )
-    phone = models.CharField(max_length=16)
+    phone = models.CharField(max_length=16, blank=True, null=True)
     newsletter = models.BooleanField(default=False)
     date_created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
@@ -36,7 +35,7 @@ class Pet(models.Model):
         related_name="pets"
     )
     name = models.CharField(max_length=150)
-    birthday = models.DateField()
+    birthday = models.DateField(blank=True, null=True)
     pet_type = models.ForeignKey(
         "pet_businesses.PetType",
         on_delete=models.SET_NULL,
