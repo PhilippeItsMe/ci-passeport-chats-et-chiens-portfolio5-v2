@@ -1,7 +1,7 @@
 from django.contrib.auth.models import Group
 from django.shortcuts import render, get_object_or_404, reverse, redirect
-from django.contrib.auth.decorators import login_required
-from django.views import generic
+# from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from .models import PetBusiness, Comment, Like
@@ -9,6 +9,7 @@ from .forms import CommentForm, UserRegistrationForm
 from .forms import CustomSignupForm, PetBusinessForm
 from pet_businesses.utils import group_required
 from django.core.exceptions import PermissionDenied
+from django.db.models import Q
 
 
 #------------  Authentificaiton view ------------#
@@ -49,14 +50,30 @@ def custom_signup(request):
 
 #------------  Pet Businesses view ------------#
 
-class BusinessList(generic.ListView):
+class BusinessList(ListView):
     """
-    View to render businesses list.
+    View to render businesses list and manage search queries.
     """
-    queryset = PetBusiness.objects.filter(approved=True)
+    model = PetBusiness
     template_name = "pet_businesses/pet_business_list.html"
     context_object_name = "pet_business_list"
     paginate_by = 3
+
+    def get_queryset(self):
+        queryset = PetBusiness.objects.filter(approved=True)
+        query = self.request.GET.get('q')
+
+        if query:
+            queryset = queryset.filter(
+                Q(firm__icontains=query) | Q(description__icontains=query)
+            )
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search_term'] = self.request.GET.get('q', '')
+        return context
 
 
 def pet_business_detail(request, slug):

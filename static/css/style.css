@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Chewy&family=Quicksand:wght@300..700&display=swap');
 
+
 /*---------- Setup ----------*/
 
 * {
@@ -33,6 +34,11 @@ main {
     color: var(--offwhite) !important;
 }
 
+.darkgrey {
+    color: var(--darkgrey) !important;
+}
+
+
 .bg-yellow {
     background-color: var(--yellow);
 }
@@ -44,6 +50,7 @@ main {
 .bg-darkgrey {
     background-color: var(--darkgrey) !important;
 }
+
 
 /*---------- Typo ----------*/
 
@@ -83,8 +90,8 @@ input {
     font-size: 1.1rem;
 }
 
-/*---------- Links & Button ----------*/
 
+/*---------- Links & Button ----------*/
 
 .link:hover,
 .yellow-btn:hover,
@@ -94,6 +101,9 @@ a:hover {
     cursor: url('/static/images/paw-cursor.webp') 10 10, auto;
 }
 
+.white-paw {
+    cursor: url('/static/images/paw-cursor-white.webp') 10 10, auto !important;
+}
 
 .link {
     color: var(--orange);
@@ -156,14 +166,17 @@ a:hover {
     display: inline-block;
 }
 
+
 /*---------- Wrapper ----------*/
 
 /*Full page wrapper*/
+
 .page-wrapper {
     padding: 0 2rem;
 }
 
-/*Django message wrappere*/
+/*Django message wrapper*/
+
 .message-wrapper {
     padding: 1 2rem;
     border: 1px solid var(--orange) !important;
@@ -179,6 +192,7 @@ a:hover {
     margin-bottom: 0.5rem;
     width: auto;
 }
+
 
 /*---------- Header ----------*/
 
@@ -235,6 +249,7 @@ footer {
     top: -218px;
 }
 
+
 /*---------- Business List ----------*/
 
 .card {
@@ -273,6 +288,7 @@ footer {
     font-size: 1.3rem;
 }
 
+
 /*---------- Business Detail ----------*/
 
 .spacing-up {
@@ -309,6 +325,7 @@ footer {
     margin-top: 4rem;
     margin-bottom: 2rem;
 }
+
 
 /*---------- Responsivness ----------*/
 
