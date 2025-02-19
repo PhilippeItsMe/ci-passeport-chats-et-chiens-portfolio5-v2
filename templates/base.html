@@ -31,102 +31,91 @@
 
     <!---------- Navigation ---------->
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <nav class="navbar navbar-expand-lg navbar-light w-100">
         <div class="container-fluid">
+            <!--First Menu Row-->
+            <div id="topnav" class="row pt-lg-2 d-none d-lg-flex align-items-center w-100">
+                <!-- Logo -->
+                <div class="col-lg-4 text-center text-lg-start">
+                    <a class="navbar-brand" href="{% url 'home' %}">
+                        <img class="logo" src="{% static 'images/logo.webp' %}" alt="logo">
+                    </a>
+                </div>
 
-            <!-- Logo -->
-            <a class="navbar-brand" href="{% url 'home' %}">
-                <img class="logo" src="{% static 'images/logo.webp' %}" alt="logo">
-            </a>
-
-            <!-- Menu -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
-                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.path == home_url %}active{% endif %}" aria-current="page"
-                            href="{% url 'home' %}">Home</a>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Search bar -->
-            <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
-                <form method="GET" action="{% url 'home' %}">
-                    <div class="input-group w-100">
-                        <input class="form-control border border-black rounded-0" type="text" name="q"
-                            placeholder="Rechercher">
-                        <div class="input-group-append">
-                            <button
-                                class="white-paw form-control btn btn-black border border-black rounded-0 h-100 bg-darkgrey"
+                <!-- Search bar -->
+                <div class="col-lg-4">
+                    <form method="GET" action="{% url 'home' %}">
+                        <div class="input-group w-100">
+                            <input class="form-control border border-black rounded-0" type="text" name="q"
+                                placeholder="Rechercher">
+                            <button class="white-paw btn btn-black border border-black rounded-0 bg-darkgrey"
                                 type="submit">
-                                <span class="icon">
-                                    <img class="search-icon" src="{% static 'images/search.webp' %}" alt="Search">
-                                </span>
+                                <img class="search-icon" src="{% static 'images/search.webp' %}" alt="Search">
                             </button>
                         </div>
-                    </div>
-                </form>
-            </div>
+                    </form>
+                </div>
 
+                <!-- Account & Basket -->
+                <div class="col-lg-4">
+                    <ul class="list-inline d-flex justify-content-end align-items-center mb-0">
 
-            <!--Block Account & Shopping basket-->
-            <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
-                <ul class="list-inline list-unstyled text-center text-lg-right my-0">
-
-                    <!--Account-->
-                    <li class="list-inline-item dropdown">
-                        <a class="text-black nav-link" href="#" id="user-options" data-bs-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            <div class="text-center">
-                                <span class="icon">
+                        <!-- Account -->
+                        <li class="list-inline-item dropdown">
+                            <a class="text-black nav-link" href="#" id="user-options" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <div class="text-center">
                                     <img class="search-icon" src="{% static 'images/user.svg' %}" alt="User">
-                                </span>
-                                <p class="my-0 darkgrey">Mon compte</p>
+                                    <p class="my-0 darkgrey">Mon compte</p>
+                                </div>
+                            </a>
+                            <div class="dropdown-menu border-0" aria-labelledby="user-options">
+                                {% if request.user.is_authenticated %}
+                                {% if user|in_group:"Business Owners" %}
+                                <a class="dropdown-item" href="{% url 'pet_business_form' %}">Mes services</a>
+                                {% elif user|in_group:"Pet Owners" %}
+                                <a class="dropdown-item" href="{% url 'pet_owner_form' %}">Mes compagnons</a>
+                                {% endif %}
+                                <a class="dropdown-item" href="{% url 'account_logout' %}">Se déconnecter</a>
+                                {% else %}
+                                <a class="dropdown-item" href="{% url 'account_signup' %}">S'inscrire</a>
+                                <a class="dropdown-item" href="{% url 'account_login' %}">Se connecter</a>
+                                {% endif %}
                             </div>
-                        </a>
-                        <div class="dropdown-menu border-0" aria-labelledby="user-options">
-                            {% if request.user.is_authenticated %}
+                        </li>
 
-                            {% if user|in_group:"Business Owners" %}
-                            <a class="dropdown-item" href="{% url 'pet_business_form' %}">Mes services</a>
-                            {% elif user|in_group:"Pet Owners" %}
-                            <a class="dropdown-item" href="{% url 'pet_owner_form' %}">Mes compagnons</a>
-                            {% endif %}
-
-                            <a class="dropdown-item" href="{% url 'account_logout' %}">Se déconnecter</a>
-                            {% else %}
-                            <a class="dropdown-item" href="{% url 'account_signup' %}">S'inscrire</a>
-                            <a class="dropdown-item" href="{% url 'account_login' %}">Se connecter</a>
-                            {% endif %}
-                        </div>
-                    </li>
-
-                    <!--Shopping Basket-->
-                    <li class="list-inline-item">
-                        <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link"
-                            href="">
-                            <div class="text-center">
-                                <span class="icon">
+                        <!-- Shopping Basket -->
+                        <li class="list-inline-item">
+                            <a class="nav-link {% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %}"
+                                href="">
+                                <div class="text-center">
                                     <img class="search-icon" src="{% static 'images/basket.svg' %}"
                                         alt="Shopping basket">
-                                </span>
-                                <p class="my-0 darkgrey">
-                                    {% if grand_total %}
-                                    ${{ grand_total|floatformat:2 }}
-                                    {% else %}
-                                    $0.00
-                                    {% endif %}
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
+                                    <p class="my-0 darkgrey">
+                                        {% if grand_total %}
+                                        ${{ grand_total|floatformat:2 }}
+                                        {% else %}
+                                        $0.00
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
             </div>
-        </div>
+            <!--Second Menu Row-->
+            <div class="row bg-white">
+                <!--Imported From Includes Nav Bar-->
+                <nav class="navbar navbar-expand-lg navbar-light w-100">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav"
+                        aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    {% include 'includes/main-nav.html' %}
+                </nav>
+            </div>
     </nav>
 
     <!---------- Hero Section ---------->

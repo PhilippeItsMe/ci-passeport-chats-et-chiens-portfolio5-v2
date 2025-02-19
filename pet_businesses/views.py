@@ -58,16 +58,21 @@ class BusinessList(ListView):
     template_name = "pet_businesses/pet_business_list.html"
     context_object_name = "pet_business_list"
     paginate_by = 3
-
+   
+    # Filter
+    query = None
     def get_queryset(self):
         queryset = PetBusiness.objects.filter(approved=True)
         query = self.request.GET.get('q')
 
-        if query:
-            queryset = queryset.filter(
-                Q(firm__icontains=query) | Q(description__icontains=query)
-            )
-
+        if query is not None:
+            if query.strip() == "":
+                messages.error(self.request,
+                               "Vous n'avez pas entré de recherche.")
+            else:
+                queryset = queryset.filter(
+                    Q(firm__icontains=query) | Q(description__icontains=query)
+                )
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -92,7 +97,8 @@ def pet_business_detail(request, slug):
 
     if request.method == "POST":
         if not request.user.groups.filter(name="Pet Owners").exists():
-            raise PermissionDenied("Vous n'avez pas la permission de faire des commentaires.")
+            raise PermissionDenied(
+                "Vous n'avez pas la permission de faire des commentaires.")
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
