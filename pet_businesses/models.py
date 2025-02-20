@@ -3,6 +3,7 @@ from django.contrib.auth.models import User, Group, Permission
 from django.contrib.contenttypes.models import ContentType
 from django.apps import apps
 from cloudinary.models import CloudinaryField
+from django.utils.text import slugify
 
 #------------ Authorisation model ------------#
 
@@ -26,11 +27,12 @@ def create_groups_and_permissions():
 
 #------------ Pet Businesses Models ------------#
 
-class ServiceType (models.Model):
+class ServiceType(models.Model):
     """
     Model for types of pet services.
     """
     service_type = models.CharField(max_length=150)
+    slug = models.SlugField(unique=True, blank=True) 
     date_created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
 
@@ -43,11 +45,13 @@ class ServiceType (models.Model):
         return f"{self.service_type}"
 
 
-class PetType (models.Model):
+
+class PetType(models.Model):
     """
     Model for types of pets.
     """
     pet_type = models.CharField(max_length=150)
+    slug = models.SlugField(unique=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
 

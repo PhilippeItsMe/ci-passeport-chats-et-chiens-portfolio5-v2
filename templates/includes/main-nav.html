@@ -1,0 +1,51 @@
+<div class="collapse navbar-collapse" id="main-nav">
+    <ul class="navbar-nav w-auto mx-auto">
+        <li class="nav-item dropdown">
+            <a class="logo-font fw-bold nav-link text-black me-5" href="#" id="pet-type-link" data-bs-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Animaux
+            </a>
+            <ul class="dropdown-menu border-0" aria-labelledby="pet-type-link">
+                <li><a href="{% url 'home' %}?category=araignees_scorpions" class="dropdown-item">Araignées 🕷️ &
+                        Scorpions 🧯</a></li>
+                <li><a href="{% url 'home' %}?category=autres_animaux" class="dropdown-item">Autres 🏡</a></li>
+                <li><a href="{% url 'home' %}?category=chats" class="dropdown-item">Chats 🐈</a></li>
+                <li><a href="{% url 'home' %}?category=chiens" class="dropdown-item">Chiens 🐶</a></li>
+                <li><a href="{% url 'home' %}?category=oiseaux" class="dropdown-item">Oiseaux 🥜</a></li>
+                <li><a href="{% url 'home' %}?category=petits_mammiferes" class="dropdown-item">Petits mammifères 🐹</a>
+                </li>
+                <li><a href="{% url 'home' %}?category=poissons_mer" class="dropdown-item">Poissons d’eau de mer 🐟</a>
+                </li>
+                <li><a href="{% url 'home' %}?category=poissons_douce" class="dropdown-item">Poissons d’eau douce 🐠</a>
+                </li>
+                <li><a href="{% url 'home' %}?category=reptiles" class="dropdown-item">Reptiles 🐍 🐢</a></li>
+            </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+            <a class="logo-font fw-bold nav-link text-black me-5" href="#" id="service-type-link"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Services
+            </a>
+            <ul class="dropdown-menu border-0" aria-labelledby="service-type-link">
+                <li><a href="{% url 'home' %}?category=assurance_protection" class="dropdown-item">Assurance &
+                        Protection 🛡️</a></li>
+                <li><a href="{% url 'home' %}?category=autres_services" class="dropdown-item">Autres 🐕‍🦺</a></li>
+                <li><a href="{% url 'home' %}?category=garde_surveillance" class="dropdown-item">Garde & Surveillance
+                        🏠</a></li>
+                <li><a href="{% url 'home' %}?category=loisirs_activites" class="dropdown-item">Loisirs & Activités
+                        🎾</a></li>
+                <li><a href="{% url 'home' %}?category=produits_accessoires" class="dropdown-item">Produits &
+                        Accessoires 🫆</a></li>
+                <li><a href="{% url 'home' %}?category=sante_veterinaires" class="dropdown-item">Santé & Vétérinaires
+                        🏥</a></li>
+                <li><a href="{% url 'home' %}?category=services_funeraire" class="dropdown-item">Services funéraires
+                        ⚰️</a></li>
+                <li><a href="{% url 'home' %}?category=soins_hygiene" class="dropdown-item">Soins de base & Hygiène
+                        🫌</a></li>
+                <li><a href="{% url 'home' %}?category=education_comportement" class="dropdown-item">Éducation &
+                        Comportement 🐶</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>

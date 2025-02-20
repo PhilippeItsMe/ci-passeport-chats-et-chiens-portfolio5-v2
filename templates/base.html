@@ -21,6 +21,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!---------- CSS ressources ---------->
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -33,7 +34,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light w-100">
         <div class="container-fluid">
-            <!--First Menu Row-->
+            <!-- First Menu Row -->
             <div id="topnav" class="row pt-lg-2 d-none d-lg-flex align-items-center w-100">
                 <!-- Logo -->
                 <div class="col-lg-4 text-center text-lg-start">
@@ -59,7 +60,6 @@
                 <!-- Account & Basket -->
                 <div class="col-lg-4">
                     <ul class="list-inline d-flex justify-content-end align-items-center mb-0">
-
                         <!-- Account -->
                         <li class="list-inline-item dropdown">
                             <a class="text-black nav-link" href="#" id="user-options" data-bs-toggle="dropdown"
@@ -101,21 +101,21 @@
                                 </div>
                             </a>
                         </li>
-
                     </ul>
                 </div>
             </div>
-            <!--Second Menu Row-->
-            <div class="row bg-white">
-                <!--Imported From Includes Nav Bar-->
-                <nav class="navbar navbar-expand-lg navbar-light w-100">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav"
-                        aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    {% include 'includes/main-nav.html' %}
-                </nav>
-            </div>
+        </div>
+    </nav>
+
+    <!-- Second Menu Row (Main Navigation) -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white w-100">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav"
+                aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            {% include 'includes/main-nav.html' %}
+        </div>
     </nav>
 
     <!---------- Hero Section ---------->

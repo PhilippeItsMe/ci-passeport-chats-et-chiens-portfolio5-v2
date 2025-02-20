@@ -52,32 +52,39 @@ def custom_signup(request):
 
 class BusinessList(ListView):
     """
-    View to render businesses list and manage search queries.
+    View to render businesses list and manage search queries and filters.
     """
     model = PetBusiness
     template_name = "pet_businesses/pet_business_list.html"
     context_object_name = "pet_business_list"
     paginate_by = 3
-   
-    # Filter
-    query = None
+
     def get_queryset(self):
         queryset = PetBusiness.objects.filter(approved=True)
-        query = self.request.GET.get('q')
 
-        if query is not None:
+        # Search functionality
+        query = self.request.GET.get('q')
+        if query:
             if query.strip() == "":
-                messages.error(self.request,
-                               "Vous n'avez pas entré de recherche.")
+                messages.error(self.request, "Vous n'avez pas entré de recherche.")
             else:
                 queryset = queryset.filter(
                     Q(firm__icontains=query) | Q(description__icontains=query)
                 )
+
+        # Filtering by category (Pet Type or Service Type)
+        category = self.request.GET.get('category')
+        if category:
+            queryset = queryset.filter(
+                Q(business_pet_type__slug=category) | Q(business_service_type__slug=category)
+            )
+
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['search_term'] = self.request.GET.get('q', '')
+        context['selected_category'] = self.request.GET.get('category', '')
         return context
 
 
