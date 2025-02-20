@@ -102,11 +102,11 @@ input {
 .orange-btn:hover,
 .submit-btn:hover,
 a:hover {
-    cursor: url('/static/images/paw-cursor.webp') 10 10, auto;
+    cursor: url('/static/images/pawcursor.webp') 10 10, auto;
 }
 
 .white-paw {
-    cursor: url('/static/images/paw-cursor-white.webp') 10 10, auto !important;
+    cursor: url('/static/images/pawcursorwhite.webp') 10 10, auto !important;
 }
 
 .link {

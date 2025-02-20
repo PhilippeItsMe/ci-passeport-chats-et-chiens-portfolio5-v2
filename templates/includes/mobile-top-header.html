@@ -1,0 +1,72 @@
+{% load static %}
+{% url 'home' as home_url %}
+{% url 'account_login' as login_url %}
+{% url 'account_signup' as signup_url %}
+{% url 'account_logout' as logout_url %}
+{% load custom_tags %}
+
+<!-- Mobile Search -->
+<li class="list-inline-item">
+    <a class="text-black nav-link d-block d-lg-none" href="#" id="mobile-search" data-bs-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        <div class="text-center">
+            <img class="search-icon" src="{% static 'images/searchblack.webp' %}" alt="Search">
+            <p class="my-0 darkgrey">Rechercher</p>
+        </div>
+    </a>
+    <div class="dropdown-menu border-0 w-100 p-3 rounded-0 my-0" aria-labelledby="mobile-search">
+        <form class="form" method="GET" action="{% url 'home' %}">
+            <div class="input-group w-100">
+                <input class="form-control border border-black rounded-0" type="text" name="q" placeholder="Rechercher">
+                <div class="input-group-append">
+                    <button class="form-control btn btn-black border border-black rounded-0" type="submit">
+                        <span class="icon">
+                            <img class="search-icon" src="{% static 'images/search.webp' %}" alt="Search">
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</li>
+
+<!-- Mobile Account -->
+<li class="list-inline-item dropdown">
+    <a class="text-black nav-link d-block d-lg-none" href="#" id="mobile-user-options" data-bs-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        <div class="text-center">
+            <img class="search-icon" src="{% static 'images/user.svg' %}" alt="User">
+            <p class="my-0 darkgrey">Mon compte</p>
+        </div>
+    </a>
+    <div class="dropdown-menu border-0" aria-labelledby="mobile-user-options">
+        {% if request.user.is_authenticated %}
+        {% if user|in_group:"Business Owners" %}
+        <a class="dropdown-item" href="{% url 'pet_business_form' %}">Mes services</a>
+        {% elif user|in_group:"Pet Owners" %}
+        <a class="dropdown-item" href="{% url 'pet_owner_form' %}">Mes compagnons</a>
+        {% endif %}
+        <a href="{% url 'account_logout' %}" class="dropdown-item">Se déconnecter</a>
+        {% else %}
+        <a href="{% url 'account_signup' %}" class="dropdown-item">S'inscrire</a>
+        <a href="{% url 'account_login' %}" class="dropdown-item">Se connecter</a>
+        {% endif %}
+    </div>
+</li>
+
+<!-- Mobile Basket -->
+<li class="list-inline-item">
+    <a class="{% if grand_total %}text-primary font-weight-bold{% else %}text-black{% endif %} nav-link d-block d-lg-none"
+        href="">
+        <div class="text-center">
+            <img class="search-icon" src="{% static 'images/basket.svg' %}" alt="Shopping basket">
+            <p class="my-0 darkgrey">
+                {% if grand_total %}
+                ${{ grand_total|floatformat:2 }}
+                {% else %}
+                $0.00
+                {% endif %}
+            </p>
+        </div>
+    </a>
+</li>
