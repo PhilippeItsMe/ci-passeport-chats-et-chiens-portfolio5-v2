@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Chewy&family=Quicksand:wght@300..700&display=swap');
 
 
-/*---------- Setup ----------*/
+/*-------------------- Setup --------------------*/
 
 * {
     margin: 0;
@@ -18,7 +18,7 @@ main {
 
 
 
-/*---------- Colors ----------*/
+/*-------------------- Colors--------------------*/
 
 :root {
     /*Primary color*/
@@ -28,6 +28,10 @@ main {
     /*Secondary color*/
     --darkgrey: #2B2929;
     --offwhite: #fafafa;
+}
+
+.orange {
+    color: var(--orange) !important;
 }
 
 .offwhite {
@@ -52,7 +56,7 @@ main {
 }
 
 
-/*---------- Typo ----------*/
+/*-------------------- Typo --------------------*/
 
 h1 {
     font-family: "Chewy", serif;
@@ -91,7 +95,7 @@ input {
 }
 
 
-/*---------- Links & Button ----------*/
+/*-------------------- Links & Button --------------------*/
 
 .link:hover,
 .yellow-btn:hover,
@@ -166,8 +170,14 @@ a:hover {
     display: inline-block;
 }
 
+/*Background color of the selected category in the filters*/
+.dropdown-item.active {
+    background-color: var(--orange) !important;
+    color: var(--offwhite) !important;
+}
 
-/*---------- Wrapper ----------*/
+
+/*-------------------- Wrapper --------------------*/
 
 /*Full page wrapper*/
 
@@ -194,7 +204,7 @@ a:hover {
 }
 
 
-/*---------- Header ----------*/
+/*-------------------- Header --------------------*/
 
 .logo {
     width: 300px;
@@ -228,7 +238,7 @@ a:hover {
     margin-bottom: -50px;
 }
 
-/*---------- Footer ----------*/
+/*-------------------- Footer --------------------*/
 
 footer {
     margin-top: 6rem;
@@ -250,7 +260,7 @@ footer {
 }
 
 
-/*---------- Business List ----------*/
+/*-------------------- Business List--------------------*/
 
 .card {
     width: 100%;
@@ -289,7 +299,7 @@ footer {
 }
 
 
-/*---------- Business Detail ----------*/
+/*-------------------- Business Detail--------------------*/
 
 .spacing-up {
     margin-top: 3rem;
@@ -319,7 +329,7 @@ footer {
 }
 
 
-/*---------- Business form ----------*/
+/*-------------------- Business form--------------------*/
 
 .spacing {
     margin-top: 4rem;
@@ -327,7 +337,7 @@ footer {
 }
 
 
-/*---------- Responsivness ----------*/
+/*-------------------- Responsivness --------------------*/
 
 @media screen and (max-width: 768px) {
     .btneffect {

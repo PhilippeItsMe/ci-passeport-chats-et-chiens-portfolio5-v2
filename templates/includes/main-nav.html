@@ -10,7 +10,7 @@
                         <ul class="dropdown-menu border-0" aria-labelledby="pet-type-link">
                                 <li>
                                         <a href="{% url 'home' %}{% if search_term %}?q={{ search_term }}{% endif %}"
-                                                class="dropdown-item fw-bold text-primary">
+                                                class="dropdown-item fw-bold orange">
                                                 Tous les animaux 🐾
                                         </a>
                                 </li>
@@ -35,7 +35,7 @@
                         <ul class="dropdown-menu border-0" aria-labelledby="service-type-link">
                                 <li>
                                         <a href="{% url 'home' %}{% if search_term %}?q={{ search_term }}{% endif %}"
-                                                class="dropdown-item fw-bold text-primary">
+                                                class="dropdown-item fw-bold orange">
                                                 Tous les services 🐕
                                         </a>
                                 </li>
@@ -60,7 +60,7 @@
                         <ul class="dropdown-menu border-0" aria-labelledby="canton-link">
                                 <li>
                                         <a href="{% url 'home' %}{% if search_term %}?q={{ search_term }}{% endif %}"
-                                                class="dropdown-item fw-bold text-primary">
+                                                class="dropdown-item fw-bold orange">
                                                 Tous les cantons 🏡
                                         </a>
                                 </li>
@@ -84,10 +84,11 @@
                         </a>
                         <ul class="dropdown-menu border-0" aria-labelledby="locality-link">
                                 <li>
-                                        <a href="{% url 'home' %}?{% if search_term %}q={{ search_term }}&{% endif %}{% if selected_canton %}canton={{ selected_canton }}&{% endif %}"
-                                                class="dropdown-item fw-bold text-primary">
+                                        <a href="{% url 'home' %}{% if search_term %}?q={{ search_term }}{% endif %}"
+                                                class="dropdown-item fw-bold orange">
                                                 Toutes les localités 🏡
                                         </a>
+
                                 </li>
                                 <hr class="dropdown-divider">
 
