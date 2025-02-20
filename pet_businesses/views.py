@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views.generic import ListView
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from .models import PetBusiness, Comment, Like
+from .models import PetBusiness, Comment, Like, PetType, ServiceType
 from .forms import CommentForm, UserRegistrationForm
 from .forms import CustomSignupForm, PetBusinessForm
 from pet_businesses.utils import group_required
@@ -72,21 +72,46 @@ class BusinessList(ListView):
                     Q(firm__icontains=query) | Q(description__icontains=query)
                 )
 
-        # Filtering by category (Pet Type or Service Type)
-        category = self.request.GET.get('category')
-        if category:
+        # Filtering by Pet Type or Service Type ID
+        category_id = self.request.GET.get('category')
+        if category_id:
             queryset = queryset.filter(
-                Q(business_pet_type__slug=category) | Q(business_service_type__slug=category)
-            )
+                Q(business_pet_type__id=category_id) | Q(business_service_type__id=category_id)
+            ).distinct()
+
+        # Filtering by Canton
+        canton = self.request.GET.get('canton')
+        if canton:
+            queryset = queryset.filter(canton=canton)
+
+        # Filtering by Locality
+        locality = self.request.GET.get('locality')
+        if locality:
+            queryset = queryset.filter(locality__iexact=locality)
 
         return queryset
 
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        selected_canton = self.request.GET.get('canton', '')
+
+        # If canton is selected, filter localities by that canton
+        if selected_canton:
+                localities = PetBusiness.objects.filter(canton=selected_canton).values_list('locality', flat=True).distinct()
+        else:
+                localities = PetBusiness.objects.values_list('locality', flat=True).distinct()
+
         context['search_term'] = self.request.GET.get('q', '')
         context['selected_category'] = self.request.GET.get('category', '')
-        return context
+        context['selected_canton'] = selected_canton
+        context['selected_locality'] = self.request.GET.get('locality', '')
+        context['pet_types'] = PetType.objects.all()
+        context['service_types'] = ServiceType.objects.all()
+        context['canton_choices'] = PetBusiness.CANTON_CHOICES
+        context['localities'] = sorted(localities)
 
+        return context
 
 def pet_business_detail(request, slug):
     """

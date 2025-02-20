@@ -32,7 +32,6 @@ class ServiceType(models.Model):
     Model for types of pet services.
     """
     service_type = models.CharField(max_length=150)
-    slug = models.SlugField(unique=True, blank=True) 
     date_created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
 
@@ -51,7 +50,6 @@ class PetType(models.Model):
     Model for types of pets.
     """
     pet_type = models.CharField(max_length=150)
-    slug = models.SlugField(unique=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
 
