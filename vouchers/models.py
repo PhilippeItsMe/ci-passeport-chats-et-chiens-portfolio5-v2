@@ -4,6 +4,7 @@ from pet_businesses.models import PetBusiness
 from pet_owners.models import PetOwner
 import random
 import string
+from django.utils.timezone import now
 from datetime import timedelta
 
 class Voucher(models.Model):
@@ -96,8 +97,8 @@ class Voucher(models.Model):
             pet_business=pet_business,
             pet_owner=pet_owner,
             discount_type='percentage',
-            discount_value=50.00,
-            date_expires=models.DateTimeField.now() + timedelta(days=90)
+            discount_value=50.00, # 50% set up
+            date_expires = now() + timedelta(days=90) # Duration set up
         )
         percentage_voucher.save()
         vouchers.append(percentage_voucher)
@@ -107,8 +108,8 @@ class Voucher(models.Model):
             pet_business=pet_business,
             pet_owner=pet_owner,
             discount_type='fixed',
-            discount_value=20.00,
-            date_expires=models.DateTimeField.now() + timedelta(days=90)
+            discount_value=20.00, # CHF set up
+            date_expires = now() + timedelta(days=90) # Duration set up
         )
         fixed_voucher.save()
         vouchers.append(fixed_voucher)

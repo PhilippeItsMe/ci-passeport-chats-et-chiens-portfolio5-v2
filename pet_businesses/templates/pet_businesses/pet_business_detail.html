@@ -38,6 +38,7 @@
                         {% csrf_token %}
                         <button type="submit" class="orange-btn">Bon | - 50%</button>
                     </form>
+
                     <form method="post"
                         action="{% url 'vouchers:generate_single_voucher' pet_business_detail.id 'fixed' %}">
                         {% csrf_token %}
@@ -45,7 +46,6 @@
                     </form>
                 </div>
                 {% endif %}
-
                 <hr class="orange-hr">
                 <div class="row spacing-up">
 
