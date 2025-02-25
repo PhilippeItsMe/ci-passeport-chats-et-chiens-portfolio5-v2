@@ -11,4 +11,7 @@ urlpatterns = [
 
     # Pet Businesses
     path('', include('pet_businesses.urls')),
+
+    # Vouchers
+    path('vouchers/', include('vouchers.urls')),
 ]

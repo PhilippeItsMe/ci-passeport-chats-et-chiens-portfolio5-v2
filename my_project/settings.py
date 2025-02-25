@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'pet_businesses',
     'pet_owners',
+    'vouchers',
 ]
 
 LOGIN_REDIRECT_URL = '/'
