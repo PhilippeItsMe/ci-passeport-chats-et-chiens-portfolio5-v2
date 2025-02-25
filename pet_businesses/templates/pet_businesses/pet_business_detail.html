@@ -27,6 +27,25 @@
                     {% endfor %}
                 </p>
                 <p>{{ pet_business_detail.description | safe }}</p>
+
+                <!-- Vouchers Buttons -->
+
+                {% if user.is_authenticated and "Pet Owners" in user.groups.all.0.name %}
+                <h3 class="mt-3">Télécharchez vos bons !</h3>
+                <div class="d-flex gap-2">
+                    <form method="post"
+                        action="{% url 'vouchers:generate_single_voucher' pet_business_detail.id 'percentage' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="orange-btn">Bon | - 50%</button>
+                    </form>
+                    <form method="post"
+                        action="{% url 'vouchers:generate_single_voucher' pet_business_detail.id 'fixed' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="orange-btn">Bon | - 20 CHF</button>
+                    </form>
+                </div>
+                {% endif %}
+
                 <hr class="orange-hr">
                 <div class="row spacing-up">
 
@@ -88,6 +107,9 @@
                     <hr class="orange-hr">
                 </div>
             </div>
+
+
+
 
             <div class="col-md-6">
 
