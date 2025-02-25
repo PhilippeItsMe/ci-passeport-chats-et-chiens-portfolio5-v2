@@ -7,22 +7,26 @@ from django.core.files.base import ContentFile
 from pet_businesses.utils import group_required
 from django.utils.timezone import now
 from datetime import timedelta
-
+from .models import Voucher
+from pet_businesses.models import PetBusiness
+from django.contrib.auth.models import User
 
 @group_required("Pet Owners")
 def generate_single_voucher(request, business_id, discount_type):
     """Generate a single voucher (50% or 20 CHF) as a PDF from an HTML template."""
-    from .models import Voucher
-    from pet_businesses.models import PetBusiness
-    from pet_owners.models import PetOwner
-    from django.utils.timezone import now
 
+    # Debugging: Check the logged-in user
+    print(f"Logged-in user: {request.user} (ID: {request.user.id})")
+
+    # Retrieve the business linked to the provided ID
     business = get_object_or_404(PetBusiness, id=business_id)
-    owner = get_object_or_404(PetOwner, author=request.user)
+
+    # The voucher is now linked to the User instead of PetOwner
+    user = request.user  
 
     # Check if the voucher for this discount type already exists
     existing_voucher = Voucher.objects.filter(
-        pet_owner=owner,
+        user=user,  # Updated to filter by User
         pet_business=business,
         discount_type=discount_type
     ).first()
@@ -41,7 +45,7 @@ def generate_single_voucher(request, business_id, discount_type):
     if discount_type == 'percentage':
         voucher = Voucher(
             pet_business=business,
-            pet_owner=owner,
+            user=user, 
             discount_type='percentage',
             discount_value=50.00,
             date_expires=date_expires
@@ -49,11 +53,11 @@ def generate_single_voucher(request, business_id, discount_type):
     elif discount_type == 'fixed':
         voucher = Voucher(
             pet_business=business,
-            pet_owner=owner,
+            user=user, 
             discount_type='fixed',
             discount_value=20.00,
             date_expires=date_expires
-    )
+        )
     else:
         return HttpResponse("Invalid discount type.", status=400)
 

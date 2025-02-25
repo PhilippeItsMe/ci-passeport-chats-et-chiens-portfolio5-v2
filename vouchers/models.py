@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 from pet_businesses.models import PetBusiness
-from pet_owners.models import PetOwner
 import random
 import string
 from django.utils.timezone import now
@@ -28,11 +27,11 @@ class Voucher(models.Model):
         on_delete=models.CASCADE,
         related_name='vouchers'
     )
-    pet_owner = models.ForeignKey(
-        PetOwner,
-        on_delete=models.CASCADE,
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE,
         related_name='vouchers'
     )
+    
     code = models.CharField(max_length=12, unique=True, editable=False)
     discount_type = models.CharField(max_length=20, choices=DISCOUNT_TYPE_CHOICES)
     discount_value = models.DecimalField(max_digits=6, decimal_places=2)  # 50.00 pour % ou 20.00 pour CHF
@@ -40,7 +39,7 @@ class Voucher(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='active')
     date_created = models.DateTimeField(auto_now_add=True)
     date_expires = models.DateTimeField()
-    pdf_file = models.FileField(upload_to='vouchers/pdfs/', null=True, blank=True)  #In case of dispute
+    pdf_file = models.FileField(upload_to='vouchers/pdfs/', null=True, blank=True)  # In case of dispute
 
     class Meta:
         ordering = ['-date_created']
@@ -48,13 +47,13 @@ class Voucher(models.Model):
         verbose_name_plural = "Vouchers"
         constraints = [
             models.UniqueConstraint(
-                fields=['pet_owner', 'pet_business', 'discount_type'],
+                fields=['user', 'pet_business', 'discount_type'],  # Updated from pet_owner to user
                 name='unique_voucher_per_business'
             )
         ]
 
     def __str__(self):
-        return f"Voucher {self.code} for {self.pet_business.firm} - {self.pet_owner.author.username}"
+        return f"Voucher {self.code} for {self.pet_business.firm} - {self.user.username}"  # Updated
 
     def save(self, *args, **kwargs):
         if not self.code:
@@ -81,24 +80,24 @@ class Voucher(models.Model):
             f"Business: {self.pet_business.firm}\n"
             f"Address: {self.pet_business.street} {self.pet_business.number}, "
             f"{self.pet_business.npa} {self.pet_business.locality}\n"
-            f"Pet Owner: {self.pet_owner.author.first_name} {self.pet_owner.author.last_name}\n"
+            f"User: {self.user.first_name} {self.user.last_name}\n"  # Updated
             f"Discount: {discount_text} off\n"
             f"Minimum Purchase: CHF {self.minimum_purchase}\n"
             f"Expires: {self.date_expires.strftime('%Y-%m-%d %H:%M:%S')}"
         )
 
     @classmethod
-    def create_vouchers_for_business(cls, pet_business, pet_owner):
+    def create_vouchers_for_business(cls, pet_business, user):  # Updated parameter name
         """Automatically create the vouchers."""
         vouchers = []
         
         # Voucher 50%
         percentage_voucher = cls(
             pet_business=pet_business,
-            pet_owner=pet_owner,
+            user=user,  # Updated
             discount_type='percentage',
-            discount_value=50.00, # 50% set up
-            date_expires = now() + timedelta(days=90) # Duration set up
+            discount_value=50.00,  # 50% setup
+            date_expires=now() + timedelta(days=90)  # Duration setup
         )
         percentage_voucher.save()
         vouchers.append(percentage_voucher)
@@ -106,13 +105,12 @@ class Voucher(models.Model):
         # Voucher 20 CHF
         fixed_voucher = cls(
             pet_business=pet_business,
-            pet_owner=pet_owner,
+            user=user,  # Updated
             discount_type='fixed',
-            discount_value=20.00, # CHF set up
-            date_expires = now() + timedelta(days=90) # Duration set up
+            discount_value=20.00,  # CHF setup
+            date_expires=now() + timedelta(days=90)  # Duration setup
         )
         fixed_voucher.save()
         vouchers.append(fixed_voucher)
 
         return vouchers
-    
