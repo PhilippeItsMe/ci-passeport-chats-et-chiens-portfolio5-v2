@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'pet_businesses',
     'pet_owners',
     'vouchers',
+    'grpd',
 ]
 
 LOGIN_REDIRECT_URL = '/'

@@ -14,4 +14,7 @@ urlpatterns = [
 
     # Vouchers
     path('vouchers/', include('vouchers.urls')),
+
+    # GRPD & Sales conditions
+    path('grpd/', include('grpd.urls')),
 ]
