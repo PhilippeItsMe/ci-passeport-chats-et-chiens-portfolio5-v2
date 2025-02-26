@@ -76,6 +76,10 @@ h3 {
     font-weight: 400;
 }
 
+.h3-grpd {
+    font-size: 2rem !important;
+}
+
 p,
 a,
 .yellow-btn,
