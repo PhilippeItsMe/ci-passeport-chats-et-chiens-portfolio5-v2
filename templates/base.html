@@ -133,7 +133,9 @@
                 </div>
                 <div class="col-md-6 text-center text-md-start order-1 order-md-1">
                     <div>
-                        <p class="bold deco-btn">Bienvenue</p>
+                        <p class="bold deco-btn">
+                            Bienvenue{% if request.user.is_authenticated %} {{ request.user.first_name }}{% endif %}
+                        </p>
                         <h1>Au petit soin...</h1>
                         <p class="bold">Tout comme vous, nous aimons les animaux de companies.</p>
                         <p>Découvrez tous nos services, intentions et nos instants de bonheur pensés pour choyer votre
@@ -175,16 +177,17 @@
             <p class="text-center">© 2025 Passeport Chats & Chiens</p>
         </div>
         <div class="text-center">
-            <a class="darkgrey" href="{% url 'legal_notice' %}">Mentions légales | </a>
-            <a class="darkgrey" href="{% url 'cookies_notice' %}">Notice sur les cookies | </a>
-            <a class="darkgrey" href="{% url 'privacy_policy' %}">Politique de confidentialité | </a>
-            <a class="darkgrey" href="#" onclick="openCookieBanner()">Gérer les cookies</a>
+            <a class="darkgrey no-text-decoration" href="{% url 'legal_notice' %}">Mentions légales | </a>
+            <a class="darkgrey no-text-decoration" href="{% url 'cookies_notice' %}">Notice sur les cookies | </a>
+            <a class="darkgrey no-text-decoration" href="{% url 'privacy_policy' %}">Politique de confidentialité | </a>
+            <a class="darkgrey no-text-decoration" href="#" onclick="openCookieBanner()">Gérer les cookies</a>
         </div>
 
         <div id="cookie-banner">
-            <p>Gérer le consentement</p>
-            <button onclick="setCookieConsent(true, true)">Accepter tous les cookies</button>
-            <button onclick="setCookieConsent(true, false)">Refuser les cookies non-essentiels</button>
+            <p>Gérer le consentement des cookies</p>
+            <button class="orange-btn" onclick="setCookieConsent(true, true)">Accepter tous les cookies</button>
+            <button class="orange-btn" onclick="setCookieConsent(true, false)">Refuser les cookies
+                non-essentiels</button>
         </div>
     </footer>
 

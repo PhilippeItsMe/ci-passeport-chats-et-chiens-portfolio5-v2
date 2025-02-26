@@ -23,4 +23,3 @@ class PetAdmin(admin.ModelAdmin):
                     'last_modified', 'date_created')
     search_fields = ['name', 'pet_owner__author__username']
     list_filter = ('pet_type', 'date_created', 'last_modified')
-    raw_id_fields = ('pet_owner', 'pet_type')

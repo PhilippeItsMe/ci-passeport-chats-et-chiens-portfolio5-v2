@@ -23,7 +23,7 @@ ALLOWED_HOSTS = ['localhost',
 CSRF_TRUSTED_ORIGINS = [
     "https://*.codeinstitute-ide.net/",
     "https://*.herokuapp.com",
-    "https://8000-philippeits-cipasseport-ueridz1s5o8.ws-eu117.gitpod.io",
+    "https://8000-philippeits-cipasseport-ueridz1s5o8.ws-eu118.gitpod.io",
 ]
 
 

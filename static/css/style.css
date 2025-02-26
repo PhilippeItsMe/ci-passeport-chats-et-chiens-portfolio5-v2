@@ -166,6 +166,10 @@ a:hover {
     background-color: var(--orange);
 }
 
+.no-text-decoration {
+    text-decoration: none;
+}
+
 .deco-btn {
     margin-top: 1rem;
     background-color: var(--offwhite);
@@ -240,6 +244,11 @@ a:hover {
     height: 400px;
     margin-top: 30px;
     margin-bottom: -50px;
+}
+
+.dropdown-item:active {
+    background-color: transparent !important;
+    color: inherit !important;
 }
 
 /*-------------------- Footer --------------------*/
