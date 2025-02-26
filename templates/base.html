@@ -171,7 +171,14 @@
 
     <footer>
         <img class="footercat" src="{% static 'images/footercat.webp' %}" alt="cat">
-        <p class="m-0 text-center">© 2025 Passeport Chats & Chiens</p>
+        <div>
+            <p class="text-center">© 2025 Passeport Chats & Chiens</p>
+        </div>
+        <div class="text-center">
+            <span><a class="darkgrey" href="{% url 'legal_notice' %}">Mentions légales | </a></span>
+            <span><a class="darkgrey" href="{% url 'cookies_notice' %}">Notice sur les cookies | </a></span>
+            <span><a class="darkgrey" href="{% url 'privacy_policy' %}">Politique de confidentialité</a></span>
+        </div>
     </footer>
 
     <!---------- JS ressources ---------->
