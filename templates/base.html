@@ -175,15 +175,16 @@
             <p class="text-center">© 2025 Passeport Chats & Chiens</p>
         </div>
         <div class="text-center">
-            <span><a class="darkgrey" href="{% url 'legal_notice' %}">Mentions légales | </a></span>
-            <span><a class="darkgrey" href="{% url 'cookies_notice' %}">Notice sur les cookies | </a></span>
-            <span><a class="darkgrey" href="{% url 'privacy_policy' %}">Politique de confidentialité</a></span>
+            <a class="darkgrey" href="{% url 'legal_notice' %}">Mentions légales | </a>
+            <a class="darkgrey" href="{% url 'cookies_notice' %}">Notice sur les cookies | </a>
+            <a class="darkgrey" href="{% url 'privacy_policy' %}">Politique de confidentialité | </a>
+            <a class="darkgrey" href="#" onclick="openCookieBanner()">Gérer les cookies</a>
         </div>
-        <div id="cookie-banner"
-            style="position:fixed;bottom:0;width:100%;background:#000;color:#fff;padding:10px;display:none;">
+
+        <div id="cookie-banner">
             <p>Gérer le consentement</p>
-            <button onclick="setCookieConsent(true, true)">Accepter</button>
-            <button onclick="setCookieConsent(true, false)">Refuser</button>
+            <button onclick="setCookieConsent(true, true)">Accepter tous les cookies</button>
+            <button onclick="setCookieConsent(true, false)">Refuser les cookies non-essentiels</button>
         </div>
     </footer>
 

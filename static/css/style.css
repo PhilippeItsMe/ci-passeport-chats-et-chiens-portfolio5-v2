@@ -267,6 +267,20 @@ footer {
 }
 
 
+/*-------------------- Cookies Banner --------------------*/
+
+
+#cookie-banner {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: var(--darkgrey);
+    color: var(--offwhite);
+    padding: 10px;
+    display: none;
+}
+
+
 /*-------------------- Business List--------------------*/
 
 .card {

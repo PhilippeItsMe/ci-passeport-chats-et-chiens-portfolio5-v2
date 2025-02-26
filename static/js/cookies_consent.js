@@ -35,3 +35,8 @@ window.onload = function () {
         document.getElementById("cookie-banner").style.display = "block";
     }
 };
+
+// Function to reopen the cookie banner when clicking "Gérer les cookies"
+function openCookieBanner() {
+    document.getElementById("cookie-banner").style.display = "block";
+}
