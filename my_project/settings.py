@@ -4,7 +4,6 @@ import dj_database_url
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
-from cloudinary_storage.storage import MediaCloudinaryStorage
 from urllib.parse import urlparse
 if os.path.isfile('env.py'):
     import env
@@ -19,18 +18,16 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 
 DEBUG = True
 
-# ALLOWED_HOSTS = ['localhost',
-#                 '127.0.0.1',
-#                 '0.0.0.0',
-#                 '8000-philippeits-cipasseport-ueridz1s5o8.ws-eu118.gitpod.io',
-#                  '.herokuapp.com',]
-
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost',
+                 '127.0.0.1',
+                 '0.0.0.0',
+                 '8000-philippeits-cipasseport-ci3j0048bwm.ws-eu118.gitpod.io',
+                  '.herokuapp.com',]
 
 CSRF_TRUSTED_ORIGINS = [
     "https://*.codeinstitute-ide.net/",
     "https://*.herokuapp.com",
-    "https://8000-philippeits-cipasseport-ueridz1s5o8.ws-eu118.gitpod.io",
+    "https://8000-philippeits-cipasseport-ci3j0048bwm.ws-eu118.gitpod.io",
 ]
 
 
