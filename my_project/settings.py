@@ -19,11 +19,13 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost',
-                '127.0.0.1',
-                '0.0.0.0',
-                '8000-philippeits-cipasseport-ueridz1s5o8.ws-eu118.gitpod.io',
-                 '.herokuapp.com',]
+# ALLOWED_HOSTS = ['localhost',
+#                 '127.0.0.1',
+#                 '0.0.0.0',
+#                 '8000-philippeits-cipasseport-ueridz1s5o8.ws-eu118.gitpod.io',
+#                  '.herokuapp.com',]
+
+ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
     "https://*.codeinstitute-ide.net/",
