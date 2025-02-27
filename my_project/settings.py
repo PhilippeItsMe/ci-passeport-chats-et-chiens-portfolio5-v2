@@ -5,6 +5,7 @@ import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 from cloudinary_storage.storage import MediaCloudinaryStorage
+from urllib.parse import urlparse
 if os.path.isfile('env.py'):
     import env
 
@@ -19,6 +20,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = ['localhost',
+                '127.0.0.1',
+                '0.0.0.0',
                 '8000-philippeits-cipasseport-ueridz1s5o8.ws-eu118.gitpod.io',
                  '.herokuapp.com',]
 
@@ -99,12 +102,22 @@ DATABASES = {
     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
 
-cloudinary.config(
-    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
-    api_key=os.getenv("CLOUDINARY_API_KEY"),
-    api_secret=os.getenv("CLOUDINARY_API_SECRET"),
-    secure=True
-)
+cloudinary_url = os.getenv("CLOUDINARY_URL")
+
+if cloudinary_url:
+    parsed_url = urlparse(cloudinary_url)
+    cloud_name = parsed_url.hostname
+    api_key = parsed_url.username
+    api_secret = parsed_url.password
+
+    cloudinary.config(
+        cloud_name=cloud_name,
+        api_key=api_key,
+        api_secret=api_secret,
+        secure=True
+    )
+else:
+    raise ValueError("CLOUDINARY_URL is not set in environment variables.")
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
