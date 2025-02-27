@@ -12,10 +12,10 @@ class Voucher(models.Model):
     Two vouchers per business: one 50% off and one 20 CHF off.
     Includes a PDF file for the downloaded voucher.
     """
-    STATUS_CHOICES = [
-        ('active', 'Active'),
-        ('expired', 'Expired'),  # After 90 days
-    ]
+    #STATUS_CHOICES = [
+    #    ('active', 'Active'),
+    #    ('expired', 'Expired'),  # After 90 days
+    #]
     
     DISCOUNT_TYPE_CHOICES = [
         ('percentage', 'Percentage'),
@@ -36,10 +36,10 @@ class Voucher(models.Model):
     discount_type = models.CharField(max_length=20, choices=DISCOUNT_TYPE_CHOICES)
     discount_value = models.DecimalField(max_digits=6, decimal_places=2)  # 50.00 pour % ou 20.00 pour CHF
     minimum_purchase = models.DecimalField(max_digits=6, decimal_places=2, default=100.00)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='active')
+    #status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='active')
     date_created = models.DateTimeField(auto_now_add=True)
     date_expires = models.DateTimeField()
-    pdf_file = models.FileField(upload_to='vouchers/pdfs/', null=True, blank=True)  # In case of dispute
+    pdf_file = models.FileField(upload_to='vouchers/', null=True, blank=True)  # Store PDFs in media/vouchers/
 
     class Meta:
         ordering = ['-date_created']

@@ -15,9 +15,6 @@ from django.contrib.auth.models import User
 def generate_single_voucher(request, business_id, discount_type):
     """Generate a single voucher (50% or 20 CHF) as a PDF from an HTML template."""
 
-    # Debugging: Check the logged-in user
-    print(f"Logged-in user: {request.user} (ID: {request.user.id})")
-
     # Retrieve the business linked to the provided ID
     business = get_object_or_404(PetBusiness, id=business_id)
 
@@ -26,7 +23,7 @@ def generate_single_voucher(request, business_id, discount_type):
 
     # Check if the voucher for this discount type already exists
     existing_voucher = Voucher.objects.filter(
-        user=user,  # Updated to filter by User
+        user=user,  
         pet_business=business,
         discount_type=discount_type
     ).first()
@@ -63,16 +60,16 @@ def generate_single_voucher(request, business_id, discount_type):
 
     voucher.save()  # This triggers code generation via the save method
 
-    # Generate and save the PDF
+    # Generate the PDF
     html_string = render_to_string('vouchers/voucher_pdf.html', {'vouchers': [voucher]})
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = f'attachment; filename="voucher_{voucher.code}.pdf"'
     HTML(string=html_string).write_pdf(response)
 
-    # Save the PDF to the voucher
+    # Save the PDF to the voucher (new path: media/vouchers/)
     individual_buffer = io.BytesIO()
     HTML(string=html_string).write_pdf(individual_buffer)
-    voucher.pdf_file.save(f"voucher_{voucher.code}.pdf", ContentFile(individual_buffer.getvalue()))
+    voucher.pdf_file.save(f"vouchers/voucher_{voucher.code}.pdf", ContentFile(individual_buffer.getvalue()))  
     voucher.save()
     individual_buffer.close()
 
