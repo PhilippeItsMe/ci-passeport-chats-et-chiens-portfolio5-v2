@@ -14,7 +14,7 @@ from pet_businesses.utils import group_required
 def generate_single_voucher(request, business_id, discount_type):
     """Generate a single voucher (50% or 20 CHF) as a PDF and store in Cloudinary."""
     
-    print("🚀 Starting voucher generation...")  # Log start
+    print("Starting voucher generation...")  # Log start
 
     # Retrieve the business linked to the provided ID
     business = get_object_or_404(PetBusiness, id=business_id)
@@ -32,10 +32,10 @@ def generate_single_voucher(request, business_id, discount_type):
     )
 
     if not created and voucher.pdf_file:
-        print("✅ Returning existing voucher PDF.")  # Debug
+        print("Returning existing voucher PDF.")  # Debug
         return HttpResponse(voucher.pdf_file.url, content_type='application/pdf')
 
-    print("🆕 Creating new voucher...")  # Debug
+    print("Creating new voucher...")  # Debug
 
     # Ensure voucher has a code before generating the filename
     if not voucher.code:
@@ -43,56 +43,54 @@ def generate_single_voucher(request, business_id, discount_type):
         voucher.save()
 
     pdf_filename = f"vouchers/voucher_{voucher.code}.pdf"
-    print(f"📝 Generated PDF filename: {pdf_filename}")  # Debug
+    print(f"Generated PDF filename: {pdf_filename}")  # Debug
 
     # Render the HTML for the PDF
-    print("🛠 Rendering voucher HTML...")
+    print("Rendering voucher HTML...")
     html_string = render_to_string('vouchers/voucher_pdf.html', {'vouchers': [voucher]})
 
     if not html_string.strip():
-        print("❌ PDF generation failed: Empty HTML template.")  # Debug
+        print("PDF generation failed: Empty HTML template.")  # Debug
         return HttpResponse("PDF generation failed: Empty HTML template.", status=500)
 
-    print("✅ HTML rendering successful!")  # Debug
+    print("HTML rendering successful!")  # Debug
 
     # Generate the PDF
     pdf_buffer = io.BytesIO()
     try:
-        print("📄 Generating PDF with WeasyPrint...")
+        print("Generating PDF with WeasyPrint...")
         HTML(string=html_string).write_pdf(pdf_buffer)
     except Exception as e:
-        print(f"❌ PDF generation failed: {e}")  # Debug
+        print(f"PDF generation failed: {e}")  # Debug
         return HttpResponse(f"PDF generation failed: {str(e)}", status=500)
 
     # Check if the PDF is empty
     pdf_buffer.seek(0)
     pdf_size = pdf_buffer.getbuffer().nbytes
-    print(f"📏 PDF size: {pdf_size} bytes")  # Debug
+    print(f"PDF size: {pdf_size} bytes")  # Debug
 
     if pdf_size == 0:
-        print("❌ PDF generation failed: Empty file.")  # Debug
+        print("PDF generation failed: Empty file.")  # Debug
         return HttpResponse("PDF generation failed: Empty file.", status=500)
 
     # Save the PDF to Cloudinary
     try:
-        print("☁️ Saving PDF to Cloudinary...")
-        
-        if not voucher.pdf_file:  
-            print("⚠️ Warning: `voucher.pdf_file` is None before saving.")
+        print("Saving PDF to Cloudinary...")
 
-        voucher.pdf_file.save(pdf_filename, ContentFile(pdf_buffer.getvalue()))
-        voucher.save()
-        print(f"✅ PDF saved successfully to Cloudinary: {voucher.pdf_file.url}")  # Debugging
+        # Ensure the file is correctly uploaded to Cloudinary
+        voucher.pdf_file.save(f"{voucher.code}.pdf", ContentFile(pdf_buffer.getvalue()), save=True)
+        print(f"PDF saved successfully to Cloudinary: {voucher.pdf_file.url}")  # Debugging
 
     except Exception as e:
-        error_message = f"❌ Error saving PDF to Cloudinary: {str(e)}"
+        error_message = f"Error saving PDF to Cloudinary: {str(e)}"
         print(error_message)  # Logs the error
         return HttpResponse(error_message, status=500)
+
 
     # Serve the PDF as a response
     pdf_buffer.seek(0)
     response = HttpResponse(pdf_buffer, content_type='application/pdf')
     response['Content-Disposition'] = f'attachment; filename="{pdf_filename}"'
     
-    print("✅ Voucher PDF successfully generated and served!")  # Debug
+    print("Voucher PDF successfully generated and served!")  # Debug
     return response

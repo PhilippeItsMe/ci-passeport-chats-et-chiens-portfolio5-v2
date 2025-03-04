@@ -101,22 +101,19 @@ DATABASES = {
     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
 
-cloudinary_url = os.getenv("CLOUDINARY_URL")
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get("CLOUDINARY_CLOUD_NAME"),
+    'API_KEY': os.environ.get("CLOUDINARY_API_KEY"),
+    'API_SECRET': os.environ.get("CLOUDINARY_API_SECRET"),
+    'RESOURCE_TYPE': 'raw',  # Ensures PDFs are handled correctly
+}
 
-if cloudinary_url:
-    parsed_url = urlparse(cloudinary_url)
-    cloud_name = parsed_url.hostname
-    api_key = parsed_url.username
-    api_secret = parsed_url.password
-
-    cloudinary.config(
-        cloud_name=cloud_name,
-        api_key=api_key,
-        api_secret=api_secret,
-        secure=True
-    )
-else:
-    raise ValueError("CLOUDINARY_URL is not set in environment variables.")
+cloudinary.config(
+    cloud_name=CLOUDINARY_STORAGE['CLOUD_NAME'],
+    api_key=CLOUDINARY_STORAGE['API_KEY'],
+    api_secret=CLOUDINARY_STORAGE['API_SECRET'],
+    secure=True
+)
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
