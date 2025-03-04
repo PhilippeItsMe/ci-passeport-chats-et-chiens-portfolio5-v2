@@ -8,7 +8,7 @@
 
     <!---------- PetOwner Details Form (Create/Update) ---------->
     <h4 class="spacing">{% if pet_owner %}Quelques informations à mon sujet : {% else %}Créer mon profil{% endif %}</h4>
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form|crispy }}
         <button type="submit" class="submit-btn">
@@ -39,8 +39,11 @@
                 <td>{{ pet.birthday|date:"d/m/Y" }}</td>
                 <td>{{ pet.pet_type }}</td>
                 <td>
-                    <img src="{{ pet.pet_featured_image.url }}" alt="{{ pet.name }}" width="60" height="60"
-                        style="border-radius: 8px;">
+                    {% if "placeholder" in pet.pet_featured_image.url %}
+                    <img src="{% static 'images/defaultpetbusiness.webp' %}" class="scale" alt="placeholder">
+                    {% else %}
+                    <img src="{{ pet.pet_featured_image.url }}" class="scale" alt="pet image">
+                    {% endif %}
                 </td>
                 <td>
                     <a href="{% url 'pet-edit' pet.id %}" class="yellow-btn">Modifier</a>
