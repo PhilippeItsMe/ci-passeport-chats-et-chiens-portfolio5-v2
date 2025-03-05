@@ -4,7 +4,9 @@ import dj_database_url
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
-from urllib.parse import urlparse
+#from urllib.parse import urlparse
+
+cloudinary.config(secure=True)
 if os.path.isfile('env.py'):
     import env
 
@@ -95,25 +97,11 @@ TEMPLATES = [
 WSGI_APPLICATION = 'my_project.wsgi.application'
 
 
-#------------ dB & Cloudinary -------------- #
+#------------ dB -------------- #
 
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
-
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.environ.get("CLOUDINARY_CLOUD_NAME"),
-    'API_KEY': os.environ.get("CLOUDINARY_API_KEY"),
-    'API_SECRET': os.environ.get("CLOUDINARY_API_SECRET"),
-    'RESOURCE_TYPE': 'raw',  # Ensures PDFs are handled correctly
-}
-
-cloudinary.config(
-    cloud_name=CLOUDINARY_STORAGE['CLOUD_NAME'],
-    api_key=CLOUDINARY_STORAGE['API_KEY'],
-    api_secret=CLOUDINARY_STORAGE['API_SECRET'],
-    secure=True
-)
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
