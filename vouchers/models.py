@@ -35,7 +35,8 @@ class Voucher(models.Model):
     minimum_purchase = models.DecimalField(max_digits=6, decimal_places=2, default=100.00)
     date_created = models.DateTimeField(auto_now_add=True)
     date_expires = models.DateTimeField()
-    pdf_file = CloudinaryField('pdf', null=True, blank=True)
+    pdf_file = models.URLField(null=True, blank=True)
+    # pdf_file = CloudinaryField('pdf', resource_type='raw', null=True, blank=True)
 
     class Meta:
         ordering = ['-date_created']
