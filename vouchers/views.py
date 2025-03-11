@@ -1,15 +1,21 @@
 import io
+import base64
+import random
+import string
 from django.shortcuts import get_object_or_404, redirect
 from django.http import HttpResponse
 from weasyprint import HTML
 from django.template.loader import render_to_string
-from django.core.files.base import ContentFile
 from django.utils.timezone import now
 from datetime import timedelta
 from .models import Voucher
 from pet_businesses.models import PetBusiness
 from pet_businesses.utils import group_required
 import cloudinary.uploader
+
+def generate_short_code(length=6):
+    """Generate a short random alphanumeric code for the voucher."""
+    return ''.join(random.choices(string.ascii_uppercase + string.digits, k=length))
 
 @group_required("Pet Owners")
 def generate_single_voucher(request, business_id, discount_type):
@@ -35,16 +41,16 @@ def generate_single_voucher(request, business_id, discount_type):
     # If voucher already exists, redirect to stored Cloudinary URL
     if not created and voucher.pdf_file:
         print(f"Existing voucher found: {voucher.pdf_file}")
-        return redirect(voucher.pdf_file.url if hasattr(voucher.pdf_file, 'url') else voucher.pdf_file)
+        return redirect(voucher.pdf_file)
 
     print("Creating new voucher...")
 
-    # Ensure voucher has a unique code
+    # Ensure voucher has a unique short code
     if not voucher.code:
-        voucher.code = voucher._generate_unique_code()
+        voucher.code = generate_short_code()
         voucher.save()
 
-    pdf_filename = f"vouchers/voucher_{voucher.code}.pdf"
+    pdf_filename = f"vouchers/{voucher.code}.pdf"
     print(f"Generated PDF filename: {pdf_filename}")
 
     # Render HTML for the PDF
@@ -80,14 +86,18 @@ def generate_single_voucher(request, business_id, discount_type):
         print("Uploading PDF to Cloudinary...")
 
         cloudinary_response = cloudinary.uploader.upload(
-            pdf_buffer.getvalue(), resource_type="raw", folder="vouchers/"
+            pdf_buffer.getvalue(),
+            resource_type="raw",
+            folder="vouchers/",
+            public_id=voucher.code,
+            format="pdf"
         )
 
         # Debugging Cloudinary Response
         print(f"Cloudinary response: {cloudinary_response}")
 
         # Store the correct Cloudinary URL
-        voucher.pdf_file = cloudinary_response.get('secure_url', cloudinary_response.get('url', ''))
+        voucher.pdf_file = cloudinary_response.get('secure_url')
 
         if not voucher.pdf_file:
             return HttpResponse("Error: Cloudinary did not return a valid URL.", status=500)
@@ -100,8 +110,4 @@ def generate_single_voucher(request, business_id, discount_type):
         print(error_message)  # Logs the error
         return HttpResponse(error_message, status=500)
 
-    # Redirect user to the stored Cloudinary PDF URL
-    if isinstance(voucher.pdf_file, str):  # Ensure it's a string URL
-        return redirect(voucher.pdf_file)
-    else:
-        return HttpResponse("Error: Cloudinary URL is invalid.", status=500)
+    return redirect(voucher.pdf_file)
