@@ -5,7 +5,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('summernote/', include('django_summernote.urls')),
-
+    
+    # BAG
+    path('bag/', include('bag.urls')),
+    
     # Pet Owners
     path('', include('pet_owners.urls')),
 
@@ -17,7 +20,4 @@ urlpatterns = [
 
     # GRPD
     path('grpd/', include('grpd.urls')),
-
-    # GRPD & Sales conditions
-    path('bag/', include('bag.urls')),
 ]

@@ -1,9 +1,5 @@
-from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import TemplateView
 
-class BagView(ListView):
+class BagView(TemplateView):
     template_name = "bag/bag.html"
-    
-    def get(self, request, *args, **kwargs):
-        return render(request, self.template_name)
     
