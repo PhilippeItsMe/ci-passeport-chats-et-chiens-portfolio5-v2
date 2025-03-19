@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'vouchers',
     'grpd',
     'bag',
+    'products',
 ]
 
 LOGIN_REDIRECT_URL = '/'
@@ -144,7 +145,7 @@ LOGIN_REDIRECT_URL = '/'
 ACCOUNT_SIGNUP_FORM_CLASS = 'pet_businesses.forms.CustomSignupForm'
 
 
-#------------ Internatlisation -------------- #
+#------------ Internalisation -------------- #
 
 LANGUAGE_CODE = 'fr'
 
@@ -160,3 +161,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+#------------ Currency -------------- #
+CURRENCY = 'CHF'
+USE_L10N = True
