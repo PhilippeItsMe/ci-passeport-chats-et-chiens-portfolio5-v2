@@ -20,4 +20,7 @@ urlpatterns = [
 
     # GRPD
     path('grpd/', include('grpd.urls')),
+
+    # Products
+    path('products/', include('products.urls')),
 ]

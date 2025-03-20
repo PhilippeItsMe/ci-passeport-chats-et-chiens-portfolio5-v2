@@ -139,6 +139,14 @@
                         <p class="bold">Tout comme vous, nous aimons les animaux de companies.</p>
                         <p>Découvrez tous nos services, intentions et nos instants de bonheur pensés pour choyer votre
                             animal bien-aimé.</p>
+                        <form class="form" action="{% url 'add_to_bag' passeport_product.id %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="quantity" value="1">
+                            <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                            <button type="submit" class="btn btn-primary rounded-0">
+                                Je commande mon passeport
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
