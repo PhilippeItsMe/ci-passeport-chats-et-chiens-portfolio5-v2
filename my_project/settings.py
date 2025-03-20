@@ -55,8 +55,8 @@ INSTALLED_APPS = [
     'pet_owners',
     'vouchers',
     'grpd',
-    'bag',
     'products',
+    'bag.apps.BagConfig', #To have it available
 ]
 
 LOGIN_REDIRECT_URL = '/'
@@ -91,6 +91,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'bag.contexts.bag_contents', #To have it available
             ],
         },
     },
