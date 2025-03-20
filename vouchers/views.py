@@ -26,7 +26,7 @@ def generate_single_voucher(request, business_id, discount_type):
 
     # Redirect if PDF already exists
     if not created and voucher.pdf_file:
-        return redirect(voucher.pdf_file.url if hasattr(voucher.pdf_file, 'url') else voucher.pdf_file)
+        return redirect(voucher.pdf_file.url +'.pdf' if hasattr(voucher.pdf_file, 'url') else voucher.pdf_file)
 
     # Ensure voucher has a unique code
     if not voucher.code:
@@ -65,13 +65,6 @@ def generate_single_voucher(request, business_id, discount_type):
 
     except Exception as e:
         return HttpResponse(f"Error saving PDF to Cloudinary: {str(e)}", status=500)
-
-    #return redirect(voucher.pdf_file)
-    #return redirect(f"{voucher.pdf_file}.pdf")
-    #return redirect(voucher.pdf_file.replace("/upload/", "/upload/fl_attachment:pdf/"))
-
-    #pdf_url = voucher.pdf_file.replace("/upload/", "/upload/resource_type:raw/")
-    #return redirect(pdf_url)
 
     pdf_url = f"{voucher.pdf_file}?dl=voucher.pdf"
     print(f"Final Redirect URL: {pdf_url}")
