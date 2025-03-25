@@ -32,7 +32,7 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 
-#------------ Apps and so on -------------- #
+#------------ Apps, middleware and templages -------------- #
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -149,11 +149,9 @@ ACCOUNT_SIGNUP_FORM_CLASS = 'pet_businesses.forms.CustomSignupForm'
 #------------ Internalisation -------------- #
 
 LANGUAGE_CODE = 'fr'
-
 TIME_ZONE = 'Europe/Paris'
 
 USE_I18N = True
-
 USE_TZ = True
 
 STATIC_URL = 'static/'
@@ -165,5 +163,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 #------------ Currency -------------- #
+
 CURRENCY = 'CHF'
 USE_L10N = True
+
+#------------ Stripe -------------- #
+
+STRIPE_CURRENCY = 'chf'
+STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
+STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
