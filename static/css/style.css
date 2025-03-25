@@ -211,6 +211,14 @@ a:hover {
     width: auto;
 }
 
+/*One 1 line wrapper*/
+.one-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
 
 /*-------------------- Header --------------------*/
 

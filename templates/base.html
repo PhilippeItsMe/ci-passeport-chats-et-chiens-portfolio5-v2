@@ -87,7 +87,7 @@
 
                         <!-- Shopping Basket -->
                         <li class="list-inline-item">
-                            <a class="nav-link" href="{% url 'view_bag' %}">
+                            <a class="nav-link" href="{% url 'bag:view_bag' %}">
                                 <div class="text-center">
                                     <img class="search-icon" src="{% static 'images/basket.svg' %}"
                                         alt="Shopping basket">
@@ -139,9 +139,12 @@
                         <p class="bold">Tout comme vous, nous aimons les animaux de companies.</p>
                         <p>Découvrez tous nos services, intentions et nos instants de bonheur pensés pour choyer votre
                             animal bien-aimé.</p>
-                        <form class="form" action="{% url 'add_to_bag' passeport_product.id %}" method="POST">
+
+                        <!---------- Django Message ---------->
+                        <form class="form" action="{% url 'bag:add_to_bag' item_id=1 %}" method="POST">
                             {% csrf_token %}
                             <input type="hidden" name="quantity" value="1">
+                            <!--Renvoi vers l'url active-->
                             <input type="hidden" name="redirect_url" value="{{ request.path }}">
                             <button type="submit" class="btn btn-primary rounded-0">
                                 Je commande mon passeport
@@ -180,8 +183,12 @@
 
     <footer>
         <img class="footercat" src="{% static 'images/footercat.webp' %}" alt="cat">
-        <div>
+        <div class="one-line">
             <p class="text-center">© 2025 Passeport Chats & Chiens</p>
+            <a href="https://www.facebook.com/profile.php?id=61574054111145" target="_blank" rel="noopener"
+                role="contentinfo" aria-label="Lien vers Facebook">
+                <img class="picto mb-3" src="{% static 'images/facebook.svg' %}" alt="Facebook">
+            </a>
         </div>
         <div class="text-center">
             <a class="darkgrey no-text-decoration" href="{% url 'legal_notice' %}">Mentions légales | </a>

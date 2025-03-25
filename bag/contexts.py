@@ -19,7 +19,7 @@ def bag_contents(request):
         })
     
     TVA_RATE = 8.1 / 100
-    total_ht = total_ttc / (1 + TVA_RATE)  # Total before VAT (100%)
+    total_ht = float(total_ttc) / (1 + TVA_RATE)  # Total before VAT (100%)
     tva = total_ht * TVA_RATE  # VAT amount (8.1%)
     
     
