@@ -4,7 +4,6 @@ import dj_database_url
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
-#from urllib.parse import urlparse
 
 cloudinary.config(secure=True)
 if os.path.isfile('env.py'):
@@ -57,6 +56,7 @@ INSTALLED_APPS = [
     'grpd',
     'products',
     'bag.apps.BagConfig', #To have it available
+    'checkout',
 ]
 
 LOGIN_REDIRECT_URL = '/'

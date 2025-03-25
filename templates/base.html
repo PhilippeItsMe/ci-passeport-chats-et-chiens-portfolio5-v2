@@ -135,7 +135,7 @@
                 </div>
                 <div class="col-md-6 text-center text-md-start order-1 order-md-1">
                     <div>
-                        <p class="bold">
+                        <p class="bold mt-3">
                             Bienvenue{% if request.user.is_authenticated %} {{ request.user.first_name }}{% endif %}
                         </p>
                         <h1>Au petit soin...</h1>
@@ -150,7 +150,7 @@
                             <!--Renvoi vers l'url active-->
                             <input type="hidden" name="redirect_url" value="{{ request.path }}">
                             <button type="submit" class="orange-btn">
-                                🐈 Je commande mon passeport 🐕
+                                🐈 Je commande mon passeport | -50% 🐕
                             </button>
                         </form>
                     </div>

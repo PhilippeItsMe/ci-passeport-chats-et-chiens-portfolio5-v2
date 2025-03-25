@@ -24,6 +24,7 @@ python3-openid==3.2.0
 reportlab==4.3.1
 requests-oauthlib==2.0.0
 sqlparse==0.5.2
+stripe==11.6.0
 urllib3==1.26.20
 weasyprint==62.2
 whitenoise==5.3.0

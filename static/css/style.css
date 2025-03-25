@@ -170,14 +170,6 @@ a:hover {
     text-decoration: none !important;
 }
 
-.deco-btn {
-    margin-top: 1rem;
-    background-color: var(--offwhite);
-    padding: 5px 10px;
-    border-radius: 10px;
-    display: inline-block;
-}
-
 /*Background color of the selected category in the filters*/
 .dropdown-item.active {
     background-color: var(--orange) !important;
