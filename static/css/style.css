@@ -167,7 +167,7 @@ a:hover {
 }
 
 .no-text-decoration {
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
 .deco-btn {

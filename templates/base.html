@@ -135,11 +135,11 @@
                 </div>
                 <div class="col-md-6 text-center text-md-start order-1 order-md-1">
                     <div>
-                        <p class="bold deco-btn">
+                        <p class="bold">
                             Bienvenue{% if request.user.is_authenticated %} {{ request.user.first_name }}{% endif %}
                         </p>
                         <h1>Au petit soin...</h1>
-                        <p class="bold">Tout comme vous, nous aimons les animaux de companies.</p>
+                        <p>Tout comme vous, nous aimons les animaux de companies.</p>
                         <p>Découvrez tous nos services, intentions et nos instants de bonheur pensés pour choyer votre
                             animal bien-aimé.</p>
 
@@ -150,7 +150,7 @@
                             <!--Renvoi vers l'url active-->
                             <input type="hidden" name="redirect_url" value="{{ request.path }}">
                             <button type="submit" class="orange-btn">
-                                Je commande mon passeport
+                                🐈 Je commande mon passeport 🐕
                             </button>
                         </form>
                     </div>
