@@ -23,10 +23,11 @@ def add_to_bag(request, item_id):
     if item_id in bag:
         bag[item_id] += quantity
         messages.success(request,
-                         f'Updated {product.name} quantity to {bag[item_id]}')
+                         f'Le nombre de "{product.name}" souhaité a été adapté.')
     else:
         bag[item_id] = quantity
-        messages.success(request, f'Added {product.name} to your bag')
+        messages.success(request,
+                         f'"{product.name}" a été ajouté à votre panier.')
 
     request.session['bag'] = bag
     return redirect(redirect_url)
@@ -45,13 +46,14 @@ def adjust_bag(request, item_id):
     if quantity > 0:
         bag[item_id] = quantity
         messages.success(request,
-                         f'Updated {product.name} quantity to {bag[item_id]}')
+                         f'Le nombre de "{product.name}" souhaité a été adapté.')
     else:
         bag.pop(item_id, None)  # Avoid KeyError
-        messages.success(request, f'Removed {product.name} from your bag')
+        messages.success(request,
+                        f'"{product.name}" a été enlevé de votre panier.')
 
     request.session['bag'] = bag
-    return redirect(reverse('view_bag'))
+    return redirect(reverse('bag:view_bag'))
 
 
 def remove_from_bag(request, item_id):
@@ -64,7 +66,8 @@ def remove_from_bag(request, item_id):
 
     if item_id in bag:
         bag.pop(item_id, None)
-        messages.success(request, f'Removed {product.name} from your bag')
+        messages.success(request,
+                         f'"{product.name}" a été enlevé de votre panier.')
 
     request.session['bag'] = bag
 

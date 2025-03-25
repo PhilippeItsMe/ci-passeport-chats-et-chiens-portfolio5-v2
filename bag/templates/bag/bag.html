@@ -30,12 +30,11 @@
                     {% for item in bag_items %}
                     <tr>
                         <!--Image-->
-                        <td class="p-3 w-25">
+                        <td class="py-3 w-25">
                             {% if item.product.image %}
-                            <img class="img-fluid rounded" src="{{ item.product.image.url }}"
-                                alt="{{ item.product.name }}">
+                            <img class="img-fluid" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
                             {% else %}
-                            <img class="img-fluid rounded" src="{% static 'cartepasseport.webp' %}"
+                            <img class="img-fluid" src="{% static 'images/cartepasseport.webp' %}"
                                 alt="{{ item.product.name }}">
                             {% endif %}
                         </td>
@@ -56,7 +55,7 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <button class="decrement-qty btn btn-sm btn-black rounded-0"
+                                            <button class="decrement-qty btn btn-sm btn-dark rounded-0"
                                                 data-item_id="{{ item.item_id }}" id="decrement-qty_{{ item.item_id }}">
                                                 <span>
                                                     <i class="fas fa-minus fa-sm"></i>
@@ -67,7 +66,7 @@
                                             name="quantity" value="{{ item.quantity }}" min="1" max="99"
                                             data-item_id="{{ item.item_id }}" id="id_qty_{{ item.item_id }}">
                                         <div class="input-group-append">
-                                            <button class="increment-qty btn btn-sm btn-black rounded-0"
+                                            <button class="increment-qty btn btn-sm btn-dark rounded-0"
                                                 data-item_id="{{ item.item_id }}" id="increment-qty_{{ item.item_id }}">
                                                 <span>
                                                     <i class="fas fa-plus fa-sm"></i>
@@ -77,13 +76,16 @@
                                     </div>
                                 </div>
                             </form>
-                            <a class="update-link text-info"><small>Update</small></a>
-                            <a class="remove-item text-danger float-right" id="remove_{{ item.item_id }}"
-                                data-product_size="{{ item.size }}"><small>Remove</small></a>
+                            <div class="d-flex justify-content-between">
+                                <a class="update-link orange"><small>Update</small></a>
+                                <a class="remove-item orange" id="remove_{{ item.item_id }}"
+                                    data-product_size="{{ item.size }}"><small>Remove</small></a>
+                            </div>
+
                         </td>
                         <!--Sous-total-->
                         <td class="py-3">
-                            <p class="my-0">${{ item.product.price | calc_subtotal:item.quantity }}</p>
+                            <p class="my-0">CHF {{ item.product.price | calc_subtotal:item.quantity }}</p>
                         </td>
                     </tr>
                     {% endfor %}
@@ -91,14 +93,15 @@
                     <!--Sous-total & décompte TVA-->
                     <tr>
                         <td colspan="5" class="pt-5 text-right">
-                            <h6><strong>Total TTC: ${{ total|floatformat:2 }}</strong></h6>
-                            <h4 class="mt-4"><strong>Grand Total: ${{ grand_total|floatformat:2 }}</strong></h4>
+                            <h6>Total HT : CHF {{ total_ht|floatformat:2 }}></h6>
+                            <h6>TVA 8.1% : CHF {{ tva|floatformat:2 }}</h6>
+                            <h6><strong>Total TTC : CHF {{ total_ttc|floatformat:2 }}</strong></h6>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="5" class="text-right">
-                            <a href="" class="btn btn-black rounded-0 btn-lg">
-                                <span class="text-uppercase">Passer en caisse</span>
+                            <a href="" class="btn btn-dark rounded-0 btn-lg">
+                                <span class="text-uppercase">Je passe en caisse</span>
                                 <span class="icon">
                                     <i class="fas fa-lock"></i>
                                 </span>
@@ -113,32 +116,29 @@
         </div>
     </div>
 </div>
-
 {% endblock %}
 
 {% block postloadjs %}
-
 <script src="{% static 'js/quantity_input_script.js' %}"></script>
-
 <script type="text/javascript">
     $(document).ready(function () {
         // Update quantity on click
         $('.update-link').click(function (e) {
             e.preventDefault();
-            var form = $(this).prev('.update-form');
+            console.log("Update clicked!");
+            var form = $(this).closest('td').find('form.update-form');
             form.submit();
         });
 
         // Remove item and reload on click
         $('.remove-item').click(function (e) {
             e.preventDefault();
+            console.log("Remove clicked!");
             var csrfToken = "{{ csrf_token }}";
             var itemId = $(this).attr('id').split('remove_')[1];
-            var size = $(this).data('product_size');
             var url = `/bag/remove/${itemId}/`;
             var data = {
                 'csrfmiddlewaretoken': csrfToken,
-                'product_size': size
             };
 
             $.post(url, data)
@@ -148,5 +148,4 @@
         });
     });
 </script>
-
 {% endblock %}
