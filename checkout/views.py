@@ -6,8 +6,8 @@ from django.conf import settings
 from .forms import OrderForm
 from .models import Order, OrderLineItem
 from products.models import Product
-from profiles.forms import UserProfileForm
-from profiles.models import UserProfile
+from pet_owners.forms import PetOwnerForm
+from pet_owners.models import PetOwner
 from bag.contexts import bag_contents
 
 import stripe
@@ -105,7 +105,7 @@ def checkout(request):
 
         if request.user.is_authenticated:
             try:
-                profile = UserProfile.objects.get(user=request.user)
+                profile = PetOwner.objects.get(user=request.user)
                 order_form = OrderForm(initial={
                     'full_name': profile.user.get_full_name(),
                     'email': profile.user.email,
@@ -117,7 +117,7 @@ def checkout(request):
                     'street_address2': profile.default_street_address2,
                     'county': profile.default_county,
                 })
-            except UserProfile.DoesNotExist:
+            except PetOwner.DoesNotExist:
                 order_form = OrderForm()
         else:
             order_form = OrderForm()
@@ -147,7 +147,7 @@ def checkout_success(request, order_number):
     order = get_object_or_404(Order, order_number=order_number)
 
     if request.user.is_authenticated:
-        profile = UserProfile.objects.get(user=request.user)
+        profile = PetOwner.objects.get(user=request.user)
         # Attach the user's profile to the order
         order.user_profile = profile
         order.save()
@@ -163,7 +163,7 @@ def checkout_success(request, order_number):
                 'default_street_address2': order.street_address2,
                 'default_county': order.county,
             }
-            user_profile_form = UserProfileForm(profile_data, instance=profile)
+            user_profile_form = PetOwnerForm(profile_data, instance=profile)
             if user_profile_form.is_valid():
                 user_profile_form.save()
 

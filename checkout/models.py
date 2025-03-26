@@ -16,13 +16,17 @@ class Order(models.Model):
         on_delete=models.CASCADE,
         related_name="orders"
     )
+
+    full_name = models.CharField(max_length=50, null=False, blank=False)
     street = models.CharField(max_length=80, null=False, blank=False)
     street_number = models.CharField(max_length=10, null=False, blank=False)
     postal_code = models.CharField(max_length=10, null=False, blank=False)
     city = models.CharField(max_length=40, null=False, blank=False)
     country = models.CharField(max_length=80, null=True, blank=True,
                                default="Suisse")
+    email = models.EmailField(max_length=254, null=False, blank=False)
     phone = models.CharField(max_length=16, blank=True, null=True)
+
     date = models.DateTimeField(auto_now_add=True)
     total_ttc = models.DecimalField(max_digits=10, decimal_places=2,
                                     null=False, default=0)

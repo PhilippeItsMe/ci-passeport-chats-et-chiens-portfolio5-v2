@@ -8,7 +8,10 @@ urlpatterns = [
     
     # BAG
     path('bag/', include('bag.urls')),
-    
+
+    # Checkout
+    path('checkout/', include('checkout.urls')),
+
     # Pet Owners
     path('', include('pet_owners.urls')),
 
