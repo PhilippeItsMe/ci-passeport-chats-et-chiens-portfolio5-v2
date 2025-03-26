@@ -22,5 +22,5 @@ urlpatterns = [
     path('grpd/', include('grpd.urls')),
 
     # Products
-    path('products/', include('products.urls')),
+    path('products/', include('products.urls')), 
 ]
