@@ -94,7 +94,7 @@ def checkout(request):
             return redirect(reverse('products'))
 
         current_bag = bag_contents(request)
-        total = current_bag['grand_total']
+        total = current_bag['total_ttc']
         stripe_total = round(total * 100)
         stripe.api_key = stripe_secret_key
         intent = stripe.PaymentIntent.create(
@@ -106,8 +106,8 @@ def checkout(request):
             try:
                 petowner= PetOwner.objects.get(user=request.user)
                 order_form = OrderForm(initial={
-                #'full_name': petowner.user.get_full_name(),
-                #'email': petowner.user.email,
+                'full_name': petowner.user.get_full_name(), # not used later
+                'email': petowner.user.email, # not used later
                 'phone': petowner.default_phone,
                 'country': petowner.default_country,
                 'postal_code': petowner.default_postal_code,
@@ -146,13 +146,12 @@ def checkout_success(request, order_number):
         # Save the user's info
         if save_info:
             profile_data = {
-                'default_phone_number': order.phone_number,
+                'default_phone': order.phone,
                 'default_country': order.country,
-                'default_postcode': order.postcode,
-                'default_town_or_city': order.town_or_city,
-                'default_street_address1': order.street_address1,
-                'default_street_address2': order.street_address2,
-                'default_county': order.county,
+                'default_postal_code': order.postal_code,
+                'default_city': order.city,
+                'default_street': order.street,
+                'default_street_number': order.street_number,
             }
             user_profile_form = PetOwnerForm(profile_data, instance=profile)
             if user_profile_form.is_valid():

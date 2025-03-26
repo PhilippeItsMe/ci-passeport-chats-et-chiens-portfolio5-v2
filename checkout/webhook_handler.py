@@ -5,7 +5,7 @@ from django.conf import settings
 
 from .models import Order, OrderLineItem
 from products.models import Product
-from profiles.models import UserProfile
+from pet_owners.models import PetOwner
 
 import json
 import time
@@ -52,7 +52,7 @@ class StripeWH_Handler:
 
         billing_details = intent.charges.data[0].billing_details
         shipping_details = intent.shipping
-        grand_total = round(intent.charges.data[0].amount / 100, 2)
+        total_ttc = round(intent.charges.data[0].amount / 100, 2)
 
         # Clean data in the shipping details
         for field, value in shipping_details.address.items():
@@ -63,7 +63,7 @@ class StripeWH_Handler:
         profile = None
         username = intent.metadata.username
         if username != 'AnonymousUser':
-            profile = UserProfile.objects.get(user__username=username)
+            profile = PetOwner.objects.get(user__username=username)
             if save_info:
                 profile.default_phone_number = shipping_details.phone
                 profile.default_country = shipping_details.address.country
@@ -88,7 +88,7 @@ class StripeWH_Handler:
                     street_address1__iexact=shipping_details.address.line1,
                     street_address2__iexact=shipping_details.address.line2,
                     county__iexact=shipping_details.address.state,
-                    grand_total=grand_total,
+                    total_ttc=total_ttc,
                     original_bag=bag,
                     stripe_pid=pid,
                 )
@@ -116,7 +116,7 @@ class StripeWH_Handler:
                     street_address1=shipping_details.address.line1,
                     street_address2=shipping_details.address.line2,
                     county=shipping_details.address.state,
-                    grand_total=grand_total,
+                    total_ttc=total_ttc,
                     original_bag=bag,
                     stripe_pid=pid,
                 )

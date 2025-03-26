@@ -60,8 +60,8 @@
         <div class="text-center">
             <img class="search-icon" src="{% static 'images/basket.svg' %}" alt="Shopping basket">
             <p class="my-0 darkgrey">
-                {% if grand_total %}
-                ${{ grand_total|floatformat:2 }}
+                {% if total_ttc %}
+                ${{ total_ttc|floatformat:2 }}
                 {% else %}
                 $0.00
                 {% endif %}
