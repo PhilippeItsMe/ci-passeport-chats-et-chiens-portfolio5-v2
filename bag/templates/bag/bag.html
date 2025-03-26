@@ -17,11 +17,11 @@
             <div class="container">
                 <!-- Header -->
                 <div class="row fw-bold border-bottom py-2 d-none d-md-flex">
-                    <div class="col-md-3">Produit</div>
-                    <div class="col-md-3">Détails</div>
-                    <div class="col-md-2">Prix</div>
-                    <div class="col-md-2">Quantité</div>
-                    <div class="col-md-2">Total</div>
+                    <div class="col-md-3 font">Produit</div>
+                    <div class="col-md-3 font">Détail</div>
+                    <div class="col-md-2 font">Prix</div>
+                    <div class="col-md-2 font">Quantité</div>
+                    <div class="col-md-2 font">Total</div>
                 </div>
                 {% for item in bag_items %}
                 <!-- Ligne produit -->
@@ -54,14 +54,14 @@
                             <div class="input-group input-group-sm">
                                 <button class="btn btn-dark rounded-0 decrement-qty" type="submit"
                                     data-item_id="{{ item.item_id }}" id="decrement-qty_{{ item.item_id }}">
-                                    <i class="fas fa-minus fa-sm text-white"></i>
+                                    <i class="fas fa-minus fa-sm text-white white-paw"></i>
                                 </button>
                                 <input class="form-control form-control-sm qty_input text-center" type="number"
                                     name="quantity" value="{{ item.quantity }}" min="1" max="99"
                                     data-item_id="{{ item.item_id }}" id="id_qty_{{ item.item_id }}">
                                 <button class="btn btn-dark rounded-0 increment-qty" type="submit"
                                     data-item_id="{{ item.item_id }}" id="increment-qty_{{ item.item_id }}">
-                                    <i class="fas fa-plus fa-sm text-white"></i>
+                                    <i class="fas fa-plus fa-sm text-white white-paw"></i>
                                 </button>
                             </div>
                         </form>
@@ -93,7 +93,7 @@
                 <div class="row ">
                     <div class="col-md-6 text-start">
                         <a href="{% url 'checkout' %}" class="btn btn-dark rounded-0 btn-lg mt-3">
-                            <span class="text-uppercase">Je passe en caisse</span>
+                            <span class="text-uppercase white-paw">Je passe en caisse</span>
                             <i class="fas fa-lock ms-2"></i>
                         </a>
                     </div>

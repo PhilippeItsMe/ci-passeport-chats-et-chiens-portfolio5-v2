@@ -80,6 +80,11 @@ h3 {
     font-size: 2rem !important;
 }
 
+.font {
+    font-family: "Quicksand", serif;
+    font-weight: bold;
+}
+
 p,
 a,
 .yellow-btn,
@@ -87,7 +92,9 @@ a,
 .submit-btn,
 th,
 li,
-input {
+input,
+legend,
+label {
     font-family: "Quicksand", serif;
     font-size: 1rem;
     font-weight: 400;
@@ -204,6 +211,7 @@ a:hover {
 }
 
 /*One 1 line wrapper*/
+
 .one-line {
     display: flex;
     align-items: center;

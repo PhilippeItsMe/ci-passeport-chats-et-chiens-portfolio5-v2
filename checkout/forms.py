@@ -18,14 +18,14 @@ class OrderForm(forms.ModelForm):
         """
         super().__init__(*args, **kwargs)
         placeholders = {
-            'full_name': 'Full Name',
-            'email': 'Email Address',
-            'phone': 'Phone Number',
-            'street': 'Street Name',
-            'street_number': 'Street Number',
-            'postal_code': 'Postal Code',
-            'city': 'City',
-            'country': 'Country',
+            'full_name': 'Prénom et nom',
+            'email': 'Email',
+            'phone': 'Mobile',
+            'street': 'Rue',
+            'street_number': 'N°',
+            'postal_code': 'Code postal',
+            'city': 'Localité',
+            'country': 'Pays',
         }
 
         self.fields['full_name'].widget.attrs['autofocus'] = True
