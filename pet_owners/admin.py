@@ -1,27 +1,28 @@
 from django.contrib import admin
 from .models import PetOwner, Pet
-from django_summernote.admin import SummernoteModelAdmin
 
 
 @admin.register(PetOwner)
 class PetOwnerAdmin(admin.ModelAdmin):
     """
-    To display pet owners personal info in admin.
+    To display pet owners' personal info in admin.
     """
     list_display = (
-        'author', 'street', 'street_number', 'postal_code', 
-        'city', 'country', 'phone', 'newsletter',
-        'last_modified', 'date_created'
+        'author', 'default_street', 'default_street_number',
+        'default_postal_code', 'default_city', 'default_country',
+        'default_phone', 'default_newsletter',
+        'default_last_modified', 'default_date_created'
     )
     search_fields = [
-        'author__username', 'phone', 'street', 
-        'postal_code', 'city', 'country'
+        'author__username', 'default_phone', 'default_street',
+        'default_postal_code', 'default_city', 'default_country'
     ]
     list_filter = (
-        'country', 'city', 
-        'date_created', 'last_modified'
+        'default_country', 'default_city',
+        'default_date_created', 'default_last_modified'
     )
-    ordering = ('-last_modified',)
+    ordering = ('-default_last_modified',)
+
 
 
 @admin.register(Pet)

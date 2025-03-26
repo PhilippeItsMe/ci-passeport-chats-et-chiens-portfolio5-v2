@@ -13,15 +13,15 @@ class PetOwner(models.Model):
         on_delete=models.CASCADE,
         related_name="pet_owners"
     )
-    street=models.CharField(max_length=80, null=False, blank=False)
-    street_number=models.CharField(max_length=10, null=False, blank=False)
-    postal_code=models.CharField(max_length=10, null=False, blank=False)
-    city = models.CharField(max_length=40, null=False, blank=False)
-    country = models.CharField(max_length=80, null=True, blank=True, default="Suisse")
-    phone = models.CharField(max_length=16, blank=True, null=True)
-    newsletter = models.BooleanField(default=False)
-    date_created = models.DateTimeField(auto_now_add=True)
-    last_modified = models.DateTimeField(auto_now=True)
+    default_street=models.CharField(max_length=80, null=False, blank=False)
+    default_street_number=models.CharField(max_length=10, null=False, blank=False)
+    default_postal_code=models.CharField(max_length=10, null=False, blank=False)
+    default_city = models.CharField(max_length=40, null=False, blank=False)
+    default_country = models.CharField(max_length=80, null=True, blank=True, default="Suisse")
+    default_phone = models.CharField(max_length=16, blank=True, null=True)
+    default_newsletter = models.BooleanField(default=False)
+    default_date_created = models.DateTimeField(auto_now_add=True)
+    default_last_modified = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name = "Pet Owner"

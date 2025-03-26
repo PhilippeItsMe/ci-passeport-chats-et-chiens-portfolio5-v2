@@ -9,34 +9,32 @@ class PetOwnerForm(forms.ModelForm):
     class Meta:
         model = PetOwner
         fields = [
-            'street',
-            'street_number',
-            'postal_code',
-            'city',
-            'country',
-            'phone',
-            'newsletter',
+            'default_street',
+            'default_street_number',
+            'default_postal_code',
+            'default_city',
+            'default_country',
+            'default_phone',
+            'default_newsletter',
         ]
         widgets = {
-            'street': forms.TextInput(attrs={'class': 'form-control'}),
-            'street_number': forms.TextInput(attrs={'class': 'form-control'}),
-            'postal_code': forms.TextInput(attrs={'class': 'form-control'}),
-            'city': forms.TextInput(attrs={'class': 'form-control'}),
-            'country': forms.TextInput(attrs={'class': 'form-control'}),
-            'phone': forms.TextInput(attrs={'class': 'form-control'}),
-            'newsletter': forms.CheckboxInput(
-                attrs={'class': 'form-check-input'}),
+            'default_street': forms.TextInput(attrs={'class': 'form-control'}),
+            'default_street_number': forms.TextInput(attrs={'class': 'form-control'}),
+            'default_postal_code': forms.TextInput(attrs={'class': 'form-control'}),
+            'default_city': forms.TextInput(attrs={'class': 'form-control'}),
+            'default_country': forms.TextInput(attrs={'class': 'form-control'}),
+            'default_phone': forms.TextInput(attrs={'class': 'form-control'}),
+            'default_newsletter': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }
         labels = {
-            'street': 'Rue',
-            'street_number': 'Numéro',
-            'postal_code': 'Code postal',
-            'city': 'Ville',
-            'country': 'Pays',
-            'phone': 'Vous pouvez sans autre me contacter à ce numéro : ',
-            'newsletter': 'Je souhaite recevoir votre newsletter.',
+            'default_street': 'Rue',
+            'default_street_number': 'Numéro',
+            'default_postal_code': 'Code postal',
+            'default_city': 'Ville',
+            'default_country': 'Pays',
+            'default_phone': 'Vous pouvez sans autre me contacter à ce numéro : ',
+            'default_newsletter': 'Je souhaite recevoir votre newsletter.',
         }
-
 
 class PetForm(forms.ModelForm):
     """

@@ -41,13 +41,12 @@ def checkout(request):
         form_data = {
             'full_name': request.POST['full_name'],
             'email': request.POST['email'],
-            'phone_number': request.POST['phone_number'],
+            'phone': request.POST['phone'],
             'country': request.POST['country'],
-            'postcode': request.POST['postcode'],
-            'town_or_city': request.POST['town_or_city'],
-            'street_address1': request.POST['street_address1'],
-            'street_address2': request.POST['street_address2'],
-            'county': request.POST['county'],
+            'postal_code': request.POST['postal_code'],
+            'city': request.POST['city'],
+            'street': request.POST['street'],
+            'street_number': request.POST['street_number'],
         }
         order_form = OrderForm(form_data)
         if order_form.is_valid():
@@ -77,8 +76,8 @@ def checkout(request):
                             order_line_item.save()
                 except Product.DoesNotExist:
                     messages.error(request, (
-                        "One of the products in your bag wasn't found in our database. "
-                        "Please call us for assistance!")
+                        "L'un des articles commandés n'est pas dans notre dB. "
+                        "Merci de nous contacter pour de l'aide.")
                     )
                     order.delete()
                     return redirect(reverse('view_bag'))
@@ -86,8 +85,8 @@ def checkout(request):
             request.session['save_info'] = 'save-info' in request.POST
             return redirect(reverse('checkout_success', args=[order.order_number]))
         else:
-            messages.error(request, 'There was an error with your form. \
-                Please double check your information.')
+            messages.error(request, 'Il y a une erreur avec votre formulaire. \
+                Merci de vérifier vos informations.')
     else:
         bag = request.session.get('bag', {})
         if not bag:
@@ -105,28 +104,21 @@ def checkout(request):
 
         if request.user.is_authenticated:
             try:
-                profile = PetOwner.objects.get(user=request.user)
+                petowner= PetOwner.objects.get(user=request.user)
                 order_form = OrderForm(initial={
-                    'full_name': profile.user.get_full_name(),
-                    'email': profile.user.email,
-                    'phone_number': profile.default_phone_number,
-                    'country': profile.default_country,
-                    'postcode': profile.default_postcode,
-                    'town_or_city': profile.default_town_or_city,
-                    'street_address1': profile.default_street_address1,
-                    'street_address2': profile.default_street_address2,
-                    'county': profile.default_county,
+                #'full_name': petowner.user.get_full_name(),
+                #'email': petowner.user.email,
+                'phone': petowner.default_phone,
+                'country': petowner.default_country,
+                'postal_code': petowner.default_postal_code,
+                'city': petowner.default_city,
+                'street': petowner.default_street,
+                'street_number': petowner.default_street_number,
                 })
             except PetOwner.DoesNotExist:
                 order_form = OrderForm()
         else:
             order_form = OrderForm()
-
-        # in the video, the below code is not indented properly
-        # this is the correct indentation
-        if not stripe_public_key:
-            messages.warning(request, 'Stripe public key is missing. \
-                Did you forget to set it in your environment?')
 
         template = 'checkout/checkout.html'
         context = {
@@ -136,7 +128,6 @@ def checkout(request):
         }
 
         return render(request, template, context)
-        # end of the corrected indentation
 
 
 def checkout_success(request, order_number):
@@ -167,9 +158,9 @@ def checkout_success(request, order_number):
             if user_profile_form.is_valid():
                 user_profile_form.save()
 
-    messages.success(request, f'Order successfully processed! \
-        Your order number is {order_number}. A confirmation \
-        email will be sent to {order.email}.')
+    messages.success(request, f'Votre commande est bien passée! \
+        Votre numéro de commande est {order_number}. Un email de \
+        confirmation vas être envoyé à {order.email}.')
 
     if 'bag' in request.session:
         del request.session['bag']
