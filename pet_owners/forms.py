@@ -9,15 +9,31 @@ class PetOwnerForm(forms.ModelForm):
     class Meta:
         model = PetOwner
         fields = [
+            'street',
+            'street_number',
+            'postal_code',
+            'city',
+            'country',
             'phone',
             'newsletter',
         ]
         widgets = {
+            'street': forms.TextInput(attrs={'class': 'form-control'}),
+            'street_number': forms.TextInput(attrs={'class': 'form-control'}),
+            'postal_code': forms.TextInput(attrs={'class': 'form-control'}),
+            'city': forms.TextInput(attrs={'class': 'form-control'}),
+            'country': forms.TextInput(attrs={'class': 'form-control'}),
             'phone': forms.TextInput(attrs={'class': 'form-control'}),
-            'newsletter': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'newsletter': forms.CheckboxInput(
+                attrs={'class': 'form-check-input'}),
         }
         labels = {
-            'phone': 'Vous pouvez sans autre me contacter à ce numéro si nécessaire : ',
+            'street': 'Rue',
+            'street_number': 'Numéro',
+            'postal_code': 'Code postal',
+            'city': 'Ville',
+            'country': 'Pays',
+            'phone': 'Vous pouvez sans autre me contacter à ce numéro : ',
             'newsletter': 'Je souhaite recevoir votre newsletter.',
         }
 

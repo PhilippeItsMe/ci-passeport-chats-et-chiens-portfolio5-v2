@@ -6,12 +6,22 @@ from django_summernote.admin import SummernoteModelAdmin
 @admin.register(PetOwner)
 class PetOwnerAdmin(admin.ModelAdmin):
     """
-    To display pet owners in admin.
+    To display pet owners personal info in admin.
     """
-    list_display = ('author', 'phone', 'newsletter',
-                    'last_modified', 'date_created')
-    search_fields = ['author__username', 'phone']
-    list_filter = ('newsletter', 'date_created', 'last_modified')
+    list_display = (
+        'author', 'street', 'street_number', 'postal_code', 
+        'city', 'country', 'phone', 'newsletter',
+        'last_modified', 'date_created'
+    )
+    search_fields = [
+        'author__username', 'phone', 'street', 
+        'postal_code', 'city', 'country'
+    ]
+    list_filter = (
+        'country', 'city', 
+        'date_created', 'last_modified'
+    )
+    ordering = ('-last_modified',)
 
 
 @admin.register(Pet)

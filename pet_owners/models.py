@@ -5,13 +5,19 @@ from cloudinary.models import CloudinaryField
 
 class PetOwner(models.Model):
     """
-    Model representing a pet owner with personal information.
+    Model representing a pet owner with personal information 
+    for invoices and mailings.
     """
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         related_name="pet_owners"
     )
+    street=models.CharField(max_length=80, null=False, blank=False)
+    street_number=models.CharField(max_length=10, null=False, blank=False)
+    postal_code=models.CharField(max_length=10, null=False, blank=False)
+    city = models.CharField(max_length=40, null=False, blank=False)
+    country = models.CharField(max_length=80, null=True, blank=True, default="Suisse")
     phone = models.CharField(max_length=16, blank=True, null=True)
     newsletter = models.BooleanField(default=False)
     date_created = models.DateTimeField(auto_now_add=True)
@@ -22,7 +28,7 @@ class PetOwner(models.Model):
         verbose_name_plural = "Pet Owners"
 
     def __str__(self):
-        return f"{self.author.username}"
+        return f"{self.author.username} - {self.city}"
 
 
 class Pet(models.Model):
