@@ -14,7 +14,9 @@ class Order(models.Model):
     user_profile = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name="orders"
+        related_name="orders",
+        null=True,
+        blank=True,
     )
 
     full_name = models.CharField(max_length=50, null=False, blank=False)
@@ -23,7 +25,7 @@ class Order(models.Model):
     postal_code = models.CharField(max_length=10, null=False, blank=False)
     city = models.CharField(max_length=40, null=False, blank=False)
     country = models.CharField(max_length=80, null=True, blank=True,
-                               default="Suisse")
+                               default="CH")
     email = models.EmailField(max_length=254, null=False, blank=False)
     phone = models.CharField(max_length=16, blank=True, null=True)
 

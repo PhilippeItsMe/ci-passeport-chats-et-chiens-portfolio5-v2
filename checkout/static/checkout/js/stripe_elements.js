@@ -72,9 +72,9 @@ form.addEventListener('submit', function (ev) {
                     email: $.trim(form.elements['email'] ?.value || ''),
                     address: {
                         line1: `${$.trim(form.elements['street']?.value || '')} ${$.trim(form.elements['street_number']?.value || '')}`,
+                        postal_code: $.trim(form.elements['postal_code'] ?.value || ''),
                         city: $.trim(form.elements['city'] ?.value || ''),
                         country: $.trim(form.elements['country'] ?.value || ''),
-                        postal_code: $.trim(form.elements['postal_code'] ?.value || ''),
                     }
                 }
             }
