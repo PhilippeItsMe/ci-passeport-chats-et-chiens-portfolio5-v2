@@ -10,6 +10,11 @@ def view_bag(request):
 
 def add_to_bag(request, item_id):
     """ Add a quantity of the specified product to the shopping bag """
+
+    print('item_id', item_id)
+    print('request', request)
+    print('request.session:', dict(request.session))
+
     
     product = get_object_or_404(Product, pk=item_id)
     quantity = int(request.POST.get('quantity',
@@ -30,6 +35,11 @@ def add_to_bag(request, item_id):
                          f'"{product.name}" a été ajouté à votre panier.')
 
     request.session['bag'] = bag
+
+    print('request.session après:', dict(request.session))
+
+
+
     return redirect(redirect_url)
 
 

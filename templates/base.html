@@ -6,6 +6,7 @@
 {% load custom_tags %}
 {% load crispy_forms_tags %}
 
+
 <!DOCTYPE html>
 <html class="h-100" lang="en">
 
@@ -26,6 +27,8 @@
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
+    {% block extra_css %}
+    {% endblock %}
 
     <!---------- Fontawesome ---------->
     <script src="https://kit.fontawesome.com/5b37147010.js" crossorigin="anonymous"></script>
