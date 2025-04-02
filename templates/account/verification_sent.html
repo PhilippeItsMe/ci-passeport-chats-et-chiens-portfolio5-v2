@@ -2,8 +2,16 @@
 {% load i18n %}
 
 {% block content %}
-<h2 class="logo-font mb-4">{% trans "Verify Your E-mail Address" %}</h2>
-<p>{% blocktrans %}We have sent an e-mail to you for verification. Follow the link provided to finalize the signup
-    process. Please contact us if you do not receive it within a few minutes.{% endblocktrans %}</p>
 
+<div class="container page-wrapper">
+    <div class="row">
+        <div class="col-md-8 mt-3 offset-md-2">
+            <h3 class="logo-font mb-4">{% trans "Vérification de votre e-mail" %}</h3>
+            <p>{% blocktrans %}Nous vous avons envoyé un e-mail pour vérification. Veuillez suivre le lien fourni afin
+                de finaliser le processus d'inscription. Si vous ne le recevez pas dans les prochaines minutes, veuillez
+                nous contacter.
+                {% endblocktrans %}</p>
+        </div>
+    </div>
+</div>
 {% endblock %}
