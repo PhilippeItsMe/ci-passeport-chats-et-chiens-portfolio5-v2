@@ -389,32 +389,10 @@ The following libraries and resources were used in this project to ensure smooth
 ### Debugging
 
 <strong>Bug 1</strong><br>
-Issue : My page rendering pet businesses wasn't rending anything.<br>
-Solution : Adding <context_object_name = "pet_business_list"> in my views.py to be able to pass it my template pet_business_list.html.<br>
+Issue : The step of the email confirmation were not well designed.<br>
+Solution : Analysing step by step the process to fix the design.<br>
 <br>
-<strong>Bug 2</strong><br>
-Issue : Impossible to pass the pet_business attribute to the pet_business-detail.html.<br>
-Solution : Adding post object to his view {"pet_business_detail": post}.<br>
-<br>
-<strong>Bug 3</strong><br>
-Issue : Impossible to edit or delete comments.<br>
-Solution : Fine tuning the views with introducing the wright source model and destination template pet_business_detail.<br>
-<br>
-<strong>Bug 4</strong><br>
-Issue : Had to change my class names from snake_case to CamelCase. While migrating the change, 4 dB where inversed and a inbetween dB in manytomany relationship erased.<br>
-Solution : Create a brand new dB.<br>
-<br>
-<strong>Bug 5</strong><br>
-Issue : Issue rendering My Pet Businesses in the menu to pet owners users only.<br>
-Solution : Insert the conditional li inside the {% if user.is_authenticated %} tag.<br>
-<br>
-<strong>Bug 6</strong><br>
-Issue : Data from a many2many relationship where not saved in the dB.<br>
-Solution : Adding form.save_m2m() in the pet_business view.<br>
 
-<strong>Bug 7</strong><br>
-Issue : Missalignement of the 3 section of pet_buiness_detail.html. <br>
-Solution : Rewrapping the section with the same boostrap approach.<br>
 
 ### Testing
 
