@@ -375,6 +375,14 @@ footer {
 }
 
 
+/*-------------------- 404--------------------*/
+
+.size {
+    width: 300px;
+    height: auto;
+}
+
+
 /*-------------------- Responsivness --------------------*/
 
 @media screen and (max-width: 768px) {

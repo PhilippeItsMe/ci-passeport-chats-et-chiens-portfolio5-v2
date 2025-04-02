@@ -690,7 +690,7 @@ The project leverages **GitPod**, a cloud-based Integrated Development Environme
 4. Deploying the main branch via Heroku's dashboard or automatic deployment settings.
 
 #### Database Management
-The **Code Institute PostgreSQL database** is utilized for robust and reliable data storage during development and deployment. This relational database system supports advanced features such as indexing and transaction management, making it suitable for handling complex queries and ensuring optimal performance. 
+The **Heroku PostgreSQL database** is utilized for robust and reliable data storage during development and deployment. This relational database system supports advanced features such as indexing and transaction management, making it suitable for handling complex queries and ensuring optimal performance. 
 
 Students can access and configure the CI database to:
 - Manage user and application data.
@@ -706,7 +706,7 @@ Developers configure Cloudinary within the project settings using provided API k
 - **GitHub**: Central repository for project code and collaboration.
 - **GitPod**: Development and testing environment.
 - **Heroku**: Hosting and deployment platform.
-- **CI Database**: PostgreSQL for data storage and management.
+- **Heroku Database**: PostgreSQL for data storage and management.
 - **Cloudinary**: Media management and delivery.
 
 This comprehensive combination of tools ensures that the **Passeport Chats & Chiens** project is developed and deployed effectively, with a focus on scalability, accessibility, and performance.
@@ -729,6 +729,7 @@ Design template inspiration
 - [Webflow template](https://webflow.com/templates/html/pet-place-veterinary-website-template)
 
 Special thanks
+- To my private coach : Hugo Carpentier
 - To my CI mentor : Spencer Barill
-- To the CI support team
+- To the CI support team, specially Oisin and Rebecca
 - To the CI student: Sophie Tiger, for her exceptional, state-of-the-art README documentation.
