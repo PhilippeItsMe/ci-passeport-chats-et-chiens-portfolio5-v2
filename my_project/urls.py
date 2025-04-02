@@ -27,3 +27,5 @@ urlpatterns = [
     # Products
     path('products/', include('products.urls')), 
 ]
+
+handler404 = 'my_project.views.handler404'
