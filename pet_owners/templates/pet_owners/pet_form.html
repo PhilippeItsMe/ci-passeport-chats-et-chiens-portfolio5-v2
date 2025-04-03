@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="page-wrapper">
-    <h3 class="mb-4">
+    <h3 class="mb-1">
         {% if pet %}Modifier {{ pet.name }}{% else %}Ajouter un animal{% endif %}
     </h3>
 
@@ -15,7 +15,7 @@
         </button>
     </form>
 
-    <a href="{% url 'pet_list' %}" class="btn btn-secondary">Retour à la liste</a>
+    <a href="{% url 'pet_list' %}" class="orange-btn">Retour à la liste</a>
 </div>
 
 {% endblock content %}

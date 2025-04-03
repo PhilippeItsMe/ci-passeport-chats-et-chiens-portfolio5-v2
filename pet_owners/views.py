@@ -59,6 +59,7 @@ def pet_create(request):
         if form.is_valid():
             pet = form.save(commit=False)
             pet.pet_owner = pet_owner
+            print("DATA >>>", form.cleaned_data)
             pet.save()
             messages.success(request, f"L'animal {pet.name} a été ajouté avec succès.")
             return redirect('pet_list')

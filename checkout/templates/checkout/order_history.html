@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="mb-4">Mes achats</h2>
+
+    {% if orders %}
+    <div class="list-group">
+        {% for order in orders %}
+        <div class="list-group-item mb-3">
+            <h5 class="mb-1">Commande n° {{ order.order_number }}</h5>
+            <p class="mb-1">Date : {{ order.date|date:"d/m/Y H:i" }}</p>
+            <p class="mb-1">Montant : {{ order.total_price }} CHF</p>
+            <a href="{% url 'order_detail' order.id %}" class="btn btn-sm btn-primary mt-2">Voir le détail</a>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>Vous n'avez encore effectué aucun achat.</p>
+    {% endif %}
+</div>
+{% endblock %}
