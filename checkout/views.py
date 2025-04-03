@@ -177,7 +177,7 @@ def order_history(request):
     """
     View to render ma order history
     """
-    orders = Order.objects.filter(user=request.user).order_by('-date')
+    orders = Order.objects.filter(user=request.user_profile).order_by('-date')
 
     return render(request, 'checkout/order_history.html', {
         'orders': orders,
