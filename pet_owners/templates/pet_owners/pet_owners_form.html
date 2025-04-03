@@ -4,10 +4,9 @@
 {% load crispy_forms_tags %}
 
 <div class="page-wrapper">
-    <h3>Mon profil et mes loulous</h3>
+    <h3 class="mb-5">Mon profil</h3>
 
     <!---------- PetOwner Details Form (Create/Update) ---------->
-    <h4 class="spacing">{% if pet_owner %}Quelques informations à mon sujet : {% else %}Créer mon profil{% endif %}</h4>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form|crispy }}
@@ -16,89 +15,17 @@
         </button>
     </form>
 
-    <hr>
-
-    <!---------- Existing list of Pets ---------->
-    <h3>Mes meilleurs amis</h3>
-
-    {% if pet_owner and pet_owner.pets.all %}
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Date de naissance</th>
-                <th>Type</th>
-                <th>Image</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for pet in pet_owner.pets.all %}
-            <tr>
-                <td>{{ pet.name }}</td>
-                <td>{{ pet.birthday|date:"d/m/Y" }}</td>
-                <td>{{ pet.pet_type }}</td>
-                <td>
-                    {% if "placeholder" in pet.pet_featured_image.url %}
-                    <img src="{% static 'images/defaultpetbusiness.webp' %}" class="scale" alt="placeholder">
-                    {% else %}
-                    <img src="{{ pet.pet_featured_image.url }}" class="scale" alt="pet image">
-                    {% endif %}
-                </td>
-                <td>
-                    <a href="{% url 'pet-edit' pet.id %}" class="yellow-btn">Modifier</a>
-
-                    <!-- Delete button triggering confirmation modal -->
-                    <button type="button" class="orange-btn" data-bs-toggle="modal" data-bs-target="#deleteModal"
-                        data-href="{% url 'pet-delete' pet.id %}">
-                        Supprimer
-                    </button>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
-    <p>Parlez nous de vos animaux de compagnie.</p>
-    {% endif %}
-
-    <!---------- Link to Add a Pet ---------->
-    <a href="{% url 'pet-create' %}" class="submit-btn spacing">Ajouter un animal</a>
-
-    <!---------- Delete confirmation modal ---------->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Confirmation</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Êtes-vous sûr de vouloir supprimer cet animal ? Cette opération est définitive.
-                </div>
-                <div class="modal-footer">
-                    <form method="POST" action="#" id="deleteConfirmForm">
-                        {% csrf_token %}
-                        <button type="submit" class="orange-btn">Supprimer</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-<script>
-    // JavaScript to dynamically update the delete form action
-    document.addEventListener('DOMContentLoaded', function () {
-        const deleteModal = document.getElementById('deleteModal');
-        deleteModal.addEventListener('show.bs.modal', function (event) {
-            const button = event.relatedTarget;
-            const actionUrl = button.getAttribute('data-href');
-            const form = deleteModal.querySelector('#deleteConfirmForm');
-            form.action = actionUrl;
+    <script>
+        // JavaScript to dynamically update the delete form action
+        document.addEventListener('DOMContentLoaded', function () {
+            const deleteModal = document.getElementById('deleteModal');
+            deleteModal.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+                const actionUrl = button.getAttribute('data-href');
+                const form = deleteModal.querySelector('#deleteConfirmForm');
+                form.action = actionUrl;
+            });
         });
-    });
-</script>
+    </script>
 
-{% endblock content %}
+    {% endblock content %}
