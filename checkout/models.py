@@ -98,4 +98,4 @@ class OrderLineItem(models.Model):
         self.order.update_total()
 
     def __str__(self):
-        return f"{self.product.sku or self.product.name} on order {self.order.order_number}"
+        return f"{self.product.name} on order {self.order.order_number}"

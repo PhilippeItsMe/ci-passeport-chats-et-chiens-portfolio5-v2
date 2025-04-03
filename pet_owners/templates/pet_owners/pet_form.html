@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="page-wrapper">
+    <h3 class="mb-4">
+        {% if pet %}Modifier {{ pet.name }}{% else %}Ajouter un animal{% endif %}
+    </h3>
+
+    <form method="POST" enctype="multipart/form-data" class="mb-5">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="submit-btn">
+            {% if pet %}Mettre à jour{% else %}Ajouter{% endif %}
+        </button>
+    </form>
+
+    <a href="{% url 'pet_list' %}" class="btn btn-secondary">Retour à la liste</a>
+</div>
+
+{% endblock content %}

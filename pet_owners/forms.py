@@ -62,8 +62,8 @@ class PetForm(forms.ModelForm):
                 attrs={'class':'form-control'}),
         }
         labels = {
-            'name': 'Nom de votre animal ',
-            'birthday': 'Sa date de naissance ',
-            'pet_type': 'Type d’animal ',
-            'pet_featured_image': "Image de l'animal ",
+            'name': 'Quel est le nom de votre animal ?',
+            'birthday': 'Quel est sa date de naissance ?',
+            'pet_type': 'Quel est son type d’animal ? ',
+            'pet_featured_image': "Une image à partager de votre compagnon ?",
         }

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
+from django.utils import timezone
 
 
 class PetOwner(models.Model):
@@ -28,7 +29,7 @@ class PetOwner(models.Model):
         verbose_name_plural = "Pet Owners"
 
     def __str__(self):
-        return f"{self.author.username} - {self.city}"
+        return f"{self.author.username} - {self.default_city}"
 
 
 class Pet(models.Model):
@@ -41,13 +42,13 @@ class Pet(models.Model):
         related_name="pets"
     )
     name = models.CharField(max_length=150)
-    birthday = models.DateField(blank=True, null=True)
+    birthday = models.DateField(default=timezone.now)
     pet_type = models.ForeignKey(
         "pet_businesses.PetType",
-        on_delete=models.SET_NULL,
+        on_delete=models.PROTECT,
         related_name="pets",
-        null=True,
-        blank=True
+        null=False,
+        blank=False
     )
     pet_featured_image = CloudinaryField('image', default='placeholder')
     date_created = models.DateTimeField(auto_now_add=True)

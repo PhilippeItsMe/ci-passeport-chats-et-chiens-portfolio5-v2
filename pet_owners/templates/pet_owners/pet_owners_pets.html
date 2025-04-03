@@ -33,11 +33,11 @@
                     {% endif %}
                 </td>
                 <td>
-                    <a href="{% url 'pet-edit' pet.id %}" class="yellow-btn">Modifier</a>
+                    <a href="{% url 'pet_edit' pet.id %}" class="yellow-btn">Modifier</a>
 
                     <!-- Delete button triggering confirmation modal -->
                     <button type="button" class="orange-btn" data-bs-toggle="modal" data-bs-target="#deleteModal"
-                        data-href="{% url 'pet-delete' pet.id %}">
+                        data-href="{% url 'pet_delete' pet.id %}">
                         Supprimer
                     </button>
                 </td>
@@ -50,7 +50,7 @@
     {% endif %}
 
     <!---------- Link to Add a Pet ---------->
-    <a href="{% url 'pet-create' %}" class="submit-btn spacing">Ajouter un animal</a>
+    <a href="{% url 'pet_create' %}" class="submit-btn spacing">Ajouter un animal</a>
 
     <!---------- Delete confirmation modal ---------->
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
