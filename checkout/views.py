@@ -105,10 +105,10 @@ def checkout(request):
 
         if request.user.is_authenticated:
             try:
-                petowner= PetOwner.objects.get(user=request.user)
+                petowner= PetOwner.objects.get(author=request.user)
                 order_form = OrderForm(initial={
-                'full_name': petowner.user.get_full_name(), # not used later
-                'email': petowner.user.email, # not used later
+                'full_name': petowner.author.get_full_name(), # not used later
+                'email': petowner.author.email, # not used later
                 'phone': petowner.default_phone,
                 'country': petowner.default_country,
                 'postal_code': petowner.default_postal_code,
@@ -139,7 +139,7 @@ def checkout_success(request, order_number):
     order = get_object_or_404(Order, order_number=order_number)
 
     if request.user.is_authenticated:
-        profile = PetOwner.objects.get(user=request.user)
+        profile = PetOwner.objects.get(author=request.user)
         # Attach the user's profile to the order
         order.user_profile = profile
         order.save()

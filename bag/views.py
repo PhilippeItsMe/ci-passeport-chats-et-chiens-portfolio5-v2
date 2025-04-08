@@ -19,8 +19,7 @@ def add_to_bag(request, item_id):
     product = get_object_or_404(Product, pk=item_id)
     quantity = int(request.POST.get('quantity',
                                     1))  # Default quantity to 1 if not provided
-    redirect_url = request.POST.get('redirect_url',
-                                    'view_bag')  # Default fallback
+    redirect_url = request.POST.get('redirect_url') or reverse('bag:view_bag')
     bag = request.session.get('bag', {})
 
     item_id = str(item_id)  # Ensure consistency in session storage

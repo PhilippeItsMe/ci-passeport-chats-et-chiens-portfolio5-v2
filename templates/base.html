@@ -155,8 +155,8 @@
                         <form class="form" action="{% url 'bag:add_to_bag' item_id=1 %}" method="POST">
                             {% csrf_token %}
                             <input type="hidden" name="quantity" value="1">
-                            <!--Renvoi vers l'url active-->
-                            <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                            <input type="hidden" name="redirect_url"
+                                value="{% if 'checkout_success' not in request.path %}{{ request.path }}{% endif %}">
                             <button type="submit" class="orange-btn">
                                 🐈 Je commande mon passeport | -50% 🐕
                             </button>
