@@ -172,12 +172,13 @@ def checkout_success(request, order_number):
 
     return render(request, template, context)
 
+
 @login_required
 def order_history(request):
     """
-    View to render ma order history
+    View to render order history
     """
-    orders = Order.objects.filter(user=request.user_profile).order_by('-date')
+    orders = Order.objects.filter(user_profile=request.user).order_by('-date')
 
     return render(request, 'checkout/order_history.html', {
         'orders': orders,
