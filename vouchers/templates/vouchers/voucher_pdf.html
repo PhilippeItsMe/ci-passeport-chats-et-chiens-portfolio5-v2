@@ -1,26 +1,32 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 
 <head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
 <body>
     {% for voucher in vouchers %}
     <div class="voucher">
-        <div class="header">VOTRE BON</div>
+        <h3>VOTRE BON | PASSEPORT CHATS & CHIENS</h3>
+        <hr>
         <div class="details">
-            <p><strong>Code unique:</strong> {{ voucher.code }}</p>
-            <p><strong>Entreprise:</strong> {{ voucher.pet_business.firm }}</p>
-            <p><strong>Adresse:</strong> {{ voucher.pet_business.street }} {{ voucher.pet_business.number }},
+            <p><strong>Code unique :</strong> {{ voucher.code }}</p>
+            <p><strong>Entreprise :</strong> {{ voucher.pet_business.firm }}</p>
+            <p><strong>Adresse :</strong> {{ voucher.pet_business.street }} {{ voucher.pet_business.number }},
                 {{ voucher.pet_business.npa }} {{ voucher.pet_business.locality }}</p>
-            <p><strong>Utilisateur:</strong> {{ request.user.first_name }} {{ request.user.last_name }}</p>
-            <p class="discount"><strong>Réduction:</strong>
+            <p><strong>Utilisateur :</strong> {{ request.user.first_name }} {{ request.user.last_name }}</p>
+            <p class="discount"><strong>Réduction :</strong>
                 {% if voucher.discount_type == 'percentage' %}{{ voucher.discount_value }}%{% else %}CHF
                 {{ voucher.discount_value }}{% endif %}</p>
-            <p><strong>Achat minimum:</strong> CHF {{ voucher.minimum_purchase }}</p>
             <p><strong>Expire le:</strong> {{ voucher.date_expires|date:"d-m-Y H:i" }}</p>
         </div>
-        <div class="footer">Valable jusqu'à expiration (90 jours). Nominatif.</div>
+        <hr>
+        <div class="footer">Valable jusqu'à expiration (90 jours). Nominatif. Merci de bien indiquer lors de votre prise
+            de rendez-vous que vous venez avec un bon Passeport Chats & Chiens.Le rabais de chf 20.- nécessite un achat
+            de chf 100.- minimum.</div>
     </div>
     {% if not forloop.last %}
     <pagebreak />

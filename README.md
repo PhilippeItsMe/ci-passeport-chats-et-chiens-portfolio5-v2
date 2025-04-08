@@ -732,4 +732,4 @@ Special thanks
 - To my private coach : Hugo Carpentier
 - To my CI mentor : Spencer Barill
 - To the CI support team, specially Oisin and Rebecca
-- To the CI student: Sophie Tiger, for her exceptional, state-of-the-art README documentation.
+- To the CI student : Sophie Tiger, for her state-of-the-art README documentation.

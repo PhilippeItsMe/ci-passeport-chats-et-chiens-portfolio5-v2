@@ -38,7 +38,10 @@ def generate_single_voucher(request, business_id, discount_type):
     pdf_filename = f"v_{short_code}.pdf"
 
     # Render voucher HTML
-    html_string = render_to_string('vouchers/voucher_pdf.html', {'vouchers': [voucher]})
+    html_string = render_to_string('vouchers/voucher_pdf.html', {
+    'vouchers': [voucher],
+    'request': request  # Ajout ici
+    })
     if not html_string.strip():
         return HttpResponse("PDF generation failed: Empty HTML template.", status=500)
 
