@@ -1,9 +1,7 @@
+{% load static %}
+
 <div class="collapse navbar-collapse" id="main-nav">
         <ul class="navbar-nav w-auto mx-auto">
-
-                <li><a class="logo-font fw-bold nav-link text-black me-5" href="{% url 'home' %}">
-                                Home</a>
-                </li>
 
                 <!--Dropdown for Pet Types-->
                 <li class="nav-item dropdown">
@@ -107,6 +105,13 @@
                                 <li class="dropdown-item text-muted">Aucune localité</li>
                                 {% endfor %}
                         </ul>
+                </li>
+
+                <!--Reset button-->
+                <li>
+                        <a class="logo-font fw-bold nav-link me-5" href="{% url 'home' %}">
+                                <img class="reset-icon" src="{% static 'images/sync.svg' %}" alt="Home">
+                        </a>
                 </li>
         </ul>
 </div>

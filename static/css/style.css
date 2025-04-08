@@ -231,6 +231,12 @@ a:hover {
     height: 20px;
 }
 
+.reset-icon {
+    height: 24px;
+    width: 24px;
+    color: var(--darkgrey);
+}
+
 #herosection {
     background-color: var(--yellow);
     width: 100%;
