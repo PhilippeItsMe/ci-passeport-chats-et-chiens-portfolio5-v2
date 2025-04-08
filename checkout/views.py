@@ -141,7 +141,7 @@ def checkout_success(request, order_number):
     if request.user.is_authenticated:
         profile = PetOwner.objects.get(author=request.user)
         # Attach the user's profile to the order
-        order.user_profile = profile
+        order.user_profile = profile.author
         order.save()
 
         # Save the user's info
