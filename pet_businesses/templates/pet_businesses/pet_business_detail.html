@@ -109,9 +109,6 @@
                 </div>
             </div>
 
-
-
-
             <div class="col-md-6">
 
                 <!-- Picture -->
@@ -135,26 +132,16 @@
 
                         <!-- Likes count -->
 
-                        <p class="col text-center"><img class="picto" src="{% static 'images/like.svg' %}" alt="Like">:
-                            {{ pet_business_detail.likes.count }}</p>
-
-                        <!-- Like & Unlike Button -->
-
-                        {% if user|in_group:"Pet Owners" %}
-                        <form class="col d-flex justify-content-start"
-                            action="{% url 'like_post' pet_business_detail.id %}" method="POST">
-                            {% csrf_token %}
-                            {% if user.is_authenticated %}
-                            {% if has_liked %}
-                            <button type="submit" class="orange-btn">Unlike</button>
-                            {% else %}
-                            <button type="submit" class="yellow-btn">Like</button>
-                            {% endif %}
-                            {% else %}
-                            <p>Log in to like it.</p>
-                            {% endif %}
-                        </form>
-                        {% endif %}
+                        <p class="col text-center">
+                            <span id="like-button" data-id="{{ pet_business_detail.id }}">
+                                {% if has_liked %}
+                                <img class="picto" src="{% static 'images/likeorange.webp' %}" alt="Liked">
+                                {% else %}
+                                <img class="picto" src="{% static 'images/like.svg' %}" alt="Like">
+                                {% endif %}
+                            </span>
+                            <span id="like-count">{{ pet_business_detail.likes.count }}</span>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -236,5 +223,39 @@
 </div>
 
 <script src="{% static 'js/comments.js' %}"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const likeButton = document.getElementById("like-button");
+        const likeImg = likeButton.querySelector("img");
+
+        if (likeButton) {
+            likeButton.addEventListener("click", function () {
+                const petBusinessId = likeButton.getAttribute("data-id");
+
+                fetch("{% url 'ajax_like_toggle' %}", {
+                        method: "POST",
+                        headers: {
+                            "X-CSRFToken": "{{ csrf_token }}",
+                            "Content-Type": "application/x-www-form-urlencoded",
+                        },
+                        body: `pet_business_id=${petBusinessId}`
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        const likeCount = document.getElementById("like-count");
+                        likeCount.textContent = data.like_count;
+
+                        if (data.liked) {
+                            likeButton.classList.add("liked");
+                            likeImg.src = "{% static 'images/likeorange.webp' %}";
+                        } else {
+                            likeButton.classList.remove("liked");
+                            likeImg.src = "{% static 'images/like.svg' %}";
+                        }
+                    });
+            });
+        }
+    });
+</script>
 
 {% endblock content %}

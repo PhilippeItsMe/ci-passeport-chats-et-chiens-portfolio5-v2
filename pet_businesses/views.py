@@ -1,6 +1,6 @@
 from django.contrib.auth.models import Group
 from django.shortcuts import render, get_object_or_404, reverse, redirect
-# from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
 from django.contrib import messages
 from django.http import HttpResponseRedirect
@@ -10,6 +10,8 @@ from .forms import CustomSignupForm, PetBusinessForm
 from pet_businesses.utils import group_required
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
 
 
 #------------  Authentificaiton view ------------#
@@ -291,14 +293,36 @@ def comment_delete(request, slug, comment_id):
 
 #------------  Likes views ------------#
 
+# @group_required("Pet Owners")
+# def like_post(request, pet_business_id):
+#     """
+#     View to like pet businesses.
+#     """
+#     pet_business = get_object_or_404(PetBusiness, id=pet_business_id)
+#     like, created = Like.objects.get_or_create(pet_business=pet_business,
+#                                                author=request.user)
+#     if not created:
+#         like.delete()
+#     return redirect('pet_business_detail', slug=pet_business.slug)
+
+@require_POST
 @group_required("Pet Owners")
-def like_post(request, pet_business_id):
-    """
-    View to like pet businesses.
-    """
+def ajax_like_toggle(request):
+    pet_business_id = request.POST.get('pet_business_id')
     pet_business = get_object_or_404(PetBusiness, id=pet_business_id)
-    like, created = Like.objects.get_or_create(pet_business=pet_business,
-                                               author=request.user)
+
+    like, created = Like.objects.get_or_create(
+        pet_business=pet_business,
+        author=request.user
+    )
+
     if not created:
         like.delete()
-    return redirect('pet_business_detail', slug=pet_business.slug)
+        liked = False
+    else:
+        liked = True
+
+    return JsonResponse({
+        'liked': liked,
+        'like_count': pet_business.likes.count()
+    })
