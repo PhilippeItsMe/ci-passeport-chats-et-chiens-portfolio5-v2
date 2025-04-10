@@ -9,7 +9,9 @@ from pet_owners.models import PetOwner
 
 import json
 import time
+import stripe
 
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 class StripeWH_Handler:
     """Handle Stripe webhooks"""
@@ -49,15 +51,16 @@ class StripeWH_Handler:
         pid = intent.id
         bag = intent.metadata.bag
         save_info = intent.metadata.save_info
-
-        billing_details = intent.charges.data[0].billing_details
-        shipping_details = intent.shipping
-        total_ttc = round(intent.charges.data[0].amount / 100, 2)
+        print ('debug intent:', intent)
+        charge = stripe.Charge.retrieve(intent.latest_charge)
+        print ('debug charge:', charge)
+        billing_details = charge.billing_details
+        total_ttc = round(charge.amount / 100, 2)
 
         # Clean data in the shipping details
-        for field, value in shipping_details.address.items():
+        for field, value in billing_details.address.items():
             if value == "":
-                shipping_details.address[field] = None
+                billing_details.address[field] = None
 
         # Update profile information if save_info was checked
         profile = None
@@ -65,13 +68,11 @@ class StripeWH_Handler:
         if username != 'AnonymousUser':
             profile = PetOwner.objects.get(user__username=username)
             if save_info:
-                profile.default_phone_number = shipping_details.phone
-                profile.default_country = shipping_details.address.country
-                profile.default_postcode = shipping_details.address.postal_code
-                profile.default_town_or_city = shipping_details.address.city
-                profile.default_street_address1 = shipping_details.address.line1
-                profile.default_street_address2 = shipping_details.address.line2
-                profile.default_county = shipping_details.address.state
+                profile.default_street = billing_details.address.line1
+                profile.default_postal_code = billing_details.address.postal_code
+                profile.default_city = billing_details.address.city
+                profile.default_country = billing_details.address.country
+                profile.default_phone_number = billing_details.phone
                 profile.save()
 
         order_exists = False
@@ -79,15 +80,13 @@ class StripeWH_Handler:
         while attempt <= 5:
             try:
                 order = Order.objects.get(
-                    full_name__iexact=shipping_details.name,
+                    full_name__iexact=billing_details.name,
+                    street__iexact=billing_details.address.line1,
+                    postal_code__iexact=billing_details.address.postal_code,
+                    city__iexact=billing_details.address.city,
+                    country__iexact=billing_details.address.country,
                     email__iexact=billing_details.email,
-                    phone_number__iexact=shipping_details.phone,
-                    country__iexact=shipping_details.address.country,
-                    postcode__iexact=shipping_details.address.postal_code,
-                    town_or_city__iexact=shipping_details.address.city,
-                    street_address1__iexact=shipping_details.address.line1,
-                    street_address2__iexact=shipping_details.address.line2,
-                    county__iexact=shipping_details.address.state,
+                    phone__iexact=billing_details.phone,
                     total_ttc=total_ttc,
                     original_bag=bag,
                     stripe_pid=pid,
@@ -106,16 +105,14 @@ class StripeWH_Handler:
             order = None
             try:
                 order = Order.objects.create(
-                    full_name=shipping_details.name,
                     user_profile=profile,
+                    full_name=billing_details.name,
+                    street_address1=billing_details.address.line1,
+                    postal_code=billing_details.address.postal_code,
+                    city=billing_details.address.city,
+                    country=billing_details.address.country,
                     email=billing_details.email,
-                    phone_number=shipping_details.phone,
-                    country=shipping_details.address.country,
-                    postcode=shipping_details.address.postal_code,
-                    town_or_city=shipping_details.address.city,
-                    street_address1=shipping_details.address.line1,
-                    street_address2=shipping_details.address.line2,
-                    county=shipping_details.address.state,
+                    phone_number=billing_details.phone,
                     total_ttc=total_ttc,
                     original_bag=bag,
                     stripe_pid=pid,
