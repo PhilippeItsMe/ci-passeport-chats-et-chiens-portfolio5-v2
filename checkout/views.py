@@ -137,27 +137,32 @@ def checkout_success(request, order_number):
     order = get_object_or_404(Order, order_number=order_number)
 
     if request.user.is_authenticated:
-        profile = PetOwner.objects.get(author=request.user)
-        # Attach the user's profile to the order
-        order.user_profile = profile.author
-        order.save()
+        profile = PetOwner.objects.filter(author=request.user).first()
 
-        # Save the user's info
-        if save_info:
-            profile_data = {
-                'default_phone': order.phone,
-                'default_country': order.country,
-                'default_postal_code': order.postal_code,
-                'default_city': order.city,
-                'default_street': order.street,
-            }
-            user_profile_form = PetOwnerForm(profile_data, instance=profile)
-            if user_profile_form.is_valid():
-                user_profile_form.save()
+        if profile:
+            # Attach the user's profile to the order
+            order.user_profile = profile.author
+            order.save()
+
+            # Save the user's info
+            if save_info:
+                profile_data = {
+                    'default_phone': order.phone,
+                    'default_country': order.country,
+                    'default_postal_code': order.postal_code,
+                    'default_city': order.city,
+                    'default_street': order.street,
+                }
+                user_profile_form = PetOwnerForm(profile_data, instance=profile)
+                if user_profile_form.is_valid():
+                    user_profile_form.save()
+        else:
+            # Optionally, inform the user they should create their profile
+            messages.info(request, "Merci de compléter votre profil pour sauvegarder vos informations de commande.")
 
     messages.success(request, f'Votre commande est bien passée! \
         Votre numéro de commande est {order_number}. Un email de \
-        confirmation vas être envoyé à {order.email}.')
+        confirmation va être envoyé à {order.email}.')
 
     if 'bag' in request.session:
         del request.session['bag']

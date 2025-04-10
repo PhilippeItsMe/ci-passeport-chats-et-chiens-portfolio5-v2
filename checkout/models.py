@@ -2,9 +2,10 @@ import uuid
 from django.db import models
 from django.db.models import Sum
 from django.contrib.auth.models import User
-
 from products.models import Product
-
+from django.utils.crypto import get_random_string
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 class Order(models.Model):
     """
@@ -98,3 +99,38 @@ class OrderLineItem(models.Model):
 
     def __str__(self):
         return f"{self.product.name} on order {self.order.order_number}"
+
+
+class ActivationCode(models.Model):
+    order_line_item = models.ForeignKey(
+        'OrderLineItem',
+        on_delete=models.CASCADE,
+        related_name='orderlineitem_activation_code'
+    )
+    activation_code = models.CharField(
+        max_length=10,
+        unique=True,
+        editable=False
+    )
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.activation_code} for {self.order_line_item}"
+
+    @staticmethod
+    def generate_unique_activation_code():
+        """Generate a unique 10-digit numeric activation code."""
+        while True:
+            code = get_random_string(length=10, allowed_chars='0123456789')
+            if not ActivationCode.objects.filter(activation_code=code).exists():
+                return code
+
+
+@receiver(post_save, sender=OrderLineItem)
+def create_activation_codes(sender, instance, created, **kwargs):
+    if created:
+        for _ in range(instance.quantity):
+            ActivationCode.objects.create(
+                order_line_item=instance,
+                activation_code=ActivationCode.generate_unique_activation_code()
+            )
