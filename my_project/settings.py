@@ -179,9 +179,9 @@ STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
 
 #------------ Email -------------- #
 
-if 'DEVELOPMENT' in os.environ:
+if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-    DEFAULT_FROM_EMAIL = 'boutiqueado@example.com'
+    DEFAULT_FROM_EMAIL = 'contact@passeport-chats-et-chiens.ch'
 
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
