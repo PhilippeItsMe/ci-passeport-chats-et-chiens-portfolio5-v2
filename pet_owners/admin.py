@@ -8,7 +8,7 @@ class PetOwnerAdmin(admin.ModelAdmin):
     To display pet owners' personal info in admin.
     """
     list_display = (
-        'author', 'default_street', 'default_street_number',
+        'author', 'default_street',
         'default_postal_code', 'default_city', 'default_country',
         'default_phone', 'default_newsletter',
         'default_last_modified', 'default_date_created'

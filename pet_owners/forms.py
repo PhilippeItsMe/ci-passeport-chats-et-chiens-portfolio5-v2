@@ -11,7 +11,6 @@ class PetOwnerForm(forms.ModelForm):
         model = PetOwner
         fields = [
             'default_street',
-            'default_street_number',
             'default_postal_code',
             'default_city',
             'default_country',
@@ -20,7 +19,6 @@ class PetOwnerForm(forms.ModelForm):
         ]
         widgets = {
             'default_street': forms.TextInput(attrs={'class': 'form-control'}),
-            'default_street_number': forms.TextInput(attrs={'class': 'form-control'}),
             'default_postal_code': forms.TextInput(attrs={'class': 'form-control'}),
             'default_city': forms.TextInput(attrs={'class': 'form-control'}),
             'default_country': forms.TextInput(attrs={'class': 'form-control'}),

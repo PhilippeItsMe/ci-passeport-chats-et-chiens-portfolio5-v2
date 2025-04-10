@@ -47,7 +47,6 @@ def checkout(request):
             'postal_code': request.POST['postal_code'],
             'city': request.POST['city'],
             'street': request.POST['street'],
-            'street_number': request.POST['street_number'],
         }
         order_form = OrderForm(form_data)
         if order_form.is_valid():
@@ -114,7 +113,6 @@ def checkout(request):
                 'postal_code': petowner.default_postal_code,
                 'city': petowner.default_city,
                 'street': petowner.default_street,
-                'street_number': petowner.default_street_number,
                 })
             except PetOwner.DoesNotExist:
                 order_form = OrderForm()
@@ -152,7 +150,6 @@ def checkout_success(request, order_number):
                 'default_postal_code': order.postal_code,
                 'default_city': order.city,
                 'default_street': order.street,
-                'default_street_number': order.street_number,
             }
             user_profile_form = PetOwnerForm(profile_data, instance=profile)
             if user_profile_form.is_valid():

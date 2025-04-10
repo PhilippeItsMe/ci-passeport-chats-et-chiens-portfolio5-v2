@@ -15,12 +15,10 @@ class PetOwner(models.Model):
         related_name="pet_owners"
     )
     default_street=models.CharField(max_length=80, null=False, blank=False)
-    default_street_number=models.CharField(max_length=10, null=False, blank=False)
     default_postal_code=models.CharField(max_length=10, null=False, blank=False)
     default_city = models.CharField(max_length=40, null=False, blank=False)
     default_country = models.CharField(max_length=80, null=True, blank=True, default="Suisse")
     default_phone = models.CharField(max_length=16, blank=True, null=True)
-    
     default_newsletter = models.BooleanField(default=False)
     default_date_created = models.DateTimeField(auto_now_add=True)
     default_last_modified = models.DateTimeField(auto_now=True)

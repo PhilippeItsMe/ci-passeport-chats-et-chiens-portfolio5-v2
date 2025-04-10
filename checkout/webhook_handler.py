@@ -72,7 +72,7 @@ class StripeWH_Handler:
                 profile.default_postal_code = billing_details.address.postal_code
                 profile.default_city = billing_details.address.city
                 profile.default_country = billing_details.address.country
-                profile.default_phone_number = billing_details.phone
+                profile.default_phone = billing_details.phone
                 profile.save()
 
         order_exists = False
@@ -107,12 +107,12 @@ class StripeWH_Handler:
                 order = Order.objects.create(
                     user_profile=profile,
                     full_name=billing_details.name,
-                    street_address1=billing_details.address.line1,
+                    street=billing_details.address.line1,
                     postal_code=billing_details.address.postal_code,
                     city=billing_details.address.city,
                     country=billing_details.address.country,
                     email=billing_details.email,
-                    phone_number=billing_details.phone,
+                    phone=billing_details.phone,
                     total_ttc=total_ttc,
                     original_bag=bag,
                     stripe_pid=pid,
