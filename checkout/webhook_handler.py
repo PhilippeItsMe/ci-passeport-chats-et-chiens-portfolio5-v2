@@ -51,9 +51,9 @@ class StripeWH_Handler:
         pid = intent.id
         bag = intent.metadata.bag
         save_info = intent.metadata.save_info
-        print ('debug intent:', intent)
+        # print ('debug intent:', intent)
         charge = stripe.Charge.retrieve(intent.latest_charge)
-        print ('debug charge:', charge)
+        # print ('debug charge:', charge)
         billing_details = charge.billing_details
         total_ttc = round(charge.amount / 100, 2)
 
