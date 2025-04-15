@@ -87,6 +87,7 @@
                                 {% elif user|in_group:"Pet Owners" %}
                                 <a class="dropdown-item" href="{% url 'pet_list' %}">Mes compagnons</a>
                                 <a class="dropdown-item" href="{% url 'order_history' %}">Mes achats</a>
+                                <a class="dropdown-item" href="{% url 'activate_code' %}">Mon code d'activation</a>
                                 <a class="dropdown-item" href="{% url 'pet_owner_form' %}">Mon profil</a>
                                 {% endif %}
                                 <a class="dropdown-item" href="{% url 'account_logout' %}">Se déconnecter</a>

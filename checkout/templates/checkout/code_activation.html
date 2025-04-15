@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <h3>Je souhaite activer mon compte.</h3>
+    <p>En activant mon compte à l'aide du code reçu par e-mail lors de l'achat de mon passeport, j'aurai accès à mes
+        réductions. Des boutons permettant de télécharger les bons apparaîtront alors sous la description des
+        partenaires de la carte.</p>
+
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+
+    {% if active_code %}
+    <div class="card p-3 mb-4">
+        <h5>Votre code actif</h5>
+        <p><strong>Code :</strong> {{ active_code.activation_code }}</p>
+        <p><strong>Date d'activation :</strong> {{ active_code.activation_date|date:"d.m.Y H:i" }}</p>
+        <p><strong>Date d'expiration :</strong> {{ expiration_date|date:"d.m.Y H:i" }}</p>
+    </div>
+    {% else %}
+    <form method="POST" class="form-inline">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="activation_code">Code d'activation :</label>
+            <input type="text" id="activation_code" name="activation_code" maxlength="10"
+                class="form-control px-4 mt-2 mb-2" required>
+        </div>
+        <button type="submit" class="orange-btn">Activer</button>
+    </form>
+    {% endif %}
+</div>
+
+{% endblock %}

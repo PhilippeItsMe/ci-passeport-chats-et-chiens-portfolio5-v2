@@ -3,13 +3,14 @@ from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-
 from .forms import OrderForm
-from .models import Order, OrderLineItem
+from .models import Order, OrderLineItem, ActivationCode
 from products.models import Product
 from pet_owners.forms import PetOwnerForm
 from pet_owners.models import PetOwner
 from bag.contexts import bag_contents
+from django.utils import timezone
+from datetime import timedelta
 
 import stripe
 import json
@@ -185,3 +186,37 @@ def order_history(request):
     return render(request, 'checkout/order_history.html', {
         'orders': orders,
     })
+
+def activation_code(request):
+    user = request.user
+    activation_code_input = request.POST.get('activation_code')
+    context = {}
+
+    # Vérifier si l'utilisateur a déjà un code actif non expiré
+    user_active_code = ActivationCode.objects.filter(
+        activated_by=user,
+        is_active=True,
+        activation_date__isnull=False
+    ).order_by('-activation_date').first()
+
+    if user_active_code and not user_active_code.is_expired():
+        context['active_code'] = user_active_code
+        context['expiration_date'] = user_active_code.activation_date + timedelta(days=365)
+
+    if request.method == 'POST' and activation_code_input:
+        try:
+            code = ActivationCode.objects.get(activation_code=activation_code_input)
+        except ActivationCode.DoesNotExist:
+            messages.error(request, "Ce code n'existe pas.")
+            return redirect('activate_code')
+
+        if code.is_active:
+            messages.error(request, "Ce code est déjà activé.")
+        elif code.is_expired():
+            messages.error(request, "Ce code est expiré.")
+        else:
+            code.activate(user)
+            messages.success(request, "Code activé avec succès !")
+            return redirect('activate_code')
+
+    return render(request, 'checkout/code_activation.html', context)
