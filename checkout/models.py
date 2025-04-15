@@ -6,6 +6,11 @@ from products.models import Product
 from django.utils.crypto import get_random_string
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.contrib.auth import get_user_model
+from django.utils import timezone
+from datetime import timedelta
+
+User = get_user_model()
 
 class Order(models.Model):
     """
@@ -134,3 +139,50 @@ def create_activation_codes(sender, instance, created, **kwargs):
                 order_line_item=instance,
                 activation_code=ActivationCode.generate_unique_activation_code()
             )
+class ActivationCode(models.Model):
+    order_line_item = models.ForeignKey(
+        'OrderLineItem',
+        on_delete=models.CASCADE,
+        related_name='orderlineitem_activation_code'
+    )
+    activation_code = models.CharField(
+        max_length=10,
+        unique=True,
+        editable=False
+    )
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    activation_date = models.DateTimeField(null=True, blank=True)
+    is_active = models.BooleanField(default=False)
+    activated_by = models.ForeignKey(
+        User,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='activated_codes'
+    )
+
+    def __str__(self):
+        return f"{self.activation_code} for {self.order_line_item}"
+
+    def activate(self, user):
+        """Active le code pour 365 jours à partir d'aujourd'hui."""
+        if not self.is_active:
+            self.activation_date = timezone.now()
+            self.is_active = True
+            self.activated_by = user
+            self.save()
+
+    def is_expired(self):
+        """Retourne True si le code est activé et expiré."""
+        if self.is_active and self.activation_date:
+            return timezone.now() > self.activation_date + timedelta(days=365)
+        return False
+
+    @staticmethod
+    def generate_unique_activation_code():
+        """Generate a unique 10-digit numeric activation code."""
+        while True:
+            code = get_random_string(length=10, allowed_chars='0123456789')
+            if not ActivationCode.objects.filter(activation_code=code).exists():
+                return code

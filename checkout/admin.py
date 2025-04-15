@@ -37,6 +37,23 @@ class OrderAdmin(admin.ModelAdmin):
 
     @admin.register(ActivationCode)
     class ActivationCodeAdmin(admin.ModelAdmin):
-        list_display = ('activation_code', 'order_line_item', 'date_created')
-        search_fields = ('activation_code',)
-        list_filter = ('date_created',)
+        list_display = (
+            'activation_code',
+            'order_line_item',
+            'date_created',
+            'activation_date',
+            'is_active',
+            'activated_by',
+        )
+        search_fields = (
+            'activation_code',
+            'order_line_item__order__order_number',
+            'activated_by__email',
+        )
+        list_filter = (
+            'date_created',
+            'activation_date',
+            'is_active',
+        )
+        autocomplete_fields = ('activated_by',)
+        
