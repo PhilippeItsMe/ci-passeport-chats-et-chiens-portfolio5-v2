@@ -5,15 +5,9 @@
 
 <div class="container mt-5">
     <h3>Je souhaite activer mon compte.</h3>
-    <p>En activant mon compte à l'aide du code reçu par e-mail lors de l'achat de mon passeport, j'aurai accès à mes
-        réductions. Des boutons permettant de télécharger les bons apparaîtront alors sous la description des
+    <p>En activant mon compte à l'aide du code reçu par e-mail lors de l'achat de mon passeport, j'accéderai à mes
+        réductions. Des boutons permettant de télécharger ces bons apparaîtront dans le profil détaillé des
         partenaires de la carte.</p>
-
-    {% if messages %}
-    {% for message in messages %}
-    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-    {% endfor %}
-    {% endif %}
 
     {% if active_code %}
     <div class="card p-3 mb-4">
