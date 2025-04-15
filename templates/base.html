@@ -24,6 +24,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!---------- CSS ressources ---------->
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -32,9 +33,12 @@
     {% endblock %}
 
     <!---------- Fontawesome ---------->
+
     <script src="https://kit.fontawesome.com/5b37147010.js" crossorigin="anonymous"></script>
 
+
     <!---------- Stripe ---------->
+
     <script src="https://js.stripe.com/v3/"></script>
 
 </head>
@@ -45,10 +49,13 @@
 
     <nav class="navbar navbar-expand-lg navbar-light w-100">
         <div class="container-fluid">
+
             <!-- First Menu Row -->
+
             <div id="topnav" class="row pt-lg-2 d-none d-lg-flex align-items-center w-100">
 
                 <!-- Logo -->
+
                 <div class="col-lg-4 text-center text-lg-start">
                     <a class="navbar-brand" href="{% url 'home' %}">
                         <img class="logo" src="{% static 'images/logo.webp' %}" alt="logo">
@@ -56,6 +63,7 @@
                 </div>
 
                 <!-- Search bar -->
+
                 <div class="col-lg-4">
                     <form method="GET" action="{% url 'home' %}">
                         <div class="input-group w-100">
@@ -70,9 +78,12 @@
                 </div>
 
                 <!-- Account & Basket -->
+
                 <div class="col-lg-4">
                     <ul class="list-inline d-flex justify-content-end align-items-center mb-0">
+
                         <!-- Account -->
+
                         <li class="list-inline-item dropdown">
                             <a class="text-black nav-link" href="#" id="user-options" data-bs-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
@@ -100,6 +111,7 @@
                         </li>
 
                         <!-- Shopping Basket -->
+
                         <li class="list-inline-item">
                             <a class="nav-link" href="{% url 'bag:view_bag' %}">
                                 <div class="text-center">
@@ -173,7 +185,7 @@
     <!---------- Newsletter registration pop-up ---------->
 
     <script src="https://forms.app/cdn/embed.js" type="text/javascript" async defer
-        onload="new formsapp('67fe45941b6215000202d7b0', 'popup', {'overlay':'rgba(45,45,45,0.5)','width':'800px','height':'300px','autoOpen':{'action':'onpageload'},'openingAnimation':{'entrance':'animate__fadeIn','exit':'animate__fadeOut'}}, 'https://qj3fc6wz.forms.app');">
+        onload="new formsapp('67fe45941b6215000202d7b0', 'popover', {'button':{'color':'#ff9e24'},'align':'left'}, 'https://qj3fc6wz.forms.app');">
     </script>
 
     <!---------- Django Message ---------->

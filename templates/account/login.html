@@ -26,6 +26,7 @@
         {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
         {% endif %}
+        <p><a class="link" href="{% url 'password_reset' %}">Mot de passe oublié ?</a></p>
         <button class="submit-btn" type="submit">{% trans "Se connecter &raquo" %}</button>
       </form>
     </div>
