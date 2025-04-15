@@ -31,20 +31,27 @@
                 <!-- Vouchers Buttons -->
 
                 {% if user.is_authenticated and "Pet Owners" in user.groups.all.0.name %}
-                <h3 class="mt-3">Télécharchez vos bons !</h3>
+                {% if has_active_code %}
+                <h3 class="mt-3">Téléchargez vos bons !</h3>
                 <div class="d-flex gap-2">
                     <form method="post"
                         action="{% url 'vouchers:generate_single_voucher' pet_business_detail.id 'percentage' %}">
                         {% csrf_token %}
                         <button type="submit" class="orange-btn">Bon | - 50%</button>
                     </form>
-
                     <form method="post"
                         action="{% url 'vouchers:generate_single_voucher' pet_business_detail.id 'fixed' %}">
                         {% csrf_token %}
                         <button type="submit" class="orange-btn">Bon | - 20 CHF</button>
                     </form>
                 </div>
+                {% else %}
+                <div class="alert alert-warning mt-3" role="alert">
+                    Pour accéder à vos bons, connectez-vous avec un compte propriétaire d'animal (à sélectionner lors de
+                    l'inscription), puis achetez un code d'activation et saisissez-le dans la section <strong>Mon compte
+                        d'activation</strong> de votre profil.
+                </div>
+                {% endif %}
                 {% endif %}
 
                 <hr class="orange-hr">

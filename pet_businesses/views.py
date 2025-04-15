@@ -1,6 +1,5 @@
 from django.contrib.auth.models import Group
 from django.shortcuts import render, get_object_or_404, reverse, redirect
-from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
 from django.contrib import messages
 from django.http import HttpResponseRedirect
@@ -12,6 +11,9 @@ from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
+from checkout.models import ActivationCode
+from django.utils import timezone
+from datetime import timedelta
 
 
 #------------  Authentificaiton view ------------#
@@ -149,6 +151,16 @@ def pet_business_detail(request, slug):
     else:
         comment_form = CommentForm()
 
+    has_active_code = False
+    if request.user.is_authenticated:
+        has_active_code = ActivationCode.objects.filter(
+            activated_by=request.user,
+            is_active=True,
+            activation_date__isnull=False
+        ).exclude(
+            activation_date__lt=timezone.now() - timedelta(days=365)
+        ).exists()
+
     return render(
         request,
         "pet_businesses/pet_business_detail.html",
@@ -159,8 +171,9 @@ def pet_business_detail(request, slug):
             "comment_count": comment_count,
             "likes_count": likes_count,
             "has_liked": has_liked,
+            "has_active_code": has_active_code,
         },
-    )
+        )
 
 
 @group_required("Business Owners")
@@ -292,18 +305,6 @@ def comment_delete(request, slug, comment_id):
 
 
 #------------  Likes views ------------#
-
-# @group_required("Pet Owners")
-# def like_post(request, pet_business_id):
-#     """
-#     View to like pet businesses.
-#     """
-#     pet_business = get_object_or_404(PetBusiness, id=pet_business_id)
-#     like, created = Like.objects.get_or_create(pet_business=pet_business,
-#                                                author=request.user)
-#     if not created:
-#         like.delete()
-#     return redirect('pet_business_detail', slug=pet_business.slug)
 
 @require_POST
 @group_required("Pet Owners")
