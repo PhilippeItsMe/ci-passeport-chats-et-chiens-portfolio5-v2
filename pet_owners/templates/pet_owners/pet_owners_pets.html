@@ -8,7 +8,7 @@
     <!---------- Existing list of Pets ---------->
     <h3 class="mb-5">Mes meilleurs amis</h3>
 
-    {% if pet_owner and pet_owner.pets.all %}
+    {% if pets %}
     <table class="table">
         <thead>
             <tr>
@@ -20,7 +20,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for pet in pet_owner.pets.all %}
+            {% for pet in pets %}
             <tr>
                 <td>{{ pet.name }}</td>
                 <td>{{ pet.birthday|date:"d/m/Y" }}</td>
@@ -34,8 +34,6 @@
                 </td>
                 <td>
                     <a href="{% url 'pet_edit' pet.id %}" class="yellow-btn">Modifier</a>
-
-                    <!-- Delete button triggering confirmation modal -->
                     <button type="button" class="orange-btn" data-bs-toggle="modal" data-bs-target="#deleteModal"
                         data-href="{% url 'pet_delete' pet.id %}">
                         Supprimer

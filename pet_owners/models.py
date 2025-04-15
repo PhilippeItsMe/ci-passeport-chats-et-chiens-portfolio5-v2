@@ -35,10 +35,10 @@ class Pet(models.Model):
     """
     Model representing the pets owned by pet owners.
     """
-    pet_owner = models.ForeignKey(
-        PetOwner,
+    author = models.ForeignKey(
+        User,
         on_delete=models.CASCADE,
-        related_name="pets"
+        related_name="pet_owners_pets"
     )
     name = models.CharField(max_length=150)
     birthday = models.DateField(default=timezone.now)

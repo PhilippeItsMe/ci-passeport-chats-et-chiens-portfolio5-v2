@@ -30,7 +30,6 @@ class PetAdmin(admin.ModelAdmin):
     """
     To display pets in admin.
     """
-    list_display = ('name', 'pet_owner', 'pet_type', 'birthday',
+    list_display = ('name', 'author', 'pet_type', 'birthday',
                     'last_modified', 'date_created')
-    search_fields = ['name', 'pet_owner__author__username']
     list_filter = ('pet_type', 'date_created', 'last_modified')

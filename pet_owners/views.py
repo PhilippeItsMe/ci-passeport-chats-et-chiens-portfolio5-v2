@@ -36,33 +36,24 @@ def pet_owner_form(request):
 @group_required("Pet Owners")
 def pet_list(request):
     """
-    View to list all pets of the logged-in PetOwner
+    View to list all pets of the logged-in user (author).
     """
-    pet_owner = get_object_or_404(PetOwner, author=request.user)
-    pets = Pet.objects.filter(pet_owner=pet_owner)
-
-    print("Logged in user:", request.user)
-    print("Is authenticated:", request.user.is_authenticated)
+    pets = Pet.objects.filter(author=request.user)
 
     return render(request, 'pet_owners/pet_owners_pets.html', {
-        'pets': pets,
-        'pet_owner': pet_owner
+        'pets': pets
     })
 
 
 @group_required("Pet Owners")
 def pet_create(request):
-    """
-    View to create a new pet
-    """
     pet_owner = get_object_or_404(PetOwner, author=request.user)
 
     if request.method == "POST":
         form = PetForm(request.POST, request.FILES)
         if form.is_valid():
             pet = form.save(commit=False)
-            pet.pet_owner = pet_owner
-            print("DATA >>>", form.cleaned_data)
+            pet.author = request.user
             pet.save()
             messages.success(request, f"L'animal {pet.name} a été ajouté avec succès.")
             return redirect('pet_list')
@@ -77,13 +68,12 @@ def pet_create(request):
     })
 
 
-
 @group_required("Pet Owners")
 def pet_edit(request, pet_id):
     """
     View to update a pet
     """
-    pet = get_object_or_404(Pet, id=pet_id, pet_owner__author=request.user)
+    pet = get_object_or_404(Pet, id=pet_id, author=request.user)
 
     if request.method == "POST":
         form = PetForm(request.POST, request.FILES, instance=pet)
@@ -99,9 +89,7 @@ def pet_edit(request, pet_id):
     return render(request, 'pet_owners/pet_form.html', {
         'form': form,
         'pet': pet,
-        'pet_owner': pet.pet_owner,
     })
-
 
 
 @group_required("Pet Owners")
@@ -109,7 +97,7 @@ def pet_delete(request, pet_id):
     """
     View to delete a pet
     """
-    pet = get_object_or_404(Pet, id=pet_id, pet_owner__author=request.user)
+    pet = get_object_or_404(Pet, id=pet_id, author=request.user)
 
     if request.method == "POST":
         pet.delete()
