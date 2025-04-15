@@ -41,6 +41,9 @@ def pet_list(request):
     pet_owner = get_object_or_404(PetOwner, author=request.user)
     pets = Pet.objects.filter(pet_owner=pet_owner)
 
+    print("Logged in user:", request.user)
+    print("Is authenticated:", request.user.is_authenticated)
+
     return render(request, 'pet_owners/pet_owners_pets.html', {
         'pets': pets,
         'pet_owner': pet_owner
