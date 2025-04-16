@@ -2,23 +2,22 @@ Bonjour {{ order.full_name }} !
 
 Nous vous confirmons votre achat chez Passeport Chats & Chiens. 
 
-Vous trouverez ci-dessous les détails de votre commande : 
+Vous trouverez ci-dessous le détail de votre commande : 
 
 Numéro de commande : {{ order.order_number }}
 Date de la commande : {{ order.date }}
-Produit : {{ order.product }}
-Quantité : {{ order.quantity }}
-Montant de la commande : ${{ order.order_total }}
+Produit : Passeport Chats & Chiens 1 an
+Quantité : {{ total_quantity }}
+Montant de la commande : CHF {{ order.total_ttc }}
 
 Votre ou vos codes d'activation : 
-
 {% for code in activation_codes %}
 - {{ code.activation_code }}
 {% endfor %}
 
 Votre code d'activation deva être saisi dans votre profil utilisateur que vous pourrez créer sans autre sur notre site.
 
-Si vous avez des questions, n'hésitez pas à nous contacter à l'adresse suivante : info@passeport-chats-et-chiens.ch.
+Vous des questions ? N'hésitez pas à nous contacter à l'adresse suivante : contact@passeport-chats-et-chiens.ch.
 
 Merci pour votre confiance !
 

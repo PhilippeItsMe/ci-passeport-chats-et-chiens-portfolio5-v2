@@ -24,13 +24,17 @@ class StripeWH_Handler:
         activation_codes = ActivationCode.objects.filter(
         order_line_item__order=order)
 
+        original_bag = json.loads(order.original_bag)
+        total_quantity = sum(original_bag.values())
+
         subject = render_to_string(
             'checkout/confirmation_emails/confirmation_email_subject.txt',
             {'order': order})
         
         body = render_to_string(
             'checkout/confirmation_emails/confirmation_email_body.txt',
-            {'order': order, 
+            {'order': order,
+             'total_quantity': total_quantity,
              'activation_codes': activation_codes,
              'contact_email': settings.DEFAULT_FROM_EMAIL})
         
