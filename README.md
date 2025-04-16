@@ -389,8 +389,13 @@ The following libraries and resources were used in this project to ensure smooth
 ### Debugging
 
 <strong>Bug 1</strong><br>
-Issue : The step of the email confirmation were not well designed.<br>
-Solution : Analysing step by step the process to fix the design.<br>
+Issue : Layout issue on the checkout_success order summary page and total ttc not rendering.<br>
+Solution : Fixing the html code and liking the total_ttc to the order var.<br>
+<br>
+
+<strong>Bug 2</strong><br>
+Issue : No checkout_success email sended.<br>
+Solution : Matching the stripe code to heroku's.<br>
 <br>
 
 

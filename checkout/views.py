@@ -9,8 +9,11 @@ from products.models import Product
 from pet_owners.forms import PetOwnerForm
 from pet_owners.models import PetOwner
 from bag.contexts import bag_contents
-from django.utils import timezone
 from datetime import timedelta
+
+
+from django.forms.models import model_to_dict
+
 
 import stripe
 import json
@@ -136,6 +139,16 @@ def checkout_success(request, order_number):
     """
     save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
+
+
+    # 🖨 Fine-tuned print of order fields
+    order_data = model_to_dict(order)
+    print("\n📦 Order Summary")
+    print("-" * 30)
+    for key, value in order_data.items():
+        print(f"{key}: {value}")
+    print("-" * 30 + "\n")
+  
 
     if request.user.is_authenticated:
         profile = PetOwner.objects.filter(author=request.user).first()
