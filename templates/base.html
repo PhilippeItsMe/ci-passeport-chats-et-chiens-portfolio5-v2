@@ -167,6 +167,7 @@
                             animal bien-aimé.</p>
 
                         <!---------- Buying button ---------->
+
                         <form class="form" action="{% url 'bag:add_to_bag' item_id=1 %}" method="POST">
                             {% csrf_token %}
                             <input type="hidden" name="quantity" value="1">
