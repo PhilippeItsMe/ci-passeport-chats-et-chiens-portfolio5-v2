@@ -6,11 +6,15 @@ Vous trouverez ci-dessous les détails de votre commande :
 
 Numéro de commande : {{ order.order_number }}
 Date de la commande : {{ order.date }}
-Produit : 
-Quantité : 
+Produit : {{ order.product }}
+Quantité : {{ order.quantity }}
 Montant de la commande : ${{ order.order_total }}
 
-Votre code d'activation : 
+Votre ou vos codes d'activation : 
+
+{% for code in activation_codes %}
+- {{ code.activation_code }}
+{% endfor %}
 
 Votre code d'activation deva être saisi dans votre profil utilisateur que vous pourrez créer sans autre sur notre site.
 

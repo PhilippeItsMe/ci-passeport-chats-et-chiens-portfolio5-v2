@@ -1,9 +1,10 @@
 Bonjour,
 
-Pour finaliser votre inscription sur Passeport-chats-et-chiens.ch, 
+Pour finaliser votre inscription sur Passeport Chats & Chiens, 
 merci de confirmer l'exactitude de votre e-mail en cliquant sur le lien suivant :
 
 {{ activate_url }}
 
 En vous remerciant de votre confiance.  
-Votre équipe Passeport Chats & Chiens
+Votre équipe 
+Passeport Chats & Chiens
