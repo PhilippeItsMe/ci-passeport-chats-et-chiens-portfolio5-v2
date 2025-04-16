@@ -1,13 +1,9 @@
-{% extends "account/email/base_message.txt" %}
-{% load account %}
-{% load i18n %}
+Bonjour,
 
-{% block content %}
-{% autoescape off %}
-{% user_display user as user_display %}
-{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}
-Vous avez reçu cet email afin de pouvoir finaliser votre inscription sur {{ site_domain }}.
-Pour confirmer l'exactitude de votre email aller sur {{ activate_url }}
-{% endblocktrans %}
-{% endautoescape %}
-{% endblock content %}
+Pour finaliser votre inscription sur Passeport-chats-et-chiens.ch, 
+merci de confirmer l'exactitude de votre e-mail en cliquant sur le lien suivant :
+
+{{ activate_url }}
+
+En vous remerciant de votre confiance.  
+Votre équipe Passeport Chats & Chiens
