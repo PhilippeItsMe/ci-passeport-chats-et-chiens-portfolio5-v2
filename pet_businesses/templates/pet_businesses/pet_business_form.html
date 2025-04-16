@@ -48,7 +48,7 @@
     </h3>
     <form method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form|crispy }}
         <button type="submit" class="submit-btn">
             {% if form.instance.pk %}Mettre à jour{% else %}Soumettre{% endif %}
         </button>

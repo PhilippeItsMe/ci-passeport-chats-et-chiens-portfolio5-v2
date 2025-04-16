@@ -74,6 +74,21 @@ class PetBusinessForm(forms.ModelForm):
             'description': 'Description ',
         }
 
+        help_texts = {
+                'npa': 'Format: 4 chiffres (exemple : 1000)',
+                'phone': '(exemple : 079 123 45 67)',
+                'website': 'Merci de rentrer une URL complète (exemple : https://yourwebsite.com)',
+                'linkedin': 'Merci de rentrer une URL complète'
+                ' (exemple : https://linkedin.com/in/yourname)',
+                'facebook': 'Merci de rentrer une URL complète'
+                ' (exemple : https://facebook.com/yourpage)',
+                'instagram': 'Merci de rentrer une URL complète'
+                ' (exemple : https://instagram.com/yourhandle)',
+                'tiktok': 'Merci de rentrer une URL complète'
+                ' (exemple : https://tiktok.com/@yourhandle)',
+            }
+
+
 
 class CommentForm(forms.ModelForm):
     """

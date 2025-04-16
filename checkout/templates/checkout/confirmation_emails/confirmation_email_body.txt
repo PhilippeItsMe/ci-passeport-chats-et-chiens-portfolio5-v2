@@ -4,7 +4,7 @@ Nous vous confirmons votre achat chez Passeport Chats & Chiens.
 
 Vous trouverez ci-dessous le détail de votre commande : 
 
-Numéro de commande : {{ order.order_number }}
+Numéro de facturation stripe : {{ order.order_number }}
 Date de la commande : {{ order.date }}
 Produit : Passeport Chats & Chiens 1 an
 Quantité : {{ total_quantity }}
