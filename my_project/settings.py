@@ -15,7 +15,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 
 #------------ Security check -------------- #
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost',
                 '127.0.0.1',
@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'products',
     'bag.apps.BagConfig', #To have it available
     'checkout',
+    'widget_tweaks',
 ]
 
 LOGIN_REDIRECT_URL = '/'
@@ -137,8 +138,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
-#ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+#ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 ACCOUNT_USERNAME_REQUIRED = False
 LOGIN_URL = '/accounts/login/'
