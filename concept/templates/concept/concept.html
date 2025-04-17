@@ -31,9 +31,6 @@
                 <p>
                     Parce que votre animal mérite ce qu’il y a de mieux, et vous aussi !
                 </p>
-
-                <!---------- Buying button ---------->
-
                 <form class="form" action="{% url 'bag:add_to_bag' item_id=1 %}" method="POST">
                     {% csrf_token %}
                     <input type="hidden" name="quantity" value="1">
@@ -87,6 +84,32 @@
                 <button type="submit" class="orange-btn w-50">
                     🐈 Je souhaite gâter mon animal ! 🐕
                 </button>
+            </div>
+        </div>
+
+        <!--Animaux-->
+
+        <div class="row ">
+            <h3 class="mb-4 mt-5">Est-ce que cette carte est réservée aux chiens et chats ?</h3>
+            <div class="col-md-6">
+                <p>
+                    Cette carte offre des avantages pour tous les animaux de compagnie, que ce soit des chats et de
+                    chiens, mais aussi des poissons, oiseaux, hamsters, chevaux, serpents, etc.
+                </p>
+
+                <form class="form" action="{% url 'bag:add_to_bag' item_id=1 %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="quantity" value="1">
+                    <input type="hidden" name="redirect_url"
+                        value="{% if 'checkout_success' not in request.path %}{{ request.path }}{% endif %}">
+                    <button type="submit" class="orange-btn">
+                        🐈 Tant mieux ! Allons-y ! 🐕
+                    </button>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <img class="cartepasseport" src="{% static 'images/colorfulanimals.webp' %}"
+                    alt="Une carte pour tous les animaux de compagnie">
             </div>
         </div>
 
