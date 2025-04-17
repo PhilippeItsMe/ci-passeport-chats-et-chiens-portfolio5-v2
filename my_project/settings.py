@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'products',
     'bag.apps.BagConfig', #To have it available
     'checkout',
+    'concept',
 ]
 
 LOGIN_REDIRECT_URL = '/'

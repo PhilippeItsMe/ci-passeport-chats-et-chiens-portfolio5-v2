@@ -7,6 +7,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('summernote/', include('django_summernote.urls')),
 
+    # Concept
+     path('concept/', include('concept.urls')),  
+
      # Email reset
      path('password_reset/', TextOnlyPasswordResetView.as_view(),
           name='password_reset'),
