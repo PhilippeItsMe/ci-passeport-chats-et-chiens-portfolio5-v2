@@ -8,45 +8,112 @@
         <!--Intro-->
 
         <div class="row ">
-            <div class="col-md-6">
-
+            <h2 class="mb-5">Passeport Chats & Chiens, comment ça marche ?</h2>
+            <div class="col-md-6 mb-4">
+                <img class="cartepasseport" src="{% static 'images/cartepasseport.webp' %}"
+                    alt="passeport-chats-et-chiens">
             </div>
             <div class="col-md-6">
+                <p>
+                    Imaginez un monde où prendre soin de votre animal devient plus simple, plus abordable et tellement
+                    gratifiant !
+                </p>
+                <p>
+                    Notre plateforme est là pour vous mettre en relation avec des entreprises de
+                    confiance répondant à tous les besoins de votre compagnon à poils, plumes ou écailles.
+                </p>
+                <p>
+                    Pour une modeste cotisation annuelle, vous bénéficierez d’avantages exclusifs : une
+                    réduction de 50 % sur votre premier achat puis d’une remise de 20 CHF sur votre deuxième dépense
+                    (dès 100.- d'achat)– par
+                    entreprise.
+                </p>
+                <p>
+                    Parce que votre animal mérite ce qu’il y a de mieux, et vous aussi !
+                </p>
 
+                <!---------- Buying button ---------->
+
+                <form class="form" action="{% url 'bag:add_to_bag' item_id=1 %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="quantity" value="1">
+                    <input type="hidden" name="redirect_url"
+                        value="{% if 'checkout_success' not in request.path %}{{ request.path }}{% endif %}">
+                    <button type="submit" class="orange-btn">
+                        🐈 C'est parti ! 🐕
+                    </button>
+                </form>
             </div>
         </div>
 
         <!--Services-->
 
         <div class="row ">
+            <h3 class="mb-4 mt-5">Quels services trouverez-vous sur Passeport Chats & Chiens</h3>
             <div class="col-md-3">
-
+                <img class="illustration_services" src="{% static 'images/gardeetsurveillance.webp' %}"
+                    alt="Garde et surveillance">
             </div>
             <div class="col-md-3">
-
+                <img class="illustration_services" src="{% static 'images/loisirsetactivites.webp' %}"
+                    alt="Loisirs et activités">
             </div>
             <div class="col-md-3">
-
+                <img class="illustration_services" src="{% static 'images/produitsetaccessoires.webp' %}"
+                    alt="Produits et accessoires">
             </div>
             <div class="col-md-3">
-
+                <img class="illustration_services" src="{% static 'images/sante.webp' %}" alt="Santé">
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-md-3">
+                <img class="illustration_services" src="{% static 'images/soinsdebaseethygiene.webp' %}"
+                    alt="Soins de base et hygiène">
+            </div>
+            <div class="col-md-3">
+                <img class="illustration_services" src="{% static 'images/educationetcomportement.webp' %}"
+                    alt="Education et comportement">
+            </div>
+            <div class="col-md-3">
+                <img class="illustration_services" src="{% static 'images/assurancesetprotection.webp' %}"
+                    alt="Assurances et protection">
+            </div>
+            <div class="col-md-3">
+                <img class="illustration_services" src="{% static 'images/servicesfuneraires.webp' %}"
+                    alt="Services funéraires">
+            </div>
+            <div class="text-center">
+                <button type="submit" class="orange-btn w-50">
+                    🐈 Je souhaite gâter mon animal ! 🐕
+                </button>
             </div>
         </div>
 
         <!--Advantages-->
 
         <div class="row ">
+            <h3 class="mb-4 mt-5">Quels sont mes avantages avec ces cartes ?</h3>
             <div class="col-md-3">
-
+                <img class="illustration_services" src="{% static 'images/moins50.webp' %}"
+                    alt="Moins 50% sur votre premier achat">
             </div>
             <div class="col-md-3">
-
+                <img class="illustration_services" src="{% static 'images/moins20.webp' %}"
+                    alt="- CHF 20.- sur votre deuxième achat (dès 100.-)">
             </div>
             <div class="col-md-3">
-
+                <img class="illustration_services" src="{% static 'images/ecologique.webp' %}"
+                    alt="Carte 100% digitaligée pour le respect de dame nature">
             </div>
             <div class="col-md-3">
-
+                <img class="illustration_services" src="{% static 'images/nombreuxpartenaires.webp' %}"
+                    alt="De nombreux partenaires pour gâter votre animal">
+            </div>
+            <div class="text-center">
+                <button type="submit" class="orange-btn w-50">
+                    🐈 Je suis partant ! 🐕
+                </button>
             </div>
         </div>
 

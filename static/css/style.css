@@ -65,7 +65,7 @@ h1 {
 
 h2 {
     font-family: "Chewy", serif;
-    font-size: 4rem;
+    font-size: 3.5rem;
     font-weight: 400;
 }
 
@@ -377,6 +377,20 @@ footer {
 .spacing {
     margin-top: 4rem;
     margin-bottom: 2rem;
+}
+
+/*-------------------- Concept --------------------*/
+
+.cartepasseport {
+    width: 90%;
+    height: auto;
+}
+
+.illustration_services {
+    width: 90%;
+    height: auto;
+    margin-bottom: 2rem;
+    border-radius: 15px;
 }
 
 /*-------------------- 404--------------------*/
