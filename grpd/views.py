@@ -4,6 +4,12 @@ from django.http import JsonResponse
 from .models import CookieConsent
 
 
+class CGV(TemplateView):
+    """
+    View to render legal notice. 
+    """
+    template_name = "cgv/cgv.html"
+
 class LegalNoticeView(TemplateView):
     """
     View to render legal notice. 
