@@ -118,6 +118,7 @@ small {
 .yellow-btn:hover,
 .orange-btn:hover,
 .submit-btn:hover,
+.black-paw,
 a:hover {
     cursor: url('/static/images/pawcursor.webp') 10 10, auto;
 }
