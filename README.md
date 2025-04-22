@@ -13,19 +13,27 @@ Imagine a world where caring for your beloved pet becomes easier, more affordabl
 
 
 ## Design
-
 To establish a consistent and eye-catching design, the logo, primary and secondary colors, and the following fonts have been defined for this site. Additionally, wireframes of the three main pages have been created using Balsamiq.
 
 <img src="static/readme/brandesign.webp">
 
 **Home page (pet_business_list.html)**
-<img src="static/readme/businesslist.webp">
+<img src="static/readme/balsamiq1.webp">
 
 **Company detailed presentation (pet_business_detail.html)**
-<img src="static/readme/businessdetail.webp">
+<img src="static/readme/balsamiq2.webp">
 
-**Companies presentation management (pet_business_formhtml)**
-<img src="static/readme/businessform.webp">
+**Companies presentation management (pet_business_form.html)**
+<img src="static/readme/balsamiq3.webp">
+
+**My Bag page (bag.html)**
+<img src="static/readme/balsamiq4.webp">
+
+**Checkout page (checkout.html)**
+<img src="static/readme/balsamiq5.webp">
+
+**Concept page (concept.html)**
+<img src="static/readme/balsamiq6.webp">
 
 
 ## Key features
