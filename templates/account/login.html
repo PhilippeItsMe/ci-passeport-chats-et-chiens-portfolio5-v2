@@ -10,7 +10,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-8 mt-3 offset-md-2">
+    <div class="col-md-8 mt-3">
       <h3>Se connecter</h3>
       <p>{% blocktrans %}
         Bienvenue. Merci de vous connecter. Si vous n'avez pas encore de compte, merci de vous
@@ -19,7 +19,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-8 mt-3 offset-md-2">
+    <div class="col-md-8 mt-3">
       <form class="login" method="POST" action="{% url 'account_login' %}">
         {% csrf_token %}
         {{ form|crispy }}
