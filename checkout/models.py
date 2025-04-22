@@ -12,6 +12,10 @@ from datetime import timedelta
 
 User = get_user_model()
 
+COUNTRY_CHOICES = [
+    ('CH', 'Suisse'),
+    ('LI', 'Liechtenstein'),
+]
 class Order(models.Model):
     """
     Represents a customer's order with address and payment info.
@@ -29,8 +33,7 @@ class Order(models.Model):
     street = models.CharField(max_length=80, null=False, blank=False)
     postal_code = models.CharField(max_length=10, null=False, blank=False)
     city = models.CharField(max_length=40, null=False, blank=False)
-    country = models.CharField(max_length=80, null=True, blank=True,
-                               default="CH")
+    country = models.CharField(max_length=80, null=False, blank=False, choices=COUNTRY_CHOICES, default="CH")
     email = models.EmailField(max_length=254, null=False, blank=False)
     phone = models.CharField(max_length=16, blank=True, null=True)
 

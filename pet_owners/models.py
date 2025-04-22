@@ -4,6 +4,11 @@ from cloudinary.models import CloudinaryField
 from django.utils import timezone
 
 
+COUNTRY_CHOICES = [
+    ('CH', 'Suisse'),
+    ('LI', 'Liechtenstein'),
+]
+
 class PetOwner(models.Model):
     """
     Model representing a pet owner with personal information 
@@ -17,7 +22,7 @@ class PetOwner(models.Model):
     default_street=models.CharField(max_length=80, null=False, blank=False)
     default_postal_code=models.CharField(max_length=10, null=False, blank=False)
     default_city = models.CharField(max_length=40, null=False, blank=False)
-    default_country = models.CharField(max_length=80, null=True, blank=True, default="Suisse")
+    default_country = models.CharField(max_length=80, null=False, blank=False, choices=COUNTRY_CHOICES, default="CH")
     default_phone = models.CharField(max_length=16, blank=True, null=True)
     default_newsletter = models.BooleanField(default=False)
     default_date_created = models.DateTimeField(auto_now_add=True)

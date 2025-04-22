@@ -47,13 +47,11 @@ def pet_list(request):
 
 @group_required("Pet Owners")
 def pet_create(request):
-    pet_owner = get_object_or_404(PetOwner, author=request.user)
-
     if request.method == "POST":
         form = PetForm(request.POST, request.FILES)
         if form.is_valid():
             pet = form.save(commit=False)
-            pet.author = request.user
+            pet.author = request.user  # Linking pet to the current user
             pet.save()
             messages.success(request, f"L'animal {pet.name} a été ajouté avec succès.")
             return redirect('pet_list')
@@ -64,8 +62,8 @@ def pet_create(request):
 
     return render(request, 'pet_owners/pet_form.html', {
         'form': form,
-        'pet_owner': pet_owner,
     })
+
 
 
 @group_required("Pet Owners")

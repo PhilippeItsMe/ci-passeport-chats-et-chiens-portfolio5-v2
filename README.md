@@ -398,6 +398,18 @@ Issue : No checkout_success email sended.<br>
 Solution : Matching the stripe code to heroku's.<br>
 <br>
 
+<strong>Bug 3</strong><br>
+Issue : To consitencie in the page layout.<br>
+Solution : Using the class "container" to wrap all pages<br>
+<br>
+
+<strong>Bug 4</strong><br>
+Issue : Adding a pet leading to a 404 message.<br>
+Solution : Linking the pet to the user and not the pet_owner model.<br>
+<br>
+
+
+
 
 ### Testing
 
