@@ -15,7 +15,7 @@ Votre ou vos codes d'activation :
 - {{ code.activation_code }}
 {% endfor %}
 
-Votre code d'activation deva être saisi dans votre profil utilisateur que vous pourrez créer sans autre sur notre site.
+Votre code d'activation devra être saisi dans votre profil utilisateur que vous pourrez créer sans autre sur notre site.
 
 Vous des questions ? N'hésitez pas à nous contacter à l'adresse suivante : contact@passeport-chats-et-chiens.ch.
 
