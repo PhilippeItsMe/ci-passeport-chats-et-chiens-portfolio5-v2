@@ -194,7 +194,7 @@ a:hover {
 /*-------------------- Wrapper --------------------*/
 
 .message-wrapper {
-    padding: 1 2rem;
+    padding: 1rem 2rem;
     border: 1px solid var(--orange) !important;
     border-radius: 20px;
     margin-bottom: 4rem;
