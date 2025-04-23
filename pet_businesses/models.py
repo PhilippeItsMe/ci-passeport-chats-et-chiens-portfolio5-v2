@@ -70,11 +70,11 @@ class PetBusiness (models.Model):
     
     CANTON_CHOICES = [
         ('Genève', 'Genève'),
-        ('Vaud - La Côte', 'Vaud - La Côte'),
-        ('Vaud - Lausanne', 'Vaud - Lausanne'),
-        ('Vaud - Gros-de-Vaud & Plaine de l’Orbe', 'Vaud - Gros-de-Vaud & Plaine de l’Orbe'),
-        ('Vaud - Riviera & Chablais', 'Vaud - Riviera & Chablais'),
-        ('Vaud - Nord vaudois', 'Vaud - Nord vaudois'),
+        ('Vaud-La_Côte', 'Vaud - La Côte'),
+        ('Vaud-Lausanne', 'Vaud - Lausanne'),
+        ('Vaud-Gros-de-Vaud_Plaine_de_l_Orbe', 'Vaud - Gros-de-Vaud & Plaine de l’Orbe'),
+        ('Vaud-Riviera_Chablais', 'Vaud - Riviera & Chablais'),
+        ('Vaud-Nord_Vaudois', 'Vaud - Nord vaudois'),
         ('Valais', 'Valais'),
         ('Fribourg', 'Fribourg'),
         ('Neuchâtel', 'Neuchâtel'),

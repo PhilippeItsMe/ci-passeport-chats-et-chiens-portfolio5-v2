@@ -37,8 +37,6 @@ def add_to_bag(request, item_id):
 
     print('request.session après:', dict(request.session))
 
-
-
     return redirect(redirect_url)
 
 

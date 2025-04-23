@@ -491,7 +491,6 @@ Issue: The Mes compagnons page is not responsive.<br>
 Solution: Refactor the template by replacing the table layout with a responsive grid-based design using Bootstrap cards.<br>
 <br>
 
-
 ### Testing
 
 **Responsivness testing**
