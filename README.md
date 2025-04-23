@@ -471,6 +471,16 @@ Issue: Adding a pet resulted in a 404 error.<br>
 Solution: Linked the pet directly to the user instead of the pet_owner model.<br>
 <br>
 
+<strong>Bug 5</strong><br>
+Issue: Hero section order button collapsing on small screen.<br>
+Solution: Reducing button text length.<br>
+<br>
+
+<strong>Bug 6</strong><br>
+Issue: Footer text overflows the background on small screens.<br>
+Solution: Adjust the footer height based on screen size.<br>
+<br>
+
 ### Testing
 
 **Responsivness testing**

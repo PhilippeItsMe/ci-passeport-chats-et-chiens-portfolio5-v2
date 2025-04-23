@@ -193,14 +193,6 @@ a:hover {
 
 /*-------------------- Wrapper --------------------*/
 
-/*Full page wrapper*/
-
-/* .page-wrapper {
-    padding: 0 2rem;
-} */
-
-/*Django message wrapper*/
-
 .message-wrapper {
     padding: 1 2rem;
     border: 1px solid var(--orange) !important;
@@ -264,7 +256,7 @@ a:hover {
 .heropet {
     height: 400px;
     margin-top: 30px;
-    margin-bottom: -50px;
+    margin-bottom: -60px;
 }
 
 .dropdown-item:active {
@@ -277,7 +269,7 @@ a:hover {
 footer {
     margin-top: 6rem;
     background-color: var(--yellow);
-    height: 100px;
+    /* height: 150px; */
     min-height: 100px;
     display: flex;
     flex-direction: column;
@@ -425,6 +417,14 @@ footer {
     }
 }
 
+
+@media screen and (max-width: 720px) {
+    footer {
+        min-height: 140px;
+
+    }
+}
+
 @media screen and (max-width: 520px) {
     .hidden {
         display: none;
@@ -432,6 +432,12 @@ footer {
 
     .footercat {
         display: none;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    footer {
+        min-height: 160px;
     }
 }
 
