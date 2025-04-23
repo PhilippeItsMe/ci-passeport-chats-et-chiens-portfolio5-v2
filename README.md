@@ -486,6 +486,12 @@ Issue: Request countries by their code instead of their name.<br>
 Solution: Create a multiple choice selection to avoid confusion.<br>
 <br>
 
+<strong>Bug 8</strong><br>
+Issue: The Mes compagnons page is not responsive.<br>
+Solution: Refactor the template by replacing the table layout with a responsive grid-based design using Bootstrap cards.<br>
+<br>
+
+
 ### Testing
 
 **Responsivness testing**
