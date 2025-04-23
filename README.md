@@ -265,7 +265,8 @@ The project's data model is structured as follows: it revolves around <span styl
 
 Since the API endpoints and features are very similar, testing was conducted exclusively on the API endpoints, with an additional test performed on the admin functionality.
 
-  <table border="1" cellpadding="10" cellspacing="0">
+
+<table border="1" cellpadding="10" cellspacing="0">
     <thead style="background-color:white; color:black">
         <tr style="background-color:RGB(249, 249, 249, 0.1)">
             <th>Endpoint</th>
@@ -276,169 +277,199 @@ Since the API endpoints and features are very similar, testing was conducted exc
     </thead>
     <tbody>
         <tr>
-            <td>/</td>
-            <td>Read</td>
-            <td>GET</td>
-            <td>List all pet businesses.</td>
+            <td colspan="4" style="background-color:RGB(249, 249, 249, 0.1)"><strong>Django admin</strong></td>
         </tr>
+        <tr><td>/admin/...</td><td>Create, Red, Update and Delete</td><td>GET, POST</td><td>Access Django admin dashboard.</td></tr>
         <tr>
-            <td>&lt;slug:slug&gt;/</td>
-            <td>Read</td>
-            <td>GET</td>
-            <td>View details of a specific pet business.</td>
+            <td colspan="4" style="background-color:RGB(249, 249, 249, 0.1)"><strong>App concept</strong></td>
         </tr>
+        <tr><td>/concept/</td><td>Read</td><td>GET</td><td>View the concept page.</td></tr>
         <tr>
-            <td>&lt;slug:slug&gt;/</td>
-            <td>Create</td>
-            <td>POST</td>
-            <td>Add a comment to a specific pet business.</td>
+            <td colspan="4" style="background-color:RGB(249, 249, 249, 0.1)"><strong>Django accounts</strong></td>
         </tr>
+        <tr><td>/password_reset/</td><td>Read/Create</td><td>GET, POST</td><td>Request password reset.</td></tr>
+        <tr><td>/password_reset/done/</td><td>Read</td><td>GET</td><td>Password reset email sent confirmation.</td></tr>
+        <tr><td>/reset/&lt;uidb64&gt;/&lt;token&gt;/</td><td>Read/Update</td><td>GET, POST</td><td>Reset password form.</td></tr>
+        <tr><td>/reset/done/</td><td>Read</td><td>GET</td><td>Password has been reset confirmation.</td></tr>
         <tr>
-            <td>&lt;slug:slug&gt;/edit_comment/&lt;int:comment_id&gt;/</td>
-            <td>Read/Update</td>
-            <td>GET, POST</td>
-            <td>Edit a specific comment.</td>
+            <td colspan="4" style="background-color:RGB(249, 249, 249, 0.1)"><strong>Django accounts </strong></td>
         </tr>
+        <tr><td>/accounts/signup/</td><td>Create</td><td>POST</td><td>User signup.</td></tr>
+        <tr><td>/accounts/login/</td><td>Create</td><td>POST</td><td>User login.</td></tr>
+        <tr><td>/accounts/logout/</td><td>Create</td><td>POST</td><td>User logout.</td></tr>
         <tr>
-            <td>&lt;slug:slug&gt;/delete_comment/&lt;int:comment_id&gt;/</td>
-            <td>Delete</td>
-            <td>POST</td>
-            <td>Delete a specific comment.</td>
+            <td colspan="4" style="background-color:RGB(249, 249, 249, 0.1)"><strong>App bag</strong></td>
         </tr>
+        <tr><td>/bag/</td><td>Read</td><td>GET</td><td>View bag contents.</td></tr>
+        <tr><td>/bag/add/&lt;int:item_id&gt;/</td><td>Create</td><td>POST</td><td>Add item to bag.</td></tr>
+        <tr><td>/bag/adjust/&lt;int:item_id&gt;/</td><td>Update</td><td>POST</td><td>Adjust quantity of item in bag.</td></tr>
+        <tr><td>/bag/remove/&lt;int:item_id&gt;/</td><td>Delete</td><td>POST</td><td>Remove item from bag.</td></tr>
         <tr>
-            <td>/pet-business/&lt;int:pet_business_id&gt;/like/</td>
-            <td>Create/Delete</td>
-            <td>POST</td>
-            <td>Toggle "like" for a specific business.</td>
+            <td colspan="4" style="background-color:RGB(249, 249, 249, 0.1)"><strong>App checkout</strong></td>
         </tr>
+        <tr><td>/checkout/</td><td>Read/Create</td><td>GET, POST</td><td>Checkout page.</td></tr>
+        <tr><td>/checkout/checkout_success/&lt;order_number&gt;</td><td>Read</td><td>GET</td><td>Display order success page.</td></tr>
+        <tr><td>/checkout/cache_checkout_data/</td><td>Create</td><td>POST</td><td>Cache checkout data before payment.</td></tr>
+        <tr><td>/checkout/wh/</td><td>Create</td><td>POST</td><td>Handle Stripe webhooks.</td></tr>
+        <tr><td>/checkout/order_history/</td><td>Read</td><td>GET</td><td>Display past orders.</td></tr>
+        <tr><td>/checkout/activation_code/</td><td>Create</td><td>POST</td><td>Send activation code after order.</td></tr>
         <tr>
-            <td>/pet_business_form/</td>
-            <td>Read/Create</td>
-            <td>GET, POST</td>
-            <td>Display pet businesses user's businesses and form to add new ones.</td>
+            <td colspan="4" style="background-color:RGB(249, 249, 249, 0.1)"><strong>App grpd</strong></td>
         </tr>
+        <tr><td>/grpd/conditions-generales-de-vente/</td><td>Read</td><td>GET</td><td>Display general conditions of sale.</td></tr>
+        <tr><td>/grpd/mentions-legales/</td><td>Read</td><td>GET</td><td>Display legal notice.</td></tr>
+        <tr><td>/grpd/notice-cookies/</td><td>Read</td><td>GET</td><td>Display cookie notice.</td></tr>
+        <tr><td>/grpd/politique-confidentialite/</td><td>Read</td><td>GET</td><td>Display privacy policy.</td></tr>
+        <tr><td>/grpd/save-cookie-consent/</td><td>Create</td><td>POST</td><td>Save user cookie consent.</td></tr>
         <tr>
-            <td>&lt;slug:slug&gt;/edit/&lt;int:pet_business_id&gt;/</td>
-            <td>Read/Update</td>
-            <td>GET, POST</td>
-            <td>Edit a specific business.</td>
+            <td colspan="4" style="background-color:RGB(249, 249, 249, 0.1)"><strong>App pet_businesses</strong></td>
         </tr>
+        <tr><td>/</td><td>Read</td><td>GET</td><td>List all pet businesses.</td></tr>
+        <tr><td>/&lt;slug:slug&gt;/</td><td>Read</td><td>GET</td><td>View specific pet business.</td></tr>
+        <tr><td>/pet_business_form/</td><td>Read/Create</td><td>GET, POST</td><td>User's pet business list and creation form.</td></tr>
+        <tr><td>/&lt;slug:slug&gt;/edit/&lt;int:pet_business_id&gt;/</td><td>Read/Update</td><td>GET, POST</td><td>Edit a pet business.</td></tr>
+        <tr><td>/&lt;slug:slug&gt;/delete/&lt;int:pet_business_id&gt;/</td><td>Delete</td><td>POST</td><td>Delete a pet business.</td></tr>
+        <tr><td>/&lt;slug:slug&gt;/edit_comment/&lt;int:comment_id&gt;/</td><td>Read/Update</td><td>GET, POST</td><td>Edit a comment.</td></tr>
+        <tr><td>/&lt;slug:slug&gt;/delete_comment/&lt;int:comment_id&gt;/</td><td>Delete</td><td>POST</td><td>Delete a comment.</td></tr>
+        <tr><td>/ajax/like-toggle/</td><td>Create/Delete</td><td>POST</td><td>Toggle like on pet business.</td></tr>
         <tr>
-            <td>&lt;slug:slug&gt;/delete/&lt;int:pet_business_id&gt;/</td>
-            <td>Delete</td>
-            <td>POST</td>
-            <td>Delete a specific business.</td>
+            <td colspan="43" style="background-color:RGB(249, 249, 249, 0.1)"><strong>App pet_owners</strong></td>
         </tr>
+        <tr><td>/pet_owner_form/</td><td>Read/Create</td><td>GET, POST</td><td>View and edit pet owner profile.</td></tr>
+        <tr><td>pets/</td><td>Read</td><td>GET</td><td>List all pets.</td></tr>
+        <tr><td>pets/add/</td><td>Create</td><td>POST</td><td>Add a new pet.</td></tr>
+        <tr><td>pets/&lt;int:pet_id&gt;/edit/</td><td>Read/Update</td><td>GET, POST</td><td>Edit a pet.</td></tr>
+        <tr><td>pets/&lt;int:pet_id&gt;/delete/</td><td>Delete</td><td>POST</td><td>Delete a pet.</td></tr>
         <tr>
-            <td>/signup/</td>
-            <td>Create</td>
-            <td>POST</td>
-            <td>Handle user signup and group assignment.</td>
+            <td colspan="4" style="background-color:RGB(249, 249, 249, 0.1)"><strong>App vouchers</strong></td>
         </tr>
-        <tr>
-            <td>/login/</td>
-            <td>Create</td>
-            <td>POST</td>
-            <td>Log in a user and obtain authentication tokens.</td>
-        </tr>
-        <tr>
-            <td>/logout/</td>
-            <td>Create</td>
-            <td>POST</td>
-            <td>Log out a user and invalidate their authentication tokens.</td>
-        </tr>
+        <tr><td>/vouchers/generate/&lt;int:business_id&gt;/&lt;str:discount_type&gt;/</td><td>Create</td><td>POST</td><td>Generate a voucher for a business.</td></tr>
     </tbody>
 </table>
-
 
 ## Frameworks & Libraries
 
 The following libraries and resources were used in this project to ensure smooth development, deployment, and functionality:
 
-1. **asgiref==3.8.1**
-   - Provides support for ASGI (Asynchronous Server Gateway Interface) in Django, enabling asynchronous features.
-
-2. **cloudinary==1.36.0**
-   - A Python SDK for integrating with the Cloudinary service to manage and deliver media files like images and videos.
-
-3. **crispy-bootstrap5==0.7**
-   - Integrates `django-crispy-forms` with Bootstrap 5 for easy styling and rendering of forms.
-
-4. **dj-database-url==0.5.0**
-   - Simplifies database configuration by parsing database URLs from environment variables.
-
-5. **dj3-cloudinary-storage==0.0.6**
-   - Provides storage backends to integrate Django with Cloudinary for handling media files.
-
-6. **Django==4.2.17**
-   - The main web framework used for building the project, offering robust tools for creating secure and scalable web applications.
-
-7. **django-allauth==0.57.2**
-   - Handles authentication, registration, and account management, including social login functionality.
-
-8. **django-crispy-forms==2.3**
-   - Simplifies form rendering in Django with customizable templates and layouts.
-
-9. **django-summernote==0.8.20.0**
-   - Integrates the Summernote WYSIWYG editor for creating and editing rich-text content.
-
-10. **gunicorn==20.1.0**
-    - A WSGI HTTP server used to run the Django application in production.
-
-11. **oauthlib==3.2.2**
-    - Provides a framework for implementing OAuth 1 and OAuth 2 protocols for secure authentication.
-
-12. **psycopg2==2.9.10**
-    - A PostgreSQL adapter for Python, allowing Django to interact with PostgreSQL databases.
-
-13. **PyJWT==2.10.1**
-    - A library for creating and validating JSON Web Tokens (JWT), used for secure information exchange.
-
-14. **python3-openid==3.2.0**
-    - Enables OpenID authentication, often used in conjunction with `django-allauth`.
-
-15. **requests-oauthlib==2.0.0**
-    - Simplifies making OAuth-authenticated HTTP requests.
-
-16. **sqlparse==0.5.2**
-    - Parses and formats SQL queries, used internally by Django for query management.
-
-17. **urllib3==1.26.20**
-    - A robust HTTP library for handling API requests and HTTP connections.
-
-18. **whitenoise==5.3.0**
-    - Serves static files directly in production, removing the need for an external static file server.
-
-19. **Bootstrap**
-    - A popular front-end framework used for responsive and mobile-first web design. Bootstrap ensures consistent styling and layout for the user interface across different devices and browsers.
-
+<ol>
+  <li><strong>asgiref==3.8.1</strong><br>
+    Provides support for ASGI (Asynchronous Server Gateway Interface) in Django, enabling asynchronous features.
+  </li>
+  <li><strong>Brotli==1.1.0</strong><br>
+    A compression algorithm that can be used for efficient static file compression and delivery.
+  </li>
+  <li><strong>chardet==5.2.0</strong><br>
+    A character encoding detector, used for automatically detecting the encoding of text files.
+  </li>
+  <li><strong>cloudinary==1.36.0</strong><br>
+    A Python SDK for integrating with the Cloudinary service to manage and deliver media files like images and videos.
+  </li>
+  <li><strong>crispy-bootstrap5==0.7</strong><br>
+    Integrates <code>django-crispy-forms</code> with Bootstrap 5 for easy styling and rendering of forms.
+  </li>
+  <li><strong>cssselect2==0.7.0</strong><br>
+    A CSS3 selector library, commonly used by PDF generation libraries like WeasyPrint.
+  </li>
+  <li><strong>dj-database-url==0.5.0</strong><br>
+    Simplifies database configuration by parsing database URLs from environment variables.
+  </li>
+  <li><strong>dj3-cloudinary-storage==0.0.6</strong><br>
+    Provides storage backends to integrate Django with Cloudinary for handling media files.
+  </li>
+  <li><strong>Django==4.2.17</strong><br>
+    The main web framework used for building the project, offering robust tools for creating secure and scalable web applications.
+  </li>
+  <li><strong>django-allauth==0.57.2</strong><br>
+    Handles authentication, registration, and account management, including social login functionality.
+  </li>
+  <li><strong>django-cloudinary-storage==0.3.0</strong><br>
+    An alternative Cloudinary storage backend for managing media files in Django projects.
+  </li>
+  <li><strong>django-crispy-forms==2.3</strong><br>
+    Simplifies form rendering in Django with customizable templates and layouts.
+  </li>
+  <li><strong>django-summernote==0.8.20.0</strong><br>
+    Integrates the Summernote WYSIWYG editor for creating and editing rich-text content.
+  </li>
+  <li><strong>fonttools==4.56.0</strong><br>
+    A library for manipulating font files, often used in PDF generation.
+  </li>
+  <li><strong>gunicorn==20.1.0</strong><br>
+    A WSGI HTTP server used to run the Django application in production.
+  </li>
+  <li><strong>html5lib==1.1</strong><br>
+    A pure-Python library for parsing HTML documents, used by libraries like WeasyPrint.
+  </li>
+  <li><strong>oauthlib==3.2.2</strong><br>
+    Provides a framework for implementing OAuth 1 and OAuth 2 protocols for secure authentication.
+  </li>
+  <li><strong>pillow==11.1.0</strong><br>
+    A powerful image processing library in Python, used for handling image uploads and manipulation.
+  </li>
+  <li><strong>psycopg2==2.9.10</strong><br>
+    A PostgreSQL adapter for Python, allowing Django to interact with PostgreSQL databases.
+  </li>
+  <li><strong>pydyf==0.11.0</strong><br>
+    A PDF generation engine used by WeasyPrint to build PDF documents from HTML and CSS.
+  </li>
+  <li><strong>PyJWT==2.10.1</strong><br>
+    A library for creating and validating JSON Web Tokens (JWT), used for secure information exchange.
+  </li>
+  <li><strong>pyphen==0.17.2</strong><br>
+    A library used for hyphenation, supporting text rendering in PDFs.
+  </li>
+  <li><strong>python3-openid==3.2.0</strong><br>
+    Enables OpenID authentication, often used in conjunction with <code>django-allauth</code>.
+  </li>
+  <li><strong>reportlab==4.3.1</strong><br>
+    A powerful PDF generation library used to create dynamic documents from Python code.
+  </li>
+  <li><strong>requests-oauthlib==2.0.0</strong><br>
+    Simplifies making OAuth-authenticated HTTP requests.
+  </li>
+  <li><strong>sqlparse==0.5.2</strong><br>
+    Parses and formats SQL queries, used internally by Django for query management.
+  </li>
+  <li><strong>stripe==11.6.0</strong><br>
+    Official Stripe library for Python, used to handle payments and subscriptions.
+  </li>
+  <li><strong>urllib3==1.26.20</strong><br>
+    A robust HTTP library for handling API requests and HTTP connections.
+  </li>
+  <li><strong>weasyprint==62.2</strong><br>
+    A visual rendering engine for HTML and CSS that can output to PDF, used for generating documents.
+  </li>
+  <li><strong>whitenoise==5.3.0</strong><br>
+    Serves static files directly in production, removing the need for an external static file server.
+  </li>
+  <li><strong>zopfli==0.2.3.post1</strong><br>
+    A compression library used to optimize delivery of static files with better Gzip compression.
+  </li>
+</ol>
 
 ## Debugging, Testing & Deployement
 
 ### Debugging
 
 <strong>Bug 1</strong><br>
-Issue : Layout issue on the checkout_success order summary page and total ttc not rendering.<br>
-Solution : Fixing the html code and liking the total_ttc to the order var.<br>
+Issue: Layout issue on the checkout_success order summary page, and the total_ttc was not rendering.<br>
+Solution: Fixed the HTML code and linked total_ttc to the order variable.<br>
 <br>
 
 <strong>Bug 2</strong><br>
-Issue : No checkout_success email sended.<br>
-Solution : Matching the stripe code to heroku's.<br>
+Issue: No checkout_success email was sent.<br>
+Solution: Aligned the Stripe configuration with the one used on Heroku.<br>
 <br>
 
 <strong>Bug 3</strong><br>
-Issue : To consitencie in the page layout.<br>
-Solution : Using the class "container" to wrap all pages<br>
+Issue: Inconsistent page layout across the site.<br>
+Solution: Used the "container" class to wrap all pages for consistent styling.<br>
 <br>
 
 <strong>Bug 4</strong><br>
-Issue : Adding a pet leading to a 404 message.<br>
-Solution : Linking the pet to the user and not the pet_owner model.<br>
+Issue: Adding a pet resulted in a 404 error.<br>
+Solution: Linked the pet directly to the user instead of the pet_owner model.<br>
 <br>
-
-
-
 
 ### Testing
 
@@ -677,7 +708,7 @@ To set up the project locally, follow these steps:
 
 
 1.  **Clone the repository using the following command:**
-    git clone https://github.com/PhilippeItsMe/ci-portfolio4-django.git
+    git clone https://github.com/PhilippeItsMe/ci-passeport-chats-et-chiens-portfolio5-v2.git
 
 2.  **Navigate into the project directory:**
     cd ci-portfolio4-django
@@ -701,7 +732,7 @@ To contribute to the project, follow these steps:
 1.  Fork the repository by visiting the GitHub repository page and clicking the "Fork" button.
 
 2.  Clone your forked repository to your local machine:
-    git clone https://github.com/YOUR_USERNAME/ci-portfolio4-django.git
+    git clone https://github.com/YOUR_USERNAME/ci-passeport-chats-et-chiens-portfolio5-v2.git
 
 3.  Follow the local setup steps mentioned above.
 
@@ -736,7 +767,7 @@ The project leverages **GitPod**, a cloud-based Integrated Development Environme
 4. Deploying the main branch via Heroku's dashboard or automatic deployment settings.
 
 #### Database Management
-The **Heroku PostgreSQL database** is utilized for robust and reliable data storage during development and deployment. This relational database system supports advanced features such as indexing and transaction management, making it suitable for handling complex queries and ensuring optimal performance. 
+The **Code Institute PostgreSQL database** is utilized for robust and reliable data storage during development and deployment. This relational database system supports advanced features such as indexing and transaction management, making it suitable for handling complex queries and ensuring optimal performance. 
 
 Students can access and configure the CI database to:
 - Manage user and application data.
@@ -752,7 +783,7 @@ Developers configure Cloudinary within the project settings using provided API k
 - **GitHub**: Central repository for project code and collaboration.
 - **GitPod**: Development and testing environment.
 - **Heroku**: Hosting and deployment platform.
-- **Heroku Database**: PostgreSQL for data storage and management.
+- **Code Institute Database**: PostgreSQL for data storage and management.
 - **Cloudinary**: Media management and delivery.
 
 This comprehensive combination of tools ensures that the **Passeport Chats & Chiens** project is developed and deployed effectively, with a focus on scalability, accessibility, and performance.
