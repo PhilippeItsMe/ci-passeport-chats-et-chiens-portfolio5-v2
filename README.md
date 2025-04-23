@@ -481,6 +481,11 @@ Issue: Footer text overflows the background on small screens.<br>
 Solution: Adjust the footer height based on screen size.<br>
 <br>
 
+<strong>Bug 7</strong><br>
+Issue: Request countries by their code instead of their name.<br>
+Solution: Create a multiple choice selection to avoid confusion.<br>
+<br>
+
 ### Testing
 
 **Responsivness testing**
