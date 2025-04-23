@@ -43,177 +43,203 @@ The following table outlines the features included in this project. Their deploy
   <table border="1" cellpadding="10" cellspacing="0">
     <thead style="background-color:white; color:black">
         <tr style="background-color:RGB(249, 249, 249, 0.1)">
-            <th style="width:60%"> <strong>Features</strong></th>
-            <th style="width:20%; text-align:center;"><strong>Project 4 (MVP)</strong></th>
-            <th style="width:20%; text-align:center;"><strong>Project 5</strong></th>
+            <th style="width:70%"> <strong>Features</strong></th>
+            <th style="width:15%; text-align:center;"><strong>Project 5</strong></th>
+            <th style="width:15%; text-align:center;"><strong>Future developments</strong></th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td colspan="3" style="background-color:RGB(249, 249, 249, 0.1)"><strong>Business Owners Features</strong></td>
+            <td colspan="3" style="background-color:RGB(249, 249, 249, 0.1)"><strong>For Partners (Business Owners / Service Providers)</strong></td>
         </tr>
         <tr>
-            <td colspan="3"><strong>Account management</strong></td>
+            <td colspan="3"><strong>User Account Management</strong></td>
         </tr>
         <tr>
-            <td>Account creation with username & password</td>
+            <td style="padding-left: 50px;">Create an account using email and password</td>
             <td style="text-align:center;">✔</td>
             <td style="text-align:center;"></td>
         </tr>
         <tr>
-            <td>Account creation with social login</td>
-            <td style="text-align:center;"></td>
-            <td style="text-align:center;">✔</td>
-        </tr>
-        <tr>
-            <td>Account creation with email confirmation</td>
-            <td style="text-align:center;"></td>
-            <td style="text-align:center;">✔</td>
-        </tr>
-        <tr>
-            <td>Login with username & password</td>
+            <td style="padding-left: 50px;">Confirm registration via email verification</td>
             <td style="text-align:center;">✔</td>
             <td style="text-align:center;"></td>
         </tr>
         <tr>
-            <td>Username & password recovery</td>
-            <td style="text-align:center;"></td>
-            <td style="text-align:center;">✔</td>
-        </tr>
-        <tr>
-            <td>Social login</td>
-            <td style="text-align:center;"></td>
-            <td style="text-align:center;">✔</td>
-        </tr>
-        <tr>
-            <td colspan="3"><strong>Pet Business Management</strong></td>
-        </tr>
-        <tr>
-            <td>Create a new business</td>
+            <td style="padding-left: 50px;">Log in using email and password</td>
             <td style="text-align:center;">✔</td>
             <td style="text-align:center;"></td>
         </tr>
         <tr>
-            <td>Edit, update, or delete a business</td>
+            <td style="padding-left: 50px;">Reset password</td>
             <td style="text-align:center;">✔</td>
             <td style="text-align:center;"></td>
         </tr>
         <tr>
-            <td>Business statistics (views)</td>
+            <td style="padding-left: 50px;">Option to log in via social account (social login)</td>
             <td style="text-align:center;"></td>
             <td style="text-align:center;">✔</td>
         </tr>
         <tr>
-            <td colspan="3"><strong>Comments Management</strong></td>
+            <td colspan="3"><strong>Business Management</strong></td>
         </tr>
         <tr>
-            <td>Respond to pet owners comments</td>
-            <td style="text-align:center;"></td>
-            <td style="text-align:center;">✔</td>
-        </tr>
-        <tr>
-            <td colspan="3" style="background-color:RGB(249, 249, 249, 0.1)"><strong>Pet Owners Features</strong></td>
-        </tr>
-        <tr>
-            <td colspan="3"><strong>Account management</strong></td>
-        </tr>
-        <tr>
-            <td>Account creation with username & password</td>
+            <td style="padding-left: 50px;">Create a business profile (product sales or service offerings)</td>
             <td style="text-align:center;">✔</td>
             <td style="text-align:center;"></td>
         </tr>
         <tr>
-            <td>Account creation with social login</td>
-            <td style="text-align:center;"></td>
+            <td style="padding-left: 50px;">Edit, update, or delete the business profile</td>
             <td style="text-align:center;">✔</td>
+            <td style="text-align:center;"></td>
+         <tr>
+            <td colspan="3"><strong>Dashboards</strong></td>
         </tr>
         <tr>
-            <td>Account creation with email confirmation</td>
+            <td style="padding-left: 50px;">Track vouchers downloaded related to your business</td>
             <td style="text-align:center;"></td>
             <td style="text-align:center;">✔</td>
-        </tr>
-        <tr>
-            <td>Login with username & password</td>
-            <td style="text-align:center;">✔</td>
-            <td style="text-align:center;"></td>
-        </tr>
-        <tr>
-            <td>Username & password recovery</td>
-            <td style="text-align:center;"></td>
-            <td style="text-align:center;">✔</td>
-        </tr>
-        <tr>
-            <td>Social login</td>
-            <td style="text-align:center;"></td>
-            <td style="text-align:center;">✔</td>
-        </tr>
-          <tr>
-            <td colspan="3"><strong>Comments & Like Management</strong></td>
-        </tr>
-        <tr>
-            <td>Create, update and delete comments on pet businesses</td>
-            <td style="text-align:center;">✔</td>
-            <td style="text-align:center;"></td>
         </tr>
          <tr>
-            <td>Like and unlike pet businesses</td>
+            <td style="padding-left: 50px;">View statistics on how often your business profiles have been viewed</td>
+           <td style="text-align:center;"></td>
+            <td style="text-align:center;">✔</td>
+        </tr>
+        <tr>
+            <td colspan="3" style="background-color:RGB(249, 249, 249, 0.1)"><strong>For Pet Owners</strong></td>
+        </tr>
+         <tr>
+            <td colspan="3"><strong>User Account Management</strong></td>
+        </tr>
+        <tr>
+            <td style="padding-left: 50px;">Create an account using email and password</td>
             <td style="text-align:center;">✔</td>
             <td style="text-align:center;"></td>
         </tr>
         <tr>
-            <td colspan="3"><strong>Owned Pet Management</strong></td>
-        </tr>
-        <tr>
-            <td>Create a new pet profile</td>
-            <td style="text-align:center;"></td>
-            <td style="text-align:center;">✔</td>
-        </tr>
-        <tr>
-            <td>Edit, update, or delete a pet profile</td>
-            <td style="text-align:center;">✔</td>
-            <td style="text-align:center;">✔</td>
-        </tr>
-        <tr>
-            <td colspan="3" style="background-color:RGB(249, 249, 249, 0.1)"><strong>Administrator / Superuser Features</strong></td>
-        </tr>
-        <tr>
-            <td>Full CRUD (Create, Read, Update, Delete) functionality for all data within the application</td>
+            <td style="padding-left: 50px;">Confirm registration via email verification</td>
             <td style="text-align:center;">✔</td>
             <td style="text-align:center;"></td>
         </tr>
         <tr>
-            <td colspan="3" style="background-color:RGB(249, 249, 249, 0.1)"><strong>Sales Features</strong></td>
+            <td style="padding-left: 50px;">Log in using email and password</td>
+            <td style="text-align:center;">✔</td>
+            <td style="text-align:center;"></td>
         </tr>
         <tr>
-            <td colspan="3"><strong>For Pet Owners</strong></td>
+            <td style="padding-left: 50px;">Reset password</td>
+            <td style="text-align:center;">✔</td>
+            <td style="text-align:center;"></td>
         </tr>
         <tr>
-            <td>Purchase the Passport: Allows users to buy a membership for access to exclusive benefits</td>
+            <td style="padding-left: 50px;">Option to log in via social account (social login)</td>
             <td style="text-align:center;"></td>
             <td style="text-align:center;">✔</td>
         </tr>
         <tr>
-            <td>Voucher Downloads: Access to 50% discount vouchers</td>
+            <td colspan="3"><strong>Service Usage</strong></td>
+        </tr>
+          <tr>
+            <td style="padding-left: 50px;">Purchase passports for cats and dogs</td>
+            <td style="text-align:center;">✔</td>
+            <td style="text-align:center;"></td>
+        </tr>
+          <tr>
+            <td style="padding-left: 50px;">Receive activation codes by email</td>
+            <td style="text-align:center;">✔</td>
+            <td style="text-align:center;"></td>
+        </tr>
+          <tr>
+            <td style="padding-left: 50px;">Activate your activation code</td>
+            <td style="text-align:center;">✔</td>
+            <td style="text-align:center;"></td>
+        </tr>
+          <tr>
+            <td style="padding-left: 50px;">Download vouchers (50% off or CHF -20) only if an activation code has been registered</td>
+            <td style="text-align:center;">✔</td>
+            <td style="text-align:center;"></td>
+        </tr>
+          <tr>
+            <td style="padding-left: 50px;">Search for services using keywords</td>
+            <td style="text-align:center;">✔</td>
+            <td style="text-align:center;"></td>
+        </tr>
+          <tr>
+            <td style="padding-left: 50pxx;">Filter services by categories: type of animal, service type, canton, and locations</td>
+            <td style="text-align:center;">✔</td>
+            <td style="text-align:center;"></td>
+        </tr>
+        <tr>
+            <td colspan="3"><strong>Interactions with Partners</strong></td>
+        </tr>
+          <tr>
+            <td style="padding-left: 50px;">Like or unlike partner businesses</td>
+            <td style="text-align:center;">✔</td>
+            <td style="text-align:center;"></td>
+        </tr>
+          <tr>
+            <td style="padding-left: 50px;">Add and manage comments on partner businesses</td>
+            <td style="text-align:center;">✔</td>
+            <td style="text-align:center;"></td>
+        </tr>
+           <tr>
+            <td colspan="3"><strong>Personal Area</strong></td>
+        </tr>
+          <tr>
+            <td style="padding-left: 50px;">Manage your list of pets (add, edit, delete)</td>
+            <td style="text-align:center;">✔</td>
+            <td style="text-align:center;"></td>
+        </tr>
+          <tr>
+            <td style="padding-left: 50px;">View your purchase history</td>
+            <td style="text-align:center;">✔</td>
+            <td style="text-align:center;"></td>
+        </tr>
+           <tr>
+            <td style="padding-left: 30px;">Update your personal information</td>
+            <td style="text-align:center;">✔</td>
+            <td style="text-align:center;"></td>
+        </tr>
+          <tr>
+            <td style="padding-left: 50px;">Access a dashboard summarizing your downloaded vouchers</td>
+            <td style="text-align:center;"></td>
+            <td style="text-align:center;">✔</td>
+        </tr>
+       <tr>
+            <td colspan="3" style="background-color:RGB(249, 249, 249, 0.1)"><strong>Shared Features (For Partners and Pet Owners)</strong></td>
+        </tr>
+        <tr>
+            <td style="padding-left: 50px;">Link to the Passeport Chats et Chiens Facebook page</td>
+            <td style="text-align:center;">✔</td>
+            <td style="text-align:center;"></td>
+        </tr>
+        <tr>
+            <td style="padding-left: 50px;">Newsletter subscription</td>
+            <td style="text-align:center;">✔</td>
+            <td style="text-align:center;"></td>
+        </tr>
+        <tr>
+            <td style="padding-left: 50px;">Access to the terms and conditions of sale</td>
+            <td style="text-align:center;">✔</td>
+            <td style="text-align:center;"></td>
+        </tr>
+        <tr>
+            <td style="padding-left: 50px;">Manage cookie preferences (the choice entered has no impact for the moment)</td>
             <td style="text-align:center;"></td>
             <td style="text-align:center;">✔</td>
         </tr>
         <tr>
-            <td>Voucher Downloads: Access to vouchers with a fixed CHF 20.- discount</td>
-            <td style="text-align:center;"></td>
+            <td style="padding-left: 50px;">Description of the Passeport Chats et Chiens concept)</td>
             <td style="text-align:center;">✔</td>
+            <td style="text-align:center;"></td>
         </tr>
         <tr>
-            <td>Voucher Management: Provides a summary of all downloaded vouchers for easy tracking</td>
-            <td style="text-align:center;"></td>
-            <td style="text-align:center;">✔</td>
+            <td colspan="3" style="background-color:RGB(249, 249, 249, 0.1)"><strong>Administrators</strong></td>
         </tr>
         <tr>
-            <td colspan="3"><strong>Pet Business Owners Features</strong></td>
-        </tr>
-        <tr>
-            <td>Voucher Summary: Enables business owners to view a detailed summary of vouchers downloaded and used for their services</td>
-            <td style="text-align:center;"></td>
+            <td style="padding-left: 50px;">Full data management (CRUD) of the website content via the admin interface</td>
             <td style="text-align:center;">✔</td>
+            <td style="text-align:center;"></td>
         </tr>
     </tbody>
 </table>
@@ -221,21 +247,16 @@ The following table outlines the features included in this project. Their deploy
 
 ## Planning
 
-The project 4 development was completed over four weeks, following the schedule outlined below:
+The project 5 development was completed over 10 weeks, following the schedule outlined below:
 
-Weeks 2 & 3: Back-end development<br>
-Week 4: Front-end development<br>
-Week 5: Testing, debugging, deployement and documentation<br>
+Mid-February to Mid-April 2026: Feature development<br>
+Mid to End of April 2026: Testing, debugging, deployment, and documentation<br>
 
+For further details, please refer to the GitHub Agile project board.<br>
 
 ## Data Models
 
-The project's data model is structured as follows: it revolves around <span style="color:#0D99FF;">pet businesses</span>, <span style="color:#FFA629;">comments and likes</span> and <span style="color:#14AE5C;">pet owners</span>. The sales-related section of the data model will be added after completing the corresponding lesson (LMS).
-
-
-The fourth project includes the sections for pet businesses, comments, and likes. The remaining components (pet owners and product sales) will be integrated into the fifth project.
-
-For better readability of this model, please download here : [Download the data model](./static/readme/datamodel.pdf).
+The project's data model is structured as follows: it revolves around <span style="color:#0D99FF;">pet businesses</span>, <span style="color:#FFA629;">comments and likes</span>, <span style="color:#14AE5C;">pet owners</span>, <span style="color:red;">purchases</span> and <span style="color:grey;">users and grpd.</span> 
 
 <img src="static/readme/datamodel.webp">
 
