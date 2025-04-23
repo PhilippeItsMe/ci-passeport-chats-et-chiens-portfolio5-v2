@@ -9,43 +9,37 @@
     <h3 class="mb-5">Mes meilleurs amis</h3>
 
     {% if pets %}
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Date de naissance</th>
-                <th>Type</th>
-                <th>Image</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for pet in pets %}
-            <tr>
-                <td>{{ pet.name }}</td>
-                <td>{{ pet.birthday|date:"d/m/Y" }}</td>
-                <td>{{ pet.pet_type }}</td>
-                <td>
-                    {% if "placeholder" in pet.pet_featured_image.url %}
-                    <img src="{% static 'images/defaultpetbusiness.webp' %}" class="scale" alt="placeholder">
-                    {% else %}
-                    <img src="{{ pet.pet_featured_image.url }}" class="scale" alt="pet image">
-                    {% endif %}
-                </td>
-                <td>
-                    <a href="{% url 'pet_edit' pet.id %}" class="yellow-btn">Modifier</a>
-                    <button type="button" class="orange-btn" data-bs-toggle="modal" data-bs-target="#deleteModal"
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {% for pet in pets %}
+        <div class="col">
+            <div class="card h-100">
+                {% if "placeholder" in pet.pet_featured_image.url %}
+                <img src="{% static 'images/defaultpetbusiness.webp' %}" class="card-img-top scale" alt="placeholder">
+                {% else %}
+                <img src="{{ pet.pet_featured_image.url }}" class="card-img-top scale" alt="pet image">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ pet.name }}</h5>
+                    <p class="card-text">
+                        <strong>Date de naissance:</strong> {{ pet.birthday|date:"d/m/Y" }}<br>
+                        <strong>Type:</strong> {{ pet.pet_type }}
+                    </p>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <a href="{% url 'pet_edit' pet.id %}" class="btn btn-warning">Modifier</a>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"
                         data-href="{% url 'pet_delete' pet.id %}">
                         Supprimer
                     </button>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
     {% else %}
-    <p>Parlez nous de vos animaux de compagnie.</p>
+    <p>Parlez-nous de vos animaux de compagnie.</p>
     {% endif %}
+
 
     <!---------- Link to Add a Pet ---------->
     <a href="{% url 'pet_create' %}" class="submit-btn spacing">Ajouter un animal</a>
