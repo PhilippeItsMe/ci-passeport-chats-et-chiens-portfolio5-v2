@@ -496,6 +496,11 @@ Issue: Lack of contrast in CTA buttons<br>
 Solution: Use a darker shade of red (css fix).<br>
 <br>
 
+<strong>Bug 10</strong><br>
+Issue: The "Delete Comment" button was not functioning.<br>
+Solution: Moved the Bootstrap stylesheet link to the head section of base.html.<br>
+<br>
+
 
 
 ### Testing
@@ -658,57 +663,16 @@ The issue of third-party cookies has been raised by Google and negatively impact
 
 **JS testing : PASSED**
 
-comment.js :
-<img src="static/readme/commentjscheck.webp">
-
-pet_businesses.js :
-<img src="static/readme/petbusinessesjscheck.webp">
-
-slug_creation.jx :
-<img src="static/readme/slugjscheck.webp">
-
 **PY testing : ALL CLEAR**
 
-my_project / asgi.py :
-<img src="static/readme/mpasgipycheck.webp">
+All raised issues are in vscode and migrations code and therefore out of scope.
 
-my_project / settings.py :<br>
-Lines 88, 91, 94, and 97 are commands issued by AUTH and are a bit too long. On Sarah's advice (CI support assistance), they have been blocked using # noqa.
-<img src="static/readme/mpsettingspycheck.webp">
+<img src="static/readme/flake1.webp">
+<img src="static/readme/flake2.webp">
 
-my_project / urls.py :
-<img src="static/readme/mpurlspycheck.webp">
-
-my_project / wsgi.py :
-<img src="static/readme/mpwsgipycheck.webp">
-
-pet_businesses / custom_tag.py :
-<img src="static/readme/pbcustomtagpycheck.webp">
-
-pet_businesses / admin.py :
-<img src="static/readme/pbadminpycheck.webp">
-
-pet_businesses / apps.py :
-<img src="static/readme/pbappspycheck.webp">
-
-pet_businesses / forms.py :
-<img src="static/readme/pbformspycheck.webp">
-
-pet_businesses / urls.py :
-<img src="static/readme/pburlspycheck.webp">
-
-pet_businesses / utils.py :
-<img src="static/readme/pbutilspycheck.webp">
-
-pet_businesses / views.py :
-<img src="static/readme/pbviewspycheck.webp">
 
 env.py :
 CONFIDENTIAL INFORMATION
-
-manage.py :
-<img src="static/readme/managepycheck.webp">
-
 
 ### Deployement
 
