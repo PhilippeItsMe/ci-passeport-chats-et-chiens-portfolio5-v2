@@ -491,6 +491,13 @@ Issue: The Mes compagnons page is not responsive.<br>
 Solution: Refactor the template by replacing the table layout with a responsive grid-based design using Bootstrap cards.<br>
 <br>
 
+<strong>Bug 9</strong><br>
+Issue: Lack of contrast in CTA buttons<br>
+Solution: Use a darker shade of red (css fix).<br>
+<br>
+
+
+
 ### Testing
 
 **Responsivness testing**

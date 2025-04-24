@@ -22,7 +22,7 @@ main {
 :root {
     /*Primary color*/
     --yellow: #FCC737;
-    --orange: #dc3545;
+    --orange: #b72937;
 
     /*Secondary color*/
     --darkgrey: #2B2929;
@@ -169,6 +169,7 @@ a:hover {
 .submit-btn {
     padding: 0.375rem 0.75rem;
     color: var(--orange);
+    font-weight: 500;
     background-color: var(--offwhite);
     border: 1px solid var(--orange);
     border-radius: 0.375rem;
@@ -223,10 +224,11 @@ a:hover {
 
 .logo {
     width: 300px;
-    height: auto;
+    height: 73.95px;
 }
 
 .search-icon {
+    width: 20px;
     height: 20px;
 }
 
@@ -255,6 +257,7 @@ a:hover {
 
 .heropet {
     height: 400px;
+    width: 370.88px;
     margin-top: 30px;
     margin-bottom: -60px;
 }
@@ -350,6 +353,7 @@ footer {
 
 .picto {
     width: 25px;
+    height: 25px;
     margin-right: 10px;
 }
 
