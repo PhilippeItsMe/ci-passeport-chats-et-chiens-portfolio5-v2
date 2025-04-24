@@ -5,6 +5,7 @@
  const commentForm = document.getElementById("commentForm");
  const submitButton = document.getElementById("submitButton");
 
+
  for (let button of editButtons) {
      button.addEventListener("click", (e) => {
          let commentId = e.target.getAttribute("comment_id");

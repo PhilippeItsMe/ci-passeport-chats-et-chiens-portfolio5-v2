@@ -21,7 +21,7 @@ class PetOwner(models.Model):
         related_name="pet_owners"
     )
     default_street = models.CharField(max_length=80, null=False, blank=False)
-    default_postal_cod = models.CharField(
+    default_postal_code = models.CharField(
         max_length=10, null=False, blank=False)
     default_city = models.CharField(max_length=40, null=False, blank=False)
     default_country = models.CharField(
