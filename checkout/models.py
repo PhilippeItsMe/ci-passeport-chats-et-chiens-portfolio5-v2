@@ -156,7 +156,7 @@ class ActivationCode(models.Model):
         """Generate a unique 10-digit numeric activation code."""
         while True:
             code = get_random_string(length=10, allowed_chars='0123456789')
-            if not ActivationCode.objects.filter(
-                activation_code=code).exists():
-                
+            if not ActivationCode.objects.filter(activation_code=code
+                                                 ).exists():
+
                 return code
