@@ -1,6 +1,6 @@
-from django.conf import settings
 from django.shortcuts import get_object_or_404
 from products.models import Product
+
 
 def bag_contents(request):
     bag_items = []
@@ -17,12 +17,11 @@ def bag_contents(request):
             'quantity': quantity,
             'product': product,
         })
-    
+
     TVA_RATE = 8.1 / 100
     total_ht = float(total_ttc) / (1 + TVA_RATE)  # Total before VAT (100%)
     tva = total_ht * TVA_RATE  # VAT amount (8.1%)
-    
-    
+
     context = {
         'bag_items': bag_items,
         'product_count': product_count,

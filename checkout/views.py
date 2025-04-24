@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
+from django.shortcuts import render, redirect, reverse
+from django.shortcuts import get_object_or_404, HttpResponse
 from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.conf import settings
@@ -72,7 +73,8 @@ def checkout(request):
                         )
                         order_line_item.save()
                     else:
-                        for size, quantity in item_data['items_by_size'].items():
+                        for size, quantity in item_data['items_by_size'].items(
+                        ):
                             order_line_item = OrderLineItem(
                                 order=order,
                                 product=product,
@@ -82,21 +84,23 @@ def checkout(request):
                             order_line_item.save()
                 except Product.DoesNotExist:
                     messages.error(request, (
-                        "L'un des articles commandés n'est pas dans notre dB. "
+                        "L'un des articles commandés n'est pas dans notre dB."
                         "Merci de nous contacter pour de l'aide.")
                     )
                     order.delete()
                     return redirect(reverse('view_bag'))
 
             request.session['save_info'] = 'save-info' in request.POST
-            return redirect(reverse('checkout_success', args=[order.order_number]))
+            return redirect(
+                reverse('checkout_success', args=[order.order_number]))
         else:
             messages.error(request, 'Il y a une erreur avec votre formulaire. \
                 Merci de vérifier vos informations.')
     else:
         bag = request.session.get('bag', {})
         if not bag:
-            messages.error(request, "There's nothing in your bag at the moment")
+            messages.error(
+                request, "There's nothing in your bag at the moment")
             return redirect(reverse('products'))
 
         current_bag = bag_contents(request)
@@ -110,15 +114,15 @@ def checkout(request):
 
         if request.user.is_authenticated:
             try:
-                petowner= PetOwner.objects.get(author=request.user)
+                petowner = PetOwner.objects.get(author=request.user)
                 order_form = OrderForm(initial={
-                'full_name': petowner.author.get_full_name(), # not used later
-                'email': petowner.author.email, # not used later
-                'phone': petowner.default_phone,
-                'country': petowner.default_country,
-                'postal_code': petowner.default_postal_code,
-                'city': petowner.default_city,
-                'street': petowner.default_street,
+                    'full_name': petowner.author.get_full_name(),
+                    'email': petowner.author.email,
+                    'phone': petowner.default_phone,
+                    'country': petowner.default_country,
+                    'postal_code': petowner.default_postal_code,
+                    'city': petowner.default_city,
+                    'street': petowner.default_street,
                 })
             except PetOwner.DoesNotExist:
                 order_form = OrderForm()
@@ -142,15 +146,6 @@ def checkout_success(request, order_number):
     save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
 
-
-    from django.forms.models import model_to_dict
-    order_data = model_to_dict(order)
-
-    print("\n🧾 Order details:")
-    for key, value in order_data.items():
-        print(f"{key}: {value}")
-
-
     if request.user.is_authenticated:
         profile = PetOwner.objects.filter(author=request.user).first()
 
@@ -168,12 +163,14 @@ def checkout_success(request, order_number):
                     'default_city': order.city,
                     'default_street': order.street,
                 }
-                user_profile_form = PetOwnerForm(profile_data, instance=profile)
+                user_profile_form = PetOwnerForm(
+                    profile_data, instance=profile)
                 if user_profile_form.is_valid():
                     user_profile_form.save()
         else:
             # Optionally, inform the user they should create their profile
-            messages.info(request, "Merci de compléter votre profil pour sauvegarder vos informations de commande.")
+            messages.info(request, "Merci de compléter votre profil "
+                "pour sauvegarder vos informations de commande.")
 
     messages.success(request, f'Votre commande est bien passée! \
         Votre numéro de commande est {order_number}. Un email de \
@@ -201,6 +198,7 @@ def order_history(request):
         'orders': orders,
     })
 
+
 def activation_code(request):
     user = request.user
     activation_code_input = request.POST.get('activation_code')
@@ -215,11 +213,14 @@ def activation_code(request):
 
     if user_active_code and not user_active_code.is_expired():
         context['active_code'] = user_active_code
-        context['expiration_date'] = user_active_code.activation_date + timedelta(days=365)
+        context[
+            'expiration_date'] = user_active_code.activation_date + timedelta(
+                days=365)
 
     if request.method == 'POST' and activation_code_input:
         try:
-            code = ActivationCode.objects.get(activation_code=activation_code_input)
+            code = ActivationCode.objects.get(
+                activation_code=activation_code_input)
         except ActivationCode.DoesNotExist:
             messages.error(request, "Ce code n'existe pas.")
             return redirect('activate_code')
