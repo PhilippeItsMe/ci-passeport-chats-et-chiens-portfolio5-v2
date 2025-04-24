@@ -4,8 +4,8 @@ import dj_database_url
 import cloudinary
 
 cloudinary.config(secure=True)
-if os.path.isfile('env.py'):
-    import env
+# if os.path.isfile('env.py'):
+#     import env
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
@@ -13,16 +13,16 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 
-#------------ Security check -------------- #
+# ------------ Security check -------------- #
 
 DEBUG = True
 
 ALLOWED_HOSTS = ['localhost',
-                '127.0.0.1',
-                '0.0.0.0',
-                '8000-philippeits-cipasseport-ci3j0048bwm.ws-eu118.gitpod.io',
-                '8200-philippeits-cipasseport-ci3j0048bwm.ws-eu118.gitpod.io',
-                '.herokuapp.com',]
+                 '127.0.0.1',
+                 '0.0.0.0',
+                 '8000-philippeits-cipasseport-ci3j0048bwm.ws-eu118.gitpod.io',
+                 '8200-philippeits-cipasseport-ci3j0048bwm.ws-eu118.gitpod.io',
+                 '.herokuapp.com',]
 
 CSRF_TRUSTED_ORIGINS = [
     "https://*.codeinstitute-ide.net/",
@@ -32,7 +32,7 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 
-#------------ Apps, middleware and templages -------------- #
+# ------------ Apps, middleware and templages -------------- #
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     'vouchers',
     'grpd',
     'products',
-    'bag.apps.BagConfig', #To have it available
+    'bag.apps.BagConfig',
     'checkout',
     'concept',
 ]
@@ -92,7 +92,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'bag.contexts.bag_contents', #To have it available
+                'bag.contexts.bag_contents',
             ],
         },
     },
@@ -101,7 +101,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'my_project.wsgi.application'
 
 
-#------------ dB -------------- #
+# ------------ dB -------------- #
 
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
@@ -110,7 +110,7 @@ DATABASES = {
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
-#------------ Authentification -------------- #
+# ------------ Authentification -------------- #
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -139,7 +139,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-#ACCOUNT_EMAIL_VERIFICATION = 'none'
+# ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 ACCOUNT_USERNAME_REQUIRED = False
 LOGIN_URL = '/accounts/login/'
@@ -148,7 +148,7 @@ LOGIN_REDIRECT_URL = '/'
 ACCOUNT_SIGNUP_FORM_CLASS = 'pet_businesses.forms.CustomSignupForm'
 
 
-#------------ Internalisation -------------- #
+# ------------ Internalisation -------------- #
 
 LANGUAGE_CODE = 'fr'
 TIME_ZONE = 'Europe/Paris'
@@ -164,12 +164,12 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-#------------ Currency -------------- #
+# ------------ Currency -------------- #
 
 CURRENCY = 'CHF'
 USE_L10N = True
 
-#------------ Stripe -------------- #
+# ------------ Stripe -------------- #
 
 STRIPE_CURRENCY = 'chf'
 STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
@@ -177,7 +177,7 @@ STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
 STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
 
 
-#------------ Email -------------- #
+# ------------ Email -------------- #
 
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

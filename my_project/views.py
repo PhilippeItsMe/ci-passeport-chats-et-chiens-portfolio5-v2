@@ -6,6 +6,7 @@ def handler404(request, exception):
     """ Error Handler 404 - Page Not Found """
     return render(request, "errors/404.html", status=404)
 
+
 class TextOnlyPasswordResetView(PasswordResetView):
     email_template_name = 'registration/password_reset_email.txt'
     subject_template_name = 'registration/password_reset_subject.txt'

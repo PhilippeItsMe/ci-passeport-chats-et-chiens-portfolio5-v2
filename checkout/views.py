@@ -169,8 +169,11 @@ def checkout_success(request, order_number):
                     user_profile_form.save()
         else:
             # Optionally, inform the user they should create their profile
-            messages.info(request, "Merci de compléter votre profil "
-                "pour sauvegarder vos informations de commande.")
+            messages.info(
+                request,
+                "Merci de compléter votre profil "
+                "pour sauvegarder vos informations de commande."
+                )
 
     messages.success(request, f'Votre commande est bien passée! \
         Votre numéro de commande est {order_number}. Un email de \

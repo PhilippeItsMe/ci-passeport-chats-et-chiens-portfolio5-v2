@@ -3,9 +3,9 @@ from django.contrib.auth.models import User, Group, Permission
 from django.contrib.contenttypes.models import ContentType
 from django.apps import apps
 from cloudinary.models import CloudinaryField
-#from django.utils.text import slugify
 
-#------------ Authorisation model ------------#
+
+# ------------ Authorisation model ------------ #
 
 def create_groups_and_permissions():
     """
@@ -25,7 +25,8 @@ def create_groups_and_permissions():
         content_type=ContentType.objects.get_for_model(business_model))
     business_owners_group.permissions.set(business_permissions)
 
-#------------ Pet Businesses Models ------------#
+
+# ------------ Pet Businesses Models ------------ #
 
 class ServiceType(models.Model):
     """
@@ -42,7 +43,6 @@ class ServiceType(models.Model):
 
     def __str__(self):
         return f"{self.service_type}"
-
 
 
 class PetType(models.Model):
@@ -67,12 +67,13 @@ class PetBusiness (models.Model):
     Model representing a pet business with details such as address,
     contact information, and services offered.
     """
-    
+
     CANTON_CHOICES = [
         ('Genève', 'Genève'),
         ('Vaud-La_Côte', 'Vaud - La Côte'),
         ('Vaud-Lausanne', 'Vaud - Lausanne'),
-        ('Vaud-Gros-de-Vaud_Plaine_de_l_Orbe', 'Vaud - Gros-de-Vaud & Plaine de l’Orbe'),
+        ('Vaud-Gros-de-Vaud_Plaine_de_l_Orbe',
+         'Vaud - Gros-de-Vaud & Plaine de l’Orbe'),
         ('Vaud-Riviera_Chablais', 'Vaud - Riviera & Chablais'),
         ('Vaud-Nord_Vaudois', 'Vaud - Nord vaudois'),
         ('Valais', 'Valais'),
@@ -123,17 +124,18 @@ class PetBusiness (models.Model):
         """
         Returns the pet types as a list of strings.
         """
-        return [pet_type.pet_type for pet_type in self.business_pet_type.all()]
+        return [
+            pet_type.pet_type for pet_type in self.business_pet_type.all()]
 
     def service_type_tags(self):
         """
         Returns the service types as a list of strings.
         """
-        return [service_type.service_type 
+        return [service_type.service_type
                 for service_type in self.business_service_type.all()]
 
 
-#------------ Comments & Likes Models ------------#
+# ------------ Comments & Likes Models ------------ #
 
 class Comment(models.Model):
     """
@@ -162,11 +164,11 @@ class Like(models.Model):
     Model for likes on pet businesses.
     """
     pet_business = models.ForeignKey(PetBusiness,
-                    on_delete=models.CASCADE,
-                    related_name="likes")
+                                     on_delete=models.CASCADE,
+                                     related_name="likes")
     author = models.ForeignKey(User,
-                    on_delete=models.CASCADE,
-                    related_name="liker")
+                               on_delete=models.CASCADE,
+                               related_name="liker")
     date_created = models.DateTimeField(auto_now_add=True)
 
     class Meta:

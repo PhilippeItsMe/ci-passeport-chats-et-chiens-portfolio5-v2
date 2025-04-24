@@ -77,7 +77,8 @@ class PetBusinessForm(forms.ModelForm):
         help_texts = {
                 'npa': 'Format: 4 chiffres (exemple : 1000)',
                 'phone': '(exemple : 079 123 45 67)',
-                'website': 'Merci de rentrer une URL complète (exemple : https://yourwebsite.com)',
+                'website': 'Merci de rentrer une URL complète '
+                '(exemple : https://yourwebsite.com)',
                 'linkedin': 'Merci de rentrer une URL complète'
                 ' (exemple : https://linkedin.com/in/yourname)',
                 'facebook': 'Merci de rentrer une URL complète'
@@ -87,7 +88,6 @@ class PetBusinessForm(forms.ModelForm):
                 'tiktok': 'Merci de rentrer une URL complète'
                 ' (exemple : https://tiktok.com/@yourhandle)',
             }
-
 
 
 class CommentForm(forms.ModelForm):
@@ -126,12 +126,12 @@ class CustomSignupForm(forms.Form):
     ]
     group = forms.ChoiceField(choices=group_choices,
                               label="Je m'enregiste en tant que : ")
-    
+
     first_name = forms.CharField(max_length=30, label='Prénom', required=True)
     last_name = forms.CharField(max_length=30, label='Nom', required=True)
 
-    field_order = ['first_name', 'last_name', 'group','email','email2',
-                    'password1', 'password2']
+    field_order = ['first_name', 'last_name', 'group', 'email', 'email2',
+                   'password1', 'password2']
 
     def signup(self, request, user):
 

@@ -6,13 +6,14 @@ from .models import CookieConsent
 
 class CGV(TemplateView):
     """
-    View to render legal notice. 
+    View to render legal notice.
     """
     template_name = "cgv/cgv.html"
 
+
 class LegalNoticeView(TemplateView):
     """
-    View to render legal notice. 
+    View to render legal notice.
     """
     template_name = "grpd/legal_notice.html"
 
@@ -42,14 +43,19 @@ def save_cookie_consent(request):
             marketing = data.get("marketing", False)
 
             # Get session key if user is not logged in
-            session_key = request.session.session_key or request.session.create()
-            
+            session_key = (
+                request.session.session_key
+                or request.session.create()
+            )
+
             if request.user.is_authenticated:
                 # Store consent for logged-in user
-                consent, created = CookieConsent.objects.get_or_create(user=request.user)
+                consent, created = CookieConsent.objects.get_or_create(
+                    user=request.user)
             else:
                 # Store consent for anonymous user
-                consent, created = CookieConsent.objects.get_or_create(session_key=session_key)
+                consent, created = CookieConsent.objects.get_or_create(
+                    session_key=session_key)
 
             # Update fields
             consent.accepted_analytics = analytics
@@ -57,7 +63,6 @@ def save_cookie_consent(request):
             consent.save()
 
             return JsonResponse({"message": "Consent saved successfully"})
-        
+
         except json.JSONDecodeError:
             return JsonResponse({"error": "Invalid data"}, status=400)
-    

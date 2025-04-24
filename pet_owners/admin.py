@@ -24,7 +24,6 @@ class PetOwnerAdmin(admin.ModelAdmin):
     ordering = ('-default_last_modified',)
 
 
-
 @admin.register(Pet)
 class PetAdmin(admin.ModelAdmin):
     """

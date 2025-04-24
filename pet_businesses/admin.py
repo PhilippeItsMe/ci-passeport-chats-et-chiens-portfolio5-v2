@@ -4,7 +4,7 @@ from django_summernote.admin import SummernoteModelAdmin
 
 
 @admin.register(PetBusiness)
-class PostAdmin(SummernoteModelAdmin):
+class PetBusiness(SummernoteModelAdmin):
     """
     To display pet businesses in admin.
     """
@@ -24,7 +24,7 @@ class PostAdmin(SummernoteModelAdmin):
 
 
 @admin.register(ServiceType)
-class PostAdmin(SummernoteModelAdmin):
+class ServiceType(SummernoteModelAdmin):
     """
     To display service types in admin.
     """
@@ -32,7 +32,7 @@ class PostAdmin(SummernoteModelAdmin):
 
 
 @admin.register(PetType)
-class PostAdmin(SummernoteModelAdmin):
+class PetType(SummernoteModelAdmin):
     """
     To display pet types in admins
     """
@@ -40,7 +40,7 @@ class PostAdmin(SummernoteModelAdmin):
 
 
 @admin.register(Comment)
-class PostAdmin(SummernoteModelAdmin):
+class Comment(SummernoteModelAdmin):
     """
     To display comments in admins
     """
@@ -49,7 +49,7 @@ class PostAdmin(SummernoteModelAdmin):
 
 
 @admin.register(Like)
-class PostAdmin(SummernoteModelAdmin):
+class Like(SummernoteModelAdmin):
     """
     To display likes in admin.
     """

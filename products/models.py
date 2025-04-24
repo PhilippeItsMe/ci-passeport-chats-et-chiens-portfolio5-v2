@@ -1,6 +1,10 @@
 from django.db import models
 
+
 class Product(models.Model):
+    """
+    Model to define the products.
+    """
     name = models.CharField(max_length=100, unique=True)
     short_description = models.CharField(max_length=255)
     duration = models.PositiveIntegerField()

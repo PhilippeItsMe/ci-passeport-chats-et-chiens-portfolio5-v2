@@ -1,4 +1,3 @@
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from .models import PetOwner, Pet
@@ -53,7 +52,8 @@ def pet_create(request):
             pet = form.save(commit=False)
             pet.author = request.user  # Linking pet to the current user
             pet.save()
-            messages.success(request, f"L'animal {pet.name} a été ajouté avec succès.")
+            messages.success(request, f"L'animal {
+                pet.name} a été ajouté avec succès.")
             return redirect('pet_list')
         else:
             messages.error(request, "Il y a eu une erreur.")
@@ -63,7 +63,6 @@ def pet_create(request):
     return render(request, 'pet_owners/pet_form.html', {
         'form': form,
     })
-
 
 
 @group_required("Pet Owners")
@@ -77,7 +76,8 @@ def pet_edit(request, pet_id):
         form = PetForm(request.POST, request.FILES, instance=pet)
         if form.is_valid():
             pet = form.save()
-            messages.success(request, f"L'animal {pet.name} a été mis à jour avec succès.")
+            messages.success(
+                request, f"L'animal {pet.name} a été mis à jour avec succès.")
             return redirect('pet_list')
         else:
             messages.error(request, "Il y a eu une erreur.")
@@ -99,7 +99,8 @@ def pet_delete(request, pet_id):
 
     if request.method == "POST":
         pet.delete()
-        messages.success(request, f"L'animal {pet.name} a été supprimé avec succès.")
+        messages.success(
+            request, f"L'animal {pet.name} a été supprimé avec succès.")
         return redirect('pet_list')
     else:
         messages.error(request, "Il y a eu une erreur.")

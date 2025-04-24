@@ -4,11 +4,11 @@ from django.contrib.auth import views as auth_views
 from my_project.views import TextOnlyPasswordResetView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('summernote/', include('django_summernote.urls')),
+     path('admin/', admin.site.urls),
+     path('summernote/', include('django_summernote.urls')),
 
-    # Concept
-     path('concept/', include('concept.urls')),  
+     # Concept
+     path('concept/', include('concept.urls')),
 
      # Email reset
      path('password_reset/', TextOnlyPasswordResetView.as_view(),
@@ -20,10 +20,10 @@ urlpatterns = [
           name='password_reset_confirm'),
      path('reset/done/', auth_views.PasswordResetCompleteView.as_view(),
           name='password_reset_complete'),
-     
+
      # Account
      path('accounts/', include('allauth.urls')),
-    
+
      # BAG
      path('bag/', include('bag.urls')),
 
@@ -43,7 +43,7 @@ urlpatterns = [
      path('grpd/', include('grpd.urls')),
 
      # Products
-     path('products/', include('products.urls')),   
+     path('products/', include('products.urls')),
 ]
 
 handler404 = 'my_project.views.handler404'

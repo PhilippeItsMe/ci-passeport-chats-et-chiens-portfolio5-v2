@@ -19,11 +19,14 @@ class PetOwnerForm(forms.ModelForm):
         ]
         widgets = {
             'default_street': forms.TextInput(attrs={'class': 'form-control'}),
-            'default_postal_code': forms.TextInput(attrs={'class': 'form-control'}),
+            'default_postal_code': forms.TextInput(
+                attrs={'class': 'form-control'}),
             'default_city': forms.TextInput(attrs={'class': 'form-control'}),
             'default_country': forms.Select(attrs={'class': 'form-control'}),
-            'default_phone': forms.TextInput(attrs={'class': 'form-control'}),
-            'default_newsletter': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'default_phone': forms.TextInput(
+                attrs={'class': 'form-control'}),
+            'default_newsletter': forms.CheckboxInput(
+                attrs={'class': 'form-check-input'}),
         }
         labels = {
             'default_street': 'Rue',
@@ -31,9 +34,11 @@ class PetOwnerForm(forms.ModelForm):
             'default_postal_code': 'Code postal',
             'default_city': 'Ville',
             'default_country': 'Pays',
-            'default_phone': 'Vous pouvez sans autre me contacter à ce numéro : ',
+            'default_phone':
+            'Vous pouvez sans autre me contacter à ce numéro : ',
             'default_newsletter': 'Je souhaite recevoir votre newsletter.',
         }
+
 
 class CustomClearableFileInput(ClearableFileInput):
     def __init__(self, attrs=None):
@@ -67,7 +72,8 @@ class PetForm(forms.ModelForm):
                 format='%Y-%m-%d'
             ),
             'pet_type': forms.Select(attrs={'class': 'form-control'}),
-            'pet_featured_image': CustomClearableFileInput(attrs={'class': 'form-control'}),
+            'pet_featured_image': CustomClearableFileInput(
+                attrs={'class': 'form-control'}),
         }
         labels = {
             'name': 'Quel est le nom de votre animal ?',
@@ -80,4 +86,5 @@ class PetForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
         if self.instance and self.instance.birthday:
-            self.initial['birthday'] = self.instance.birthday.strftime('%Y-%m-%d')
+            self.initial['birthday'] = self.instance.birthday.strftime(
+                '%Y-%m-%d')

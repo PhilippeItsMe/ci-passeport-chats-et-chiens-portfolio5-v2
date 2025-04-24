@@ -12,10 +12,9 @@ urlpatterns = [
           views.comment_edit, name='comment_edit'),
      path('<slug:slug>/delete_comment/<int:comment_id>/',
           views.comment_delete, name='comment_delete'),
-     #path('signup/', views.custom_signup, name='signup'),
      path('<slug:slug>/edit/<int:pet_business_id>/',
-         views.pet_business_edit, name='pet_business_edit'),
+          views.pet_business_edit, name='pet_business_edit'),
      path('<slug:slug>/delete/<int:pet_business_id>/',
-         views.pet_business_delete, name='pet_business_delete'),
+          views.pet_business_delete, name='pet_business_delete'),
      path('ajax/like-toggle/', ajax_like_toggle, name='ajax_like_toggle'),
 ]

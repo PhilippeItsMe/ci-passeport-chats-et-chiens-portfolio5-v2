@@ -80,7 +80,9 @@ class StripeWH_Handler:
             profile = PetOwner.objects.get(user__username=username)
             if save_info:
                 profile.default_street = billing_details.address.line1
-                profile.default_postal_code = billing_details.address.postal_code
+                profile.default_postal_code = (
+                    billing_details.address.postal_code
+                    )
                 profile.default_city = billing_details.address.city
                 profile.default_country = billing_details.address.country
                 profile.default_phone = billing_details.phone

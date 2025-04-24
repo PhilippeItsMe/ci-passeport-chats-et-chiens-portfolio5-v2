@@ -16,7 +16,7 @@ from django.utils import timezone
 from datetime import timedelta
 
 
-#------------  Authentificaiton view ------------#
+# ------------  Authentificaiton view ------------ #
 
 def custom_signup(request):
     """
@@ -52,7 +52,7 @@ def custom_signup(request):
     })
 
 
-#------------  Pet Businesses view ------------#
+# ------------  Pet Businesses view ------------ #
 
 class BusinessList(ListView):
     """
@@ -70,17 +70,20 @@ class BusinessList(ListView):
         query = self.request.GET.get('q')
         if query:
             if query.strip() == "":
-                messages.error(self.request, "Vous n'avez pas entré de recherche.")
+                messages.error(self.request,
+                               "Vous n'avez pas entré de recherche.")
             else:
                 queryset = queryset.filter(
-                    Q(firm__icontains=query) | Q(description__icontains=query)
+                    Q(firm__icontains=query) | Q(
+                        description__icontains=query)
                 )
 
         # Filtering by Pet Type or Service Type ID
         category_id = self.request.GET.get('category')
         if category_id:
             queryset = queryset.filter(
-                Q(business_pet_type__id=category_id) | Q(business_service_type__id=category_id)
+                Q(business_pet_type__id=category_id) | Q(
+                    business_service_type__id=category_id)
             ).distinct()
 
         # Filtering by Canton
@@ -95,16 +98,18 @@ class BusinessList(ListView):
 
         return queryset
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         selected_canton = self.request.GET.get('canton', '')
 
         # If canton is selected, filter localities by that canton
         if selected_canton:
-                localities = PetBusiness.objects.filter(canton=selected_canton).values_list('locality', flat=True).distinct()
+            localities = PetBusiness.objects.filter(
+                    canton=selected_canton).values_list(
+                        'locality', flat=True).distinct()
         else:
-                localities = PetBusiness.objects.values_list('locality', flat=True).distinct()
+            localities = PetBusiness.objects.values_list(
+                    'locality', flat=True).distinct()
 
         context['search_term'] = self.request.GET.get('q', '')
         context['selected_category'] = self.request.GET.get('category', '')
@@ -116,6 +121,7 @@ class BusinessList(ListView):
         context['localities'] = sorted(localities)
 
         return context
+
 
 def pet_business_detail(request, slug):
     """
@@ -255,7 +261,7 @@ def pet_business_delete(request, slug, pet_business_id):
     return redirect('pet_business_form')
 
 
-#------------  Comments views ------------#
+# ------------  Comments views ------------ #
 
 @group_required("Pet Owners")
 def comment_edit(request, slug, comment_id):
@@ -304,7 +310,7 @@ def comment_delete(request, slug, comment_id):
     return HttpResponseRedirect(reverse('pet_business_detail', args=[slug]))
 
 
-#------------  Likes views ------------#
+# ------------  Likes views ------------ #
 
 @require_POST
 @group_required("Pet Owners")

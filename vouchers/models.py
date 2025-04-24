@@ -7,13 +7,14 @@ from django.utils.timezone import now
 from datetime import timedelta
 from cloudinary.models import CloudinaryField
 
+
 class Voucher(models.Model):
     """
     Model representing vouchers for discounts on pet businesses.
     Two vouchers per business: one 50% off and one 20 CHF off.
     Includes a PDF file for the downloaded voucher.
     """
-    
+
     DISCOUNT_TYPE_CHOICES = [
         ('percentage', 'Percentage'),
         ('fixed', 'Fixed Amount'),
@@ -28,15 +29,18 @@ class Voucher(models.Model):
         User, on_delete=models.CASCADE,
         related_name='vouchers'
     )
-    
+
     code = models.CharField(max_length=12, unique=True, editable=False)
-    discount_type = models.CharField(max_length=20, choices=DISCOUNT_TYPE_CHOICES)
-    discount_value = models.DecimalField(max_digits=6, decimal_places=2)  # 50.00 pour % ou 20.00 pour CHF
-    minimum_purchase = models.DecimalField(max_digits=6, decimal_places=2, default=100.00)
+    discount_type = models.CharField(
+        max_length=20, choices=DISCOUNT_TYPE_CHOICES)
+    discount_value = models.DecimalField(max_digits=6, decimal_places=2)
+    minimum_purchase = models.DecimalField(
+        max_digits=6, decimal_places=2, default=100.00)
     date_created = models.DateTimeField(auto_now_add=True)
     date_expires = models.DateTimeField()
     # pdf_file = models.URLField(null=True, blank=True)
-    pdf_file = CloudinaryField('pdf', resource_type='raw', null=True, blank=True)
+    pdf_file = CloudinaryField('pdf',
+                               resource_type='raw', null=True, blank=True)
 
     class Meta:
         ordering = ['-date_created']
@@ -44,13 +48,14 @@ class Voucher(models.Model):
         verbose_name_plural = "Vouchers"
         constraints = [
             models.UniqueConstraint(
-                fields=['user', 'pet_business', 'discount_type'],  # Updated from pet_owner to user
+                fields=['user', 'pet_business', 'discount_type'],
                 name='unique_voucher_per_business'
             )
         ]
 
     def __str__(self):
-        return f"Voucher {self.code} for {self.pet_business.firm} - {self.user.username}"  # Updated
+        return f"Voucher {self.code} for {
+            self.pet_business.firm} - {self.user.username}"
 
     def save(self, *args, **kwargs):
         if not self.code:
@@ -60,13 +65,15 @@ class Voucher(models.Model):
     def _generate_unique_code(self):
         """Generate a unique code per voucher."""
         while True:
-            code = ''.join(random.choices(string.ascii_uppercase + string.digits, k=12))
+            code = ''.join(random.choices(
+                string.ascii_uppercase + string.digits, k=12))
             if not Voucher.objects.filter(code=code).exists():
                 return code
 
     def get_full_details(self):
         """
-        Returns formatted voucher details including business and owner information.
+        Returns formatted voucher details including
+        business and owner information.
         """
         discount_text = (
             f"{self.discount_value}%" if self.discount_type == 'percentage'
@@ -75,19 +82,20 @@ class Voucher(models.Model):
         return (
             f"Voucher Code: {self.code}\n"
             f"Business: {self.pet_business.firm}\n"
-            f"Address: {self.pet_business.street} {self.pet_business.number}, "
+            f"Address: {self.pet_business.street} {
+                self.pet_business.number}, "
             f"{self.pet_business.npa} {self.pet_business.locality}\n"
-            f"User: {self.user.first_name} {self.user.last_name}\n"  # Updated
+            f"User: {self.user.first_name} {self.user.last_name}\n"
             f"Discount: {discount_text} off\n"
             f"Minimum Purchase: CHF {self.minimum_purchase}\n"
             f"Expires: {self.date_expires.strftime('%Y-%m-%d %H:%M:%S')}"
         )
 
     @classmethod
-    def create_vouchers_for_business(cls, pet_business, user):  # Updated parameter name
+    def create_vouchers_for_business(cls, pet_business, user):
         """Automatically create the vouchers."""
         vouchers = []
-        
+
         # Voucher 50%
         percentage_voucher = cls(
             pet_business=pet_business,
