@@ -269,6 +269,8 @@ The following table outlines the features included in this project. Their deploy
     </tbody>
 </table>
 
+NOTICE
+<p style="color:red;">The GDPR functionality is currently only partially operational. The cookie consent banner is displayed correctly and can be relaunched via a link in the footer. However, the full consent management logic has yet to be implemented. This will be completed at a later stage, once Google Analytics and Google Tag Manager have been installed.</p>
 
 ## Planning
 
