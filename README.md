@@ -11,6 +11,31 @@
 ## Project
 Imagine a world where caring for your beloved pet becomes easier, more affordable, and oh-so-rewarding! Our platform is here to connect passionate pet owners with trusted businesses that cater to every furry, feathery, or scaly need. For just a small annual fee, you'll unlock exclusive perks: enjoy a fabulous 50% discount on your first purchase and a delightful CHF 20 off on your second visit—per business. Because your pet deserves the very best, and so do you! 
 
+## Marketing plan
+
+### Phase 1 — Partner Network Development
+
+Objective: Recruit 300 partners.<br>
+Timeline : July to December 2025.<br>
+Budget: € 22,000.<br>
+
+Actions:
+- Deploy a dedicated sales representative.
+- Send two mail marketing campaigns (July and October).
+- Implement automated LinkedIn outreach (La Growth Machine, July to September).
+
+###  Phase 2 — Passport Sales
+
+Objective: Sell 1000 passports.<br>
+Timeline: January to June 2026.<br>
+Budget :  € 35,000.<br>
+
+Actions:
+- Manage and animate the Instagram account (content creation and community engagement).
+- Run an ongoing advertising campaign on Meta (Facebook and Instagram Ads).
+- Launch SEA campaigns (paid search advertising via Google Ads).
+- Enhance the website's SEO to improve organic visibility.
+- Installation of posters and flyers at partner locations.
 
 ## Design
 To establish a consistent and eye-catching design, the logo, primary and secondary colors, and the following fonts have been defined for this site. Additionally, wireframes of the three main pages have been created using Balsamiq.
