@@ -690,6 +690,44 @@ The issue of third-party cookies has been raised by Google and negatively impact
 
 **JS testing : PASSED**
 
+***In static/js***
+
+comments.js : PASSED
+<img src="static/readme/jscomments.webp">
+
+cookies_consent.js : PASSED
+<img src="static/readme/jscookiesconsent.webp">
+
+pet_business.js : PASSED
+<img src="static/readme/jspetbusiness.webp">
+
+quantity_input_script.js : PASSED
+<img src="static/readme/jsquantityinputscript.webp">
+
+slug_creation.js : PASSED
+<img src="static/readme/jsslugcreation.webp">
+
+***In checkout/static/checkout/js***
+
+stripe_elements.js
+<img src="static/readme/jscheckoutstripeelements.webp">
+
+***In temlates***
+
+bag.html : PASSED
+<img src="static/readme/jsbaghtml.webp">
+
+pet_business_details.html : PASSED
+<img src="static/readme/jspetbusinessdetailshtml.webp">
+
+
+pet_owners_form.html
+<img src="static/readme/jspetwonersformhtml.webp">
+
+pet_owners_pets.html
+<img src="static/readme/jspetwonersformhtml.webp">
+
+
 **PY testing : ALL CLEAR**
 
 All raised issues are in vscode and migrations code and therefore out of scope.
