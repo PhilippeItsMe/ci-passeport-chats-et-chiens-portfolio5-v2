@@ -1,4 +1,4 @@
- /* jshint esversion: 6 */
+ /* global bootstrap */
 
  const editButtons = document.getElementsByClassName("btn-edit");
  const commentText = document.getElementById("id_body");

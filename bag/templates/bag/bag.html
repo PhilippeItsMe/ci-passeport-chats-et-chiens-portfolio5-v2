@@ -110,6 +110,7 @@
 {% block postloadjs %}
 <script src="{% static 'js/quantity_input_script.js' %}"></script>
 <script type="text/javascript">
+    /* global $ */
     $(document).ready(function () {
         // Update quantity on click
         $('.update-link').click(function (e) {
