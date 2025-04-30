@@ -564,8 +564,6 @@ Solution: Moved the Bootstrap stylesheet link to the head section of base.html.<
 
 **API Endpoints testing**
 
-Since the API endpoints and features are very similar, testing was conducted exclusively on the API endpoints, with an additional test performed on the admin functionality.
-
 <table border="1" cellpadding="10" cellspacing="0">
     <thead style="background-color:white; color:black">
         <tr style="background-color:RGB(249, 249, 249, 0.1)">
@@ -601,18 +599,18 @@ Since the API endpoints and features are very similar, testing was conducted exc
             <td colspan="4" style="background-color:RGB(249, 249, 249, 0.1)"><strong>App bag</strong></td>
         </tr>
         <tr><td>/bag/</td><td>Read</td><td>By clicking on the bag icon in the top right corner, users can view the contents of their bag.</td><td>Behaved as expected</td></tr>
-        <tr><td>/bag/add/&lt;int:item_id&gt;/</td><td>Create</td><<td>By clicking on the CTAs inviting them to purchase a passport, a passport is added to the user's bag."</td><td>Behaved as expected</td></tr>
-        <tr><td>/bag/adjust/&lt;int:item_id&gt;/</td><td>Update</td><<td>"By clicking the + and – buttons and then 'Ajuster', the user can increase or decrease the number of passports they want."</td><td>Behaved as expected</td></tr>
+        <tr><td>/bag/add/&lt;int:item_id&gt;/</td><td>Create</td><td>By clicking on the CTAs inviting them to purchase a passport, a passport is added to the user's bag."</td><td>Behaved as expected</td></tr>
+        <tr><td>/bag/adjust/&lt;int:item_id&gt;/</td><td>Update</td><td>"By clicking the + and – buttons and then 'Ajuster', the user can increase or decrease the number of passports they want."</td><td>Behaved as expected</td></tr>
         <tr><td>/bag/remove/&lt;int:item_id&gt;/</td><td>Delete</td><td>By clicking the "Supprimer "link, the user can remove his passeport order..</td><td>Behaved as expected</td></tr>
         <tr>
             <td colspan="4" style="background-color:RGB(249, 249, 249, 0.1)"><strong>App checkout</strong></td>
         </tr>
         <tr><td>/checkout/</td><td>Read/Create</td><td>By clicking on 'Checkout' on the bag page, the user can enter their contact details, review their order, enter their credit card information, and proceed with the payment.</td><td>Behaved as expected</td></tr>
         <tr><td>/checkout/checkout_success/&lt;order_number&gt;</td><td>Read</td><td>Once the payment is completed, a confirmation page is displayed and a confirmation email with an activation code is sended.</td><td>Behaved as expected</td></tr>
-        <tr><td>/checkout/cache_checkout_data/</td><td>Create</td>><td>Cache checkout data before payment.</td><td>Behaved as expected</td></tr>
+        <tr><td>/checkout/cache_checkout_data/</td><td>Create</td><td>Cache checkout data before payment.</td><td>Behaved as expected</td></tr>
         <tr><td>/checkout/wh/</td><td>Create</td><td>Handle Stripe webhooks.</td><td>Behaved as expected</td></tr>
         <tr><td>/checkout/order_history/</td><td>Read</td><td>The 'Mon compte/Mes achats' link, visible only if the user is registered as a pet owner, allows users to view their purchase history.</td><td>Behaved as expected</td></tr>
-        <tr><td>/checkout/activation_code/</td><td>Create</td><<td>The 'My Account/My Activation Code' link allows, visible only if the user is registered as pet owner, the user to access a page where they can enter their activation code to unlock the passport benefits.</td><td>Behaved as expected</td></tr>
+        <tr><td>/checkout/activation_code/</td><td>Create</td><td>The 'My Account/My Activation Code' link allows, visible only if the user is registered as pet owner, the user to access a page where they can enter their activation code to unlock the passport benefits.</td><td>Behaved as expected</td></tr>
         <tr>
             <td colspan="4" style="background-color:RGB(249, 249, 249, 0.1)"><strong>App grpd</strong></td>
         </tr>
@@ -635,15 +633,15 @@ Since the API endpoints and features are very similar, testing was conducted exc
         <tr>
             <td colspan="43" style="background-color:RGB(249, 249, 249, 0.1)"><strong>App pet_owners</strong></td>
         </tr>
-        <tr><td>/pet_owner_form/</td><td>Read/Create</td>><td>View and edit pet owner profile.</td><td>Behaved as expected</td></tr>
-        <tr><td>pets/</td><td>Read</td><td>List all pets.</td><td>Behaved as expected</td></tr>
-        <tr><td>pets/add/</td><td>Create</td><td>Add a new pet.</td><td>Behaved as expected</td></tr>
-        <tr><td>pets/&lt;int:pet_id&gt;/edit/</td><td>Read/Update</td><td>Edit a pet.</td><td>Behaved as expected</td></tr>
-        <tr><td>pets/&lt;int:pet_id&gt;/delete/</td><td>Delete</td><td>Delete a pet.</td><td>Behaved as expected</td></tr>
+        <tr><td>/pet_owner_form/</td><td>Read/Create</td><td>Pet owners can add and update their list of pets through this form.</td><td>Behaved as expected</td></tr>
+        <tr><td>pets/</td><td>Read</td><td>By clicking on 'Mon compte / Mes compagnons', pet owners can view all their registered pets and access the form to add a new pet or update an existing one.</td><td>Behaved as expected</td></tr>
+        <tr><td>pets/add/</td><td>Create</td><td>By clicking the 'Ajouter un animal' button, pet owners can add a new pet to their list.</td><td>Behaved as expected</td></tr>add 
+        <tr><td>pets/&lt;int:pet_id&gt;/edit/</td><td>Read/Update</td><td>By clicking the 'Modifier' button, pet owners can update their pet informations.</td><td>Behaved as expected</td></tr>
+        <tr><td>pets/&lt;int:pet_id&gt;/delete/</td><td>Delete</td><td>By clicking the 'Supprimer' button, pet owners can delete a pet form their list.</td><td>Behaved as expected</td></tr>
         <tr>
             <td colspan="4" style="background-color:RGB(249, 249, 249, 0.1)"><strong>App vouchers</strong></td>
         </tr>
-        <tr><td>/vouchers/generate/&lt;int:business_id&gt;/&lt;str:discount_type&gt;/</td><td>Create</td><td>Generate a voucher for a business.</td><td>Behaved as expected</td></tr>
+        <tr><td>/vouchers/generate/&lt;int:business_id&gt;/&lt;str:discount_type&gt;/</td><td>Create</td><td>By clicking on the 'Bon | -50%' or 'Bon | -20 CHF' button on a pet business detail page, pet owners who have registered their activation code can download their voucher. Vouchers are valid for 90 days. The first click on the button generates the voucher, and subsequent clicks allow the user to download the saved version. This voucher section is only visible to pet owners who have activated their code.</td><td>Behaved as expected</td></tr>
     </tbody>
 </table>
 
