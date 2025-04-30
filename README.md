@@ -290,9 +290,6 @@ The project's data model is structured as follows: it revolves around <span styl
 
 ## API Endpoints
 
-Since the API endpoints and features are very similar, testing was conducted exclusively on the API endpoints, with an additional test performed on the admin functionality.
-
-
 <table border="1" cellpadding="10" cellspacing="0">
     <thead style="background-color:white; color:black">
         <tr style="background-color:RGB(249, 249, 249, 0.1)">
@@ -574,106 +571,81 @@ Since the API endpoints and features are very similar, testing was conducted exc
         <tr style="background-color:RGB(249, 249, 249, 0.1)">
             <th>Endpoint</th>
             <th>CRUD Method</th>
-            <th>HTTP Method</th>
             <th>Purpose</th>
-            <th>TEST</th>
+            <th>Testing</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>/</td>
-            <td>Read</td>
-            <td>GET</td>
-            <td>List all pet businesses.</td>
-            <td>PASSED</td>
+            <td colspan="4" style="background-color:RGB(249, 249, 249, 0.1)"><strong>Django admin</strong></td>
         </tr>
+        <tr><td>/admin/...</td><td>Create, Red, Update and Delete</td><td>When logged into the admin dashboard, the admin user can create, read, update, and delete all datas.</td><td>Behaved as expected</td></tr>
         <tr>
-            <td>&lt;slug:slug&gt;/</td>
-            <td>Read</td>
-            <td>GET</td>
-            <td>View details of a specific pet business.</td>
-            <td>PASSED</td>
+            <td colspan="4" style="background-color:RGB(249, 249, 249, 0.1)"><strong>App concept</strong></td>
         </tr>
+        <tr><td>/concept/</td><td>Read</td><td>By clicking on 'Concept', the user can explore the entire Passeport Chats & Chiens concept.</td><td>Behaved as expected</td></tr>
         <tr>
-            <td>&lt;slug:slug&gt;/</td>
-            <td>Create</td>
-            <td>POST</td>
-            <td>Add a comment to a specific pet business.</td>
-            <td>PASSED</td>
+            <td colspan="4" style="background-color:RGB(249, 249, 249, 0.1)"><strong>Django accounts</strong></td>
         </tr>
+        <tr><td>/password_reset/</td><td>Read/Create</td><td>On the 'Se connecter' page, the user can request a new password by clicking on 'Mot de passe oublié'.</td><td>Behaved as expected</td></tr>
+        <tr><td>/password_reset/done/</td><td>Read</td><td>When requesting a new passwowrd, an email is sent with a link.</td><td>Behaved as expected</td></tr>
+        <tr><td>/reset/&lt;uidb64&gt;/&lt;token&gt;/</td><td>Read/Update</td><td>When the user click on the link received per email, a form to enter it is displayed.</td><td>Behaved as expected</td></tr>
+        <tr><td>/reset/done/</td><td>Read</td><td>Once the new password is entered, a confirmation page is displayed.</td><td>Behaved as expected</td></tr>
         <tr>
-            <td>&lt;slug:slug&gt;/edit_comment/&lt;int:comment_id&gt;/</td>
-            <td>Read/Update</td>
-            <td>GET, POST</td>
-            <td>Edit a specific comment.</td>
-            <td>PASSED</td>
+            <td colspan="4" style="background-color:RGB(249, 249, 249, 0.1)"><strong>Django accounts </strong></td>
         </tr>
+        <tr><td>/accounts/signup/</td><td>Create</td><td>On the "S'inscire" page, new users can register and specify whether they are partners or pet owners. A confirmation email will be sent to them to verify their email address. </td><td>Behaved as expected</td></tr>
+        <tr><td>/accounts/login/</td><td>Create</td><td>On the "Se connecter" page, user can login.</td><td>Behaved as expected</td></tr>
+        <tr><td>/accounts/logout/</td><td>Create</td><td>On the "Se déconnecter" page, user can logout.</td><td>Behaved as expected</td></tr>
         <tr>
-            <td>&lt;slug:slug&gt;/delete_comment/&lt;int:comment_id&gt;/</td>
-            <td>Delete</td>
-            <td>POST</td>
-            <td>Delete a specific comment.</td>
-            <td>PASSED</td>
+            <td colspan="4" style="background-color:RGB(249, 249, 249, 0.1)"><strong>App bag</strong></td>
         </tr>
+        <tr><td>/bag/</td><td>Read</td><td>By clicking on the bag icon in the top right corner, users can view the contents of their bag.</td><td>Behaved as expected</td></tr>
+        <tr><td>/bag/add/&lt;int:item_id&gt;/</td><td>Create</td><<td>By clicking on the CTAs inviting them to purchase a passport, a passport is added to the user's bag."</td><td>Behaved as expected</td></tr>
+        <tr><td>/bag/adjust/&lt;int:item_id&gt;/</td><td>Update</td><<td>"By clicking the + and – buttons and then 'Ajuster', the user can increase or decrease the number of passports they want."</td><td>Behaved as expected</td></tr>
+        <tr><td>/bag/remove/&lt;int:item_id&gt;/</td><td>Delete</td><td>By clicking the "Supprimer "link, the user can remove his passeport order..</td><td>Behaved as expected</td></tr>
         <tr>
-            <td>/pet-business/&lt;int:pet_business_id&gt;/like/</td>
-            <td>Create/Delete</td>
-            <td>POST</td>
-            <td>Toggle "like" for a specific business.</td>
-            <td>PASSED</td>
+            <td colspan="4" style="background-color:RGB(249, 249, 249, 0.1)"><strong>App checkout</strong></td>
         </tr>
+        <tr><td>/checkout/</td><td>Read/Create</td><td>By clicking on 'Checkout' on the bag page, the user can enter their contact details, review their order, enter their credit card information, and proceed with the payment.</td><td>Behaved as expected</td></tr>
+        <tr><td>/checkout/checkout_success/&lt;order_number&gt;</td><td>Read</td><td>Once the payment is completed, a confirmation page is displayed and a confirmation email with an activation code is sended.</td><td>Behaved as expected</td></tr>
+        <tr><td>/checkout/cache_checkout_data/</td><td>Create</td>><td>Cache checkout data before payment.</td><td>Behaved as expected</td></tr>
+        <tr><td>/checkout/wh/</td><td>Create</td><td>Handle Stripe webhooks.</td><td>Behaved as expected</td></tr>
+        <tr><td>/checkout/order_history/</td><td>Read</td><td>The 'Mon compte/Mes achats' link, visible only if the user is registered as a pet owner, allows users to view their purchase history.</td><td>Behaved as expected</td></tr>
+        <tr><td>/checkout/activation_code/</td><td>Create</td><<td>The 'My Account/My Activation Code' link allows, visible only if the user is registered as pet owner, the user to access a page where they can enter their activation code to unlock the passport benefits.</td><td>Behaved as expected</td></tr>
         <tr>
-            <td>/pet_business_form/</td>
-            <td>Read/Create</td>
-            <td>GET, POST</td>
-            <td>Display pet businesses user's businesses and form to add new ones.</td>
-            <td>PASSED</td>
+            <td colspan="4" style="background-color:RGB(249, 249, 249, 0.1)"><strong>App grpd</strong></td>
         </tr>
+        <tr><td>/grpd/conditions-generales-de-vente/</td><td>Read</td><td>The 'Condition générale de vente' link in the footer allows users to view the terms of sale.</td><td>Behaved as expected</td></tr>
+        <tr><td>/grpd/mentions-legales/</td><td>Read</td><td>The 'Mentions légales' link in the footer allows users to view the legal notice.</td><td>Behaved as expected</td></tr>
+        <tr><td>/grpd/notice-cookies/</td><td>Read</td><td>The 'notice sur les cookies' link in the footer allows users to view the cookies notice.</td><td>Behaved as expected</td></tr>
+        <tr><td>/grpd/politique-confidentialite/</td><td>Read</td><td>The 'Politique de confidentialié' link in the footer allows users to view the privacy policy.</td><td>Behaved as expected</td></tr>
+        <tr><td>/grpd/save-cookie-consent/</td><td>Create</td><td>The 'Gérer les cookies' link allows the user to access a pop-up where they can manage their cookies consent. The backend of the feature still need to be completed.</td><td>Behaved as expected</td></tr>
         <tr>
-            <td>&lt;slug:slug&gt;/edit/&lt;int:pet_business_id&gt;/</td>
-            <td>Read/Update</td>
-            <td>GET, POST</td>
-            <td>Edit a specific business.</td>
-            <td>PASSED</td>
+            <td colspan="4" style="background-color:RGB(249, 249, 249, 0.1)"><strong>App pet_businesses</strong></td>
         </tr>
+        <tr><td>/</td><td>Read</td><td>All pet businesses are listed on the home page and can be filter by categories or searched by key words.</td><td>Behaved as expected</td></tr>
+        <tr><td>/&lt;slug:slug&gt;/</td><td>Read</td><td>When a user clicks on a business name, a dedicated page displays that business’s details..</td><td>Behaved as expected</td></tr>
+        <tr><td>/pet_business_form/</td><td>Read/Create</td><td>When a pet businesses user clicks on the 'My Account/My Services' link, he is taken to a page where they can enter informations about his businesses offering services for animals. A list of his registered businesses is also displayed at the top of the page.</td><td>Behaved as expected</td></tr>
+        <tr><td>/&lt;slug:slug&gt;/edit/&lt;int:pet_business_id&gt;/</td><td>Read/Update</td><td>Edit button allows a pet business owner to update their business informations.</td><td>Behaved as expected</td></tr>
+        <tr><td>/&lt;slug:slug&gt;/delete/&lt;int:pet_business_id&gt;/</td><td>Delete</td><td>Delete button allows a pet business owner to delete their business informations.</td><td>Behaved as expected</td></tr>
+        <tr><td>/&lt;slug:slug&gt;/edit_comment/&lt;int:comment_id&gt;/</td><td>Read/Update</td><td>Pet owners can edit their existing comments, update them, and resubmit by clicking 'Soumettre'. They can also submit new comments by cliking "Soumettre". Comments must be approved before they become visible to everyone. </td><td>Behaved as expected</td></tr>
+        <tr><td>/&lt;slug:slug&gt;/delete_comment/&lt;int:comment_id&gt;/</td><td>Delete</td><td>A pet owner can delete their comments by clicking 'Effacer'.</td><td>Behaved as expected</td></tr>
+        <tr><td>/ajax/like-toggle/</td><td>Create/Delete</td><td>A pet owner can like or remove their like to a business by clicking the thumbs-up icon.</td><td>Behaved as expected</td></tr>
         <tr>
-            <td>&lt;slug:slug&gt;/delete/&lt;int:pet_business_id&gt;/</td>
-            <td>Delete</td>
-            <td>POST</td>
-            <td>Delete a specific business.</td>
-            <td>PASSED</td>
+            <td colspan="43" style="background-color:RGB(249, 249, 249, 0.1)"><strong>App pet_owners</strong></td>
         </tr>
+        <tr><td>/pet_owner_form/</td><td>Read/Create</td>><td>View and edit pet owner profile.</td><td>Behaved as expected</td></tr>
+        <tr><td>pets/</td><td>Read</td><td>List all pets.</td><td>Behaved as expected</td></tr>
+        <tr><td>pets/add/</td><td>Create</td><td>Add a new pet.</td><td>Behaved as expected</td></tr>
+        <tr><td>pets/&lt;int:pet_id&gt;/edit/</td><td>Read/Update</td><td>Edit a pet.</td><td>Behaved as expected</td></tr>
+        <tr><td>pets/&lt;int:pet_id&gt;/delete/</td><td>Delete</td><td>Delete a pet.</td><td>Behaved as expected</td></tr>
         <tr>
-            <td>/signup/</td>
-            <td>Create</td>
-            <td>POST</td>
-            <td>Handle user signup and group assignment.</td>
-            <td>PASSED</td>
+            <td colspan="4" style="background-color:RGB(249, 249, 249, 0.1)"><strong>App vouchers</strong></td>
         </tr>
-        <tr>
-            <td>/login/</td>
-            <td>Create</td>
-            <td>POST</td>
-            <td>Log in a user and obtain authentication tokens.</td>
-            <td>PASSED</td>
-        </tr>
-        <tr>
-            <td>/logout/</td>
-            <td>Create</td>
-            <td>POST</td>
-            <td>Log out a user and invalidate their authentication tokens.</td>
-            <td>PASSED</td>
-        </tr>
-        <tr>
-            <td>ADMIN feature</td>
-            <td>CRUD</td>
-            <td>GET POST</td>
-            <td>Full control on all datas</td>
-            <td>PASSED</td>
-        </tr>
+        <tr><td>/vouchers/generate/&lt;int:business_id&gt;/&lt;str:discount_type&gt;/</td><td>Create</td><td>Generate a voucher for a business.</td><td>Behaved as expected</td></tr>
     </tbody>
 </table>
-
 
 **LIGHTHOUSE testing : OK** <br>
 The issue of third-party cookies has been raised by Google and negatively impacts the best practices score due to the use of Cloudinary.

@@ -4,6 +4,8 @@ import dj_database_url
 import cloudinary
 
 cloudinary.config(secure=True)
+if os.path.isfile('env.py'):
+    import env
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
