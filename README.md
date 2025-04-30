@@ -690,7 +690,6 @@ bag.html : PASSED
 pet_business_details.html : PASSED
 <img src="static/readme/jspetbusinessdetailshtml.webp">
 
-
 pet_owners_form.html
 <img src="static/readme/jspetwonersformhtml.webp">
 
@@ -701,6 +700,10 @@ pet_owners_pets.html
 **PY testing : ALL CLEAR**
 
 All raised issues are in vscode and migrations code and therefore out of scope.
+
+WARNING : After resolving the issue : ./my_project/settings.py:8:5: F401 'env' imported but unused
+the project crashed. Therefore, I had to put the env. link back in the setting.py file. 
+Therefore the issue in back in the flake8 testing.
 
 <img src="static/readme/flake1.webp">
 <img src="static/readme/flake2.webp">
